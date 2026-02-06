@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #030008; // Deepest Obsidian
+  color: #f1f5f9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+// Ensure the main app container fills the viewport
+#root {
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Global Luxury Bold Styling
+b, strong {
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+// Interactive Selection (Neon Purple Tint)
+::selection {
+  background-color: rgba(168, 85, 247, 0.3);
+  color: #ffffff;
+}
+
+// Premium "Obsidian" Scrollbar
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030008;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #1e1b4b, #312e81); // Subtle Deep Indigo
+  border: 2px solid #030008;
+  border-radius: 20px;
+  
+  &:hover {
+    background: #a855f7; // Glow purple on hover
+  }
+}
+
+// Input defaults for the whole app
+input, button, textarea {
+  font-family: inherit;
+}
+
+// Global Layout utility for responsive images
+img {
+  max-width: 100%;
+  display: block;
+}
+
+// Feature: Dynamic Background Glow (Optional)
+// Add this if you want a subtle purple aura in the corners of the app
+body::before {
+  content: "";
+  position: fixed;
+  top: -10%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.03) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}

@@ -1,0 +1,44 @@
+// Ultra-Wide / 4K Displays
+@mixin xl {
+  @media (min-width: 1440px) {
+    @content;
+  }
+}
+
+// Standard Desktops & Laptops (The "Prime" View)
+@mixin lg {
+  @media (max-width: 1366px) {
+    @content;
+  }
+}
+
+// Tablets (iPad Pro / Landscape Tablets)
+@mixin md {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+// Mobile Devices (Large Phones / Portrait Tablets)
+@mixin sm {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+// Compact Mobile (Small Phones / Narrow Screens)
+@mixin xs {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+
+/* Utility Mixin for the Cyber-Obsidian theme:
+  Use this for glassmorphism effects consistently across pages
+*/
+@mixin glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(168, 85, 247, 0.1);
+  border-radius: 16px;
+}

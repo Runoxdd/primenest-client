@@ -1,0 +1,226 @@
+@import "../../responsive.scss";
+
+.singlePage {
+
+  .specimg {
+  // 1. Control the size
+  width: 18px;          // Small enough to match text height
+  height: 18px;         // Keep it square
+  
+  // 2. Fix the alignment
+  object-fit: contain;  // Ensures the icon isn't stretched
+  vertical-align: middle; // Standard alignment for inline text
+  
+  // 3. Spacing
+  margin-right: 8px;    // Pushes the text away slightly
+  
+  // 4. Color/Look (Optional but great for dark themes)
+  opacity: 0.8;         // Makes it look slightly integrated
+  filter: brightness(0) invert(1); // Forces dark icons to become white (if needed)
+  
+  // 5. Layout fix inside the button
+  display: inline-block; 
+  flex-shrink: 0;       // Prevents the icon from getting crushed if text is long
+}
+  display: flex;
+  height: 100%;
+  background-color: #030008;
+
+  @include md {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .details {
+    flex: 3;
+    height: 100%;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
+
+    .wrapper {
+      padding: 20px 50px 50px 0;
+      @include lg { padding-right: 20px; }
+      @include md { padding: 20px; }
+
+      .info {
+        margin-top: 40px;
+
+        .top {
+          display: flex;
+          justify-content: space-between;
+          @include sm { flex-direction: column; gap: 25px; }
+
+          .post {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            h1 { font-weight: 800; font-size: 32px; color: #fff; letter-spacing: -1px; }
+
+            .address {
+              display: flex;
+              gap: 8px;
+              align-items: center;
+              color: #94a3b8;
+              font-size: 14px;
+              img { width: 16px; height: 16px; filter: brightness(0) invert(1); opacity: 0.6; }
+            }
+
+            .price {
+              padding: 10px 20px;
+              background: rgba(168, 85, 247, 0.1);
+              border: 1px solid rgba(168, 85, 247, 0.3);
+              color: #a855f7;
+              border-radius: 12px;
+              width: max-content;
+              font-size: 24px;
+              font-weight: 800;
+            }
+          }
+
+          .user {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(168, 85, 247, 0.1);
+            min-width: 140px;
+
+            img {
+              width: 60px;
+              height: 60px;
+              border-radius: 18px; // Squircle
+              object-fit: cover;
+              border: 2px solid #a855f7;
+              margin-bottom: 10px;
+            }
+
+            span { color: #fff; font-weight: 700; font-size: 14px; }
+            p { color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+          }
+        }
+
+        .bottom {
+          margin-top: 40px;
+          color: #cbd5e1;
+          line-height: 1.8;
+          font-size: 16px;
+          background: rgba(255, 255, 255, 0.02);
+          padding: 30px;
+          border-radius: 20px;
+        }
+      }
+    }
+  }
+
+  .features {
+    flex: 2;
+    background-color: rgba(10, 5, 20, 0.5);
+    height: 100%;
+    overflow-y: auto;
+    border-left: 1px solid rgba(168, 85, 247, 0.1);
+
+    .wrapper {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .title {
+        font-weight: 700;
+        font-size: 14px;
+        color: #a855f7;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .listVertical, .listHorizontal, .size {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+      }
+
+      .feature {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        img { width: 20px; filter: brightness(0) invert(1); opacity: 0.8; }
+        .featureText {
+          span { display: block; font-weight: 700; color: #fff; font-size: 14px; }
+          p { color: #94a3b8; font-size: 12px; }
+        }
+      }
+
+      .listVertical { padding: 25px; display: flex; flex-direction: column; gap: 20px; }
+
+      .sizes {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        .size {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          padding: 15px;
+          span { color: #fff; font-weight: 600; font-size: 12px; }
+        }
+      }
+
+      .listHorizontal {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        @include lg { grid-template-columns: 1fr; gap: 20px; }
+      }
+
+      .mapContainer {
+        height: 200px;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 2px solid rgba(168, 85, 247, 0.2);
+      }
+
+      .buttons {
+        display: flex;
+        gap: 15px;
+        button {
+          flex: 1;
+          padding: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          border-radius: 14px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: 0.3s;
+          font-size: 13px;
+          text-transform: uppercase;
+
+          &.chatBtn {
+            background: linear-gradient(135deg, #a855f7, #6366f1);
+            color: white;
+            border: none;
+            &:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3); }
+          }
+
+          &.saveBtn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            &:hover { background: rgba(168, 85, 247, 0.1); }
+            &.saved { background: #fff; color: #030008; border: none; }
+          }
+        }
+      }
+    }
+  }
+}

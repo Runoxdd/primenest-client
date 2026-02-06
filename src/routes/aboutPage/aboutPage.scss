@@ -1,0 +1,91 @@
+@import "../../responsive.scss";
+
+.aboutPage {
+  background-color: #030008;
+  color: white;
+  min-height: 100vh;
+  padding: 40px 20px;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      margin-bottom: 80px;
+
+      @include md { flex-direction: column; text-align: center; }
+
+      .textContainer {
+        flex: 1;
+        h1 {
+          font-size: 56px;
+          font-weight: 900;
+          span {
+            background: linear-gradient(90deg, #a855f7, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+        .subtitle { color: #a855f7; font-weight: 700; font-size: 18px; margin: 10px 0; letter-spacing: 1px; }
+        .description { color: #94a3b8; line-height: 1.8; font-size: 16px; margin-top: 20px; }
+      }
+
+      .imgContainer {
+        flex: 1;
+        img { width: 100%; border-radius: 30px; border: 1px solid rgba(168, 85, 247, 0.3); box-shadow: 0 0 30px rgba(168, 85, 247, 0.1); }
+      }
+    }
+
+    .missionVision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 80px;
+
+      @include sm { grid-template-columns: 1fr; }
+
+      .box {
+        background: rgba(255, 255, 255, 0.02);
+        padding: 40px;
+        border-radius: 24px;
+        border: 1px solid rgba(168, 85, 247, 0.15);
+        backdrop-filter: blur(10px);
+        
+        h2 { color: #a855f7; margin-bottom: 15px; font-size: 24px; }
+        p { color: #e2e8f0; line-height: 1.6; }
+      }
+    }
+
+    .values {
+      text-align: center;
+      h1 { font-size: 42px; margin-bottom: 50px; span { color: #a855f7; } }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+
+        .card {
+          padding: 40px;
+          background: rgba(168, 85, 247, 0.03);
+          border-radius: 24px;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          transition: 0.3s;
+
+          &:hover {
+            border-color: #a855f7;
+            transform: translateY(-10px);
+            background: rgba(168, 85, 247, 0.06);
+          }
+
+          .icon { font-size: 40px; margin-bottom: 20px; }
+          h3 { font-size: 20px; margin-bottom: 10px; color: #fff; }
+          p { color: #94a3b8; font-size: 14px; line-height: 1.6; }
+        }
+      }
+    }
+  }
+}

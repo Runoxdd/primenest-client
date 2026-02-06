@@ -1,0 +1,128 @@
+@import "../../responsive.scss";
+
+.slider {
+  width: 100%;
+  height: 420px;
+  display: flex;
+  gap: 15px;
+
+  @include sm {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .fullSlider {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(3, 0, 8, 0.98); // Matches your deep theme
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease-out;
+
+    .arrow {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        background: rgba(168, 85, 247, 0.05);
+      }
+
+      img {
+        width: 45px;
+        filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
+
+        @include sm { width: 30px; }
+
+        &.right { transform: rotate(180deg); }
+      }
+    }
+
+    .imgContainer {
+      flex: 10;
+      height: 85%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        max-width: 90%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 16px;
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+      }
+    }
+
+    .close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: #a855f7;
+      font-size: 36px;
+      font-weight: 300;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover { 
+        transform: rotate(90deg) scale(1.2); 
+        color: #fff;
+      }
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    cursor: pointer;
+    border: 1px solid rgba(168, 85, 247, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      border-color: #a855f7;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+      transform: scale(1.01);
+    }
+  }
+
+  .bigImage {
+    flex: 3;
+    @include sm { height: 280px; }
+  }
+
+  .smallImages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+
+    @include sm {
+      flex-direction: row;
+      height: 100px;
+    }
+
+    img {
+      height: calc(33.33% - 8px);
+      @include sm { height: 100%; }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

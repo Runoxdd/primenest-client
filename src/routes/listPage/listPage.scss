@@ -1,0 +1,62 @@
+@import "../../responsive.scss";
+
+.listPage {
+  display: flex;
+  height: calc(100vh - 85px); // Set to your actual navbar height (85px)
+  background-color: #030008;
+  overflow: hidden; // Keeps scroll separate on desktop
+
+  @include sm {
+    flex-direction: column;
+    height: auto; // Let the page expand naturally on mobile
+    overflow: visible; // Allow the main body to scroll
+  }
+
+  .listContainer {
+    flex: 3;
+    height: 100%;
+    overflow-y: auto; // Scrolling for the list side
+    padding: 0 20px 50px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    /* Custom Scrollbar */
+    &::-webkit-scrollbar { width: 6px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(168, 85, 247, 0.2);
+      border-radius: 10px;
+      &:hover { background: rgba(168, 85, 247, 0.5); }
+    }
+
+    .wrapper {
+      padding-right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      height: max-content;
+    }
+
+    @include md { flex: 2; }
+
+    @include sm {
+      flex: none;
+      width: 100%;
+      height: auto; // Fixes the "cutoff"
+      overflow: visible;
+      padding: 20px;
+    }
+  }
+
+  .mapContainer {
+    flex: 2;
+    height: 100%;
+    background-color: #030008;
+    border-left: 1px solid rgba(168, 85, 247, 0.1);
+
+    @include sm {
+      display: none; // Keep map hidden on mobile as you had it
+    }
+  }
+}

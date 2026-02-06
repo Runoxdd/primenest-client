@@ -1,0 +1,122 @@
+@import "../../responsive.scss";
+
+.homePage {
+  display: flex;
+  height: 100vh;
+  background-color: #030008; // Deep Space Black
+  color: #fff;
+  overflow: hidden;
+
+  .textContainer {
+    flex: 3;
+    z-index: 2;
+
+    .wrapper {
+      padding: 0 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 40px;
+      height: 100%;
+
+      @include lg { padding: 0 50px; }
+      @include md { padding: 20px; text-align: center; align-items: center; }
+
+      .title {
+        font-size: 64px;
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -2px;
+
+        span {
+          background: linear-gradient(90deg, #a855f7, #6366f1);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        @include lg { font-size: 52px; }
+        @include md { font-size: 44px; }
+      }
+
+      .description {
+        font-size: 18px;
+        color: #94a3b8;
+        line-height: 1.6;
+        max-width: 600px;
+
+        @include md { font-size: 16px; }
+      }
+
+      .boxes {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        @include sm { display: none; }
+
+        .box {
+          padding: 20px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(168, 85, 247, 0.1);
+          border-radius: 20px;
+          flex: 1;
+          transition: 0.3s;
+
+          &:hover {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.05);
+            transform: translateY(-5px);
+          }
+
+          h1 {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 5px;
+
+            @include lg { font-size: 28px; }
+          }
+
+          h2 {
+            font-size: 14px;
+            font-weight: 500;
+            color: #6366f1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+        }
+      }
+    }
+  }
+
+  .imgContainer {
+    flex: 2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    @include md { display: none; }
+
+    img {
+      width: 120%;
+      height: 90%;
+      object-fit: contain;
+      z-index: 1;
+      filter: drop-shadow(0 0 50px rgba(168, 85, 247, 0.2));
+      
+      @include lg { width: 110%; }
+    }
+
+    .glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: #a855f7;
+      filter: blur(150px);
+      opacity: 0.15;
+      right: -100px;
+      top: 20%;
+      z-index: 0;
+    }
+  }
+}

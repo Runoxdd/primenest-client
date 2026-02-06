@@ -1,0 +1,135 @@
+@import "../../responsive.scss";
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  backdrop-filter: blur(15px);
+  margin-bottom: 30px;
+
+  h1 {
+    font-weight: 700;
+    font-size: 26px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+
+    span {
+      background: linear-gradient(90deg, #a855f7, #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: capitalize;
+      margin-left: 8px;
+    }
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #a855f7;
+      font-weight: 800;
+    }
+
+    input,
+    select {
+      background-color: rgba(3, 0, 8, 0.6);
+      color: #fff;
+      padding: 14px;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 12px;
+      font-size: 14px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:focus {
+        outline: none;
+        border-color: #a855f7;
+        background-color: rgba(168, 85, 247, 0.05);
+        box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+      }
+
+      &::placeholder {
+        color: #555;
+      }
+      
+      option {
+        background-color: #030008;
+        color: white;
+      }
+    }
+  }
+
+  .top {
+    width: 100%;
+    .item {
+      input {
+        width: 100%;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+
+    @include sm {
+      gap: 15px; 
+    }
+
+    .item {
+      flex: 1;
+      min-width: 130px;
+      
+      @include sm {
+        min-width: calc(50% - 10px); 
+      }
+      
+      input, select {
+        width: 100%;
+      }
+    }
+
+    .searchBtn {
+      align-self: flex-end;
+      height: 48px;
+      width: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
+
+      @include sm {
+        width: 100%; 
+        margin-top: 10px;
+        align-self: stretch; 
+      }
+
+      img {
+        width: 22px;
+        height: 22px;
+        filter: brightness(0) invert(1);
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+      }
+    }
+  }
+}
