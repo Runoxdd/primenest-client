@@ -8,7 +8,7 @@ import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./routes/newPostPage/newPostPage";
-import AssistantPage from "./routes/assistantPage/AssistantPage";
+import AssistantPage from "./routes/assistantPage/assistantPage";
 import AboutPage from "./routes/aboutPage/AboutPage";
 import ContactPage from "./routes/contactPage/ContactPage";
 import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
