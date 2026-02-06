@@ -6,20 +6,26 @@ export const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
-  
-  // Initialize with your Render Socket URL
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    // We only create the socket connection ONCE when the app mounts
-    const newSocket = io("https://primenest-socket.onrender.com");
+    // 1. Create the socket with production settings
+    const newSocket = io("https://primenest-socket.onrender.com", {
+      withCredentials: true,
+      // We prioritize websocket but allow polling for the initial handshake
+      transports: ["polling", "websocket"], 
+    });
+
     setSocket(newSocket);
 
-    // Clean up connection when app closes
-    return () => newSocket.close();
+    // 2. Cleanup: close the connection when the user leaves the site
+    return () => {
+      newSocket.close();
+    };
   }, []);
 
   useEffect(() => {
+    // Only emit if the socket is connected and user exists
     if (currentUser && socket) {
       socket.emit("newUser", currentUser.id);
     }
