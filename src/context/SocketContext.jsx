@@ -6,7 +6,8 @@ export const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
-  const [socket, setSocket] = useState(null);
+  // Use your Render Socket URL here
+const [socket, setSocket] = useState(io("https://primenest-socket.onrender.com"));
 
   useEffect(() => {
     setSocket(io("http://localhost:4000"));
