@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./newPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -55,6 +55,7 @@ function NewPostPage() {
         navigate("/" + res.data.id);
       }
     } catch (err) {
+      console.error(err);
       setError("Data transmission failed. Please verify all telemetry fields.");
     }
   };
@@ -166,8 +167,8 @@ function NewPostPage() {
         <UploadWidget
           uwConfig={{
             multiple: true,
-            cloudName: "your_cloud_name",
-            uploadPreset: "your_preset",
+            cloudName: "dfui2sgjw",
+            uploadPreset: "estate",
             folder: "posts",
           }}
           setState={setImages}

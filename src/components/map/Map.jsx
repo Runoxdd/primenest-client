@@ -3,6 +3,20 @@ import "./map.scss";
 import "leaflet/dist/leaflet.css";
 import Pin from "../pin/Pin";
 import { useEffect } from "react";
+import L from "leaflet"; // 1. Import Leaflet
+
+// 2. Fix for missing marker icons in production
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+let DefaultIcon = L.icon({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 function ChangeView({ center, zoom }) {
   const map = useMap();
@@ -26,8 +40,7 @@ function Map({ items }) {
     >
       <ChangeView center={center} zoom={items.length === 1 ? 12 : 7} />
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        // UPDATED TO TRUE DARK MODE TILES:
+        attribution='&copy; OpenStreetMap &copy; CARTO'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
       {items.map((item) => (
