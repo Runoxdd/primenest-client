@@ -13,6 +13,7 @@ function Chat({ chats }) {
   const messageEndRef = useRef();
   const decrease = useNotificationStore((state) => state.decrease);
 
+  // Auto-scroll to bottom on new message
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat]);
@@ -55,15 +56,26 @@ function Chat({ chats }) {
         console.log(err);
       }
     };
+
     if (chat && socket) {
+      // FIX: Kill old listeners before starting a new one to prevent double messages
+      socket.off("getMessage");
+
       socket.on("getMessage", (data) => {
         if (chat.id === data.chatId) {
-          setChat((prev) => ({ ...prev, messages: [...prev.messages, data] }));
+          setChat((prev) => ({ 
+            ...prev, 
+            messages: [...prev.messages, data] 
+          }));
           read();
         }
       });
     }
-    return () => { socket.off("getMessage"); };
+    
+    // Cleanup on unmount or chat switch
+    return () => {
+      if (socket) socket.off("getMessage");
+    };
   }, [socket, chat]);
 
   return (
