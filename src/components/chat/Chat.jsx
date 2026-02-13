@@ -41,7 +41,10 @@ function Chat({ chats }) {
       e.target.reset();
       socket.emit("sendMessage", {
         receiverId: chat.receiver.id,
-        data: res.data,
+        data: {
+          ...res.data,
+          chatId: chat.id,
+        },
       });
     } catch (err) {
       console.log(err);
