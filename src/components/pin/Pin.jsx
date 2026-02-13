@@ -1,19 +1,43 @@
 import { Marker, Popup } from "react-leaflet";
 import "./pin.scss";
 import { Link } from "react-router-dom";
+import { Bed, Bath } from "lucide-react";
 
 function Pin({ item }) {
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
   return (
     <Marker position={[item.latitude, item.longitude]}>
       <Popup>
-        <div className="popupContainer">
-          <img src={item.images[0]} alt={item.title} />
-          <div className="textContainer">
-            <Link to={`/${item.id}`}>{item.title}</Link>
-            <div className="details">
-              <span>{item.bedroom} Bed</span>
-              <span className="separator">|</span>
-              <b>$ {item.price}</b>
+        <div className="popup-container">
+          <div className="popup-image">
+            <img src={item.images[0]} alt={item.title} />
+            <div className="type-badge">{item.type}</div>
+          </div>
+          <div className="popup-content">
+            <Link to={`/${item.id}`} className="popup-title">
+              {item.title}
+            </Link>
+            <div className="popup-details">
+              <div className="detail-item">
+                <Bed size={14} />
+                <span>{item.bedroom} Beds</span>
+              </div>
+              <div className="detail-item">
+                <Bath size={14} />
+                <span>{item.bathroom} Baths</span>
+              </div>
+            </div>
+            <div className="popup-price">
+              {formatPrice(item.price)}
+              {item.type === "rent" && <span className="price-period">/mo</span>}
             </div>
           </div>
         </div>

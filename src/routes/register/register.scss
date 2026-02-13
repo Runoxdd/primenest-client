@@ -1,150 +1,45 @@
 // ============================================
-// PrimeNest Register Page Styles
-// Modern Earth-Tone Design
+// PrimeNest Register Page Styles v2.0
+// Uses shared auth styles from login.scss
 // ============================================
 
 @import "../../styles/_design-system.scss";
-@import "../../responsive.scss";
 
-.registerPage {
-  height: 100vh;
-  display: flex;
-  background-color: var(--bg-primary);
+// Register uses the same auth-page layout as login
+// The styles are defined in login.scss
 
-  .formContainer {
-    flex: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
+// Additional register-specific styles
+.auth-page {
+  // Reverse the order for register (image on left, form on right)
+  .auth-image-section {
+    order: 1;
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: $space-6;
-      width: 100%;
-      max-width: 420px;
-      padding: $space-10;
-      background: var(--surface-primary);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border-light);
-      border-radius: $radius-2xl;
-      box-shadow: var(--shadow-xl);
-
-      h1 {
-        font-family: $font-display;
-        font-size: 36px;
-        font-weight: $font-weight-extrabold;
-        color: var(--text-primary);
-        letter-spacing: -1px;
-      }
-
-      .subtitle {
-        color: var(--text-secondary);
-        margin-top: -$space-4;
-        font-size: $font-size-base;
-      }
-
-      input {
-        padding: $space-4;
-        background-color: var(--input-bg);
-        border: 1px solid var(--input-border);
-        border-radius: $radius-lg;
-        color: var(--text-primary);
-        font-size: $font-size-base;
-        transition: all 0.3s ease;
-
-        &:focus {
-          outline: none;
-          border-color: var(--input-focus);
-          background-color: var(--surface-hover);
-          box-shadow: 0 0 15px rgba(212, 163, 115, 0.2);
-        }
-
-        &::placeholder {
-          color: var(--text-muted);
-        }
-      }
-
-      button {
-        padding: $space-4;
-        border-radius: $radius-lg;
-        border: none;
-        background: var(--brand-gradient);
-        color: white;
-        font-weight: $font-weight-bold;
-        font-size: $font-size-base;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: $space-3;
-        box-shadow: var(--shadow-md);
-
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-glow);
-          filter: brightness(1.1);
-        }
-
-        &:disabled {
-          background-color: var(--bg-tertiary);
-          color: var(--text-muted);
-          cursor: not-allowed;
-          transform: none;
-        }
-      }
-
-      .errorMsg {
-        color: var(--status-error);
-        font-size: $font-size-sm;
-        text-align: center;
-        background: rgba(212, 115, 115, 0.1);
-        padding: $space-3;
-        border-radius: $radius-lg;
-        border: 1px solid rgba(212, 115, 115, 0.2);
-      }
-
-      .switchAuth {
-        font-size: $font-size-sm;
-        color: var(--text-secondary);
-        text-align: center;
-        text-decoration: none;
-        margin-top: $space-3;
-
-        span {
-          color: var(--accent-primary);
-          font-weight: $font-weight-bold;
-          &:hover { text-decoration: underline; }
-        }
-      }
+    @include lg {
+      order: 0;
     }
   }
 
-  .imgContainer {
-    flex: 2;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
+  .auth-form-section {
+    order: 2;
 
-    @include md {
-      display: none;
+    @include lg {
+      order: 1;
     }
+  }
+}
 
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to right, var(--bg-primary) 5%, transparent 100%);
-      z-index: 1;
-    }
+// Terms checkbox styling
+.form-options {
+  .checkbox-label {
+    span {
+      a {
+        color: var(--accent-primary);
+        text-decoration: none;
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.6) grayscale(0.2);
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

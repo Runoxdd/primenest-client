@@ -2,129 +2,139 @@ import { useState, useRef, useEffect } from "react";
 import "./filter.scss";
 import { useSearchParams } from "react-router-dom";
 import { formatPrice, detectUserCurrency, getCurrencySymbol } from "../../lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Search, 
+  X, 
+  ChevronDown, 
+  MapPin, 
+  Home, 
+  Building2, 
+  Castle,
+  SlidersHorizontal,
+  Sparkles
+} from "lucide-react";
+import * as Slider from "@radix-ui/react-slider";
 
-// Icons
-const SearchIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8"/>
-    <path d="m21 21-4.3-4.3"/>
-  </svg>
-);
+// Property type icons mapping
+const propertyIcons = {
+  apartment: Building2,
+  house: Home,
+  condo: Castle,
+  land: MapPin,
+};
 
-const CloseIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 6 6 18"/>
-    <path d="m6 6 12 12"/>
-  </svg>
-);
-
-const ChevronIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m6 9 6 6 6-6"/>
-  </svg>
-);
-
-// Price Range Slider Component
+// Custom Price Range Slider Component
 function PriceRangeSlider({ min, max, onChange, currency }) {
-  const [minValue, setMinValue] = useState(min);
-  const [maxValue, setMaxValue] = useState(max);
-  const sliderRef = useRef(null);
-  const minValRef = useRef(min);
-  const maxValRef = useRef(max);
-  
+  const [values, setValues] = useState([min, max]);
   const MIN_PRICE = 0;
-  const MAX_PRICE = 10000000; // $10M
+  const MAX_PRICE = 10000000;
 
   useEffect(() => {
-    setMinValue(min);
-    setMaxValue(max);
+    setValues([min, max]);
   }, [min, max]);
 
-  const handleMinChange = (e) => {
-    const value = Math.min(Number(e.target.value), maxValue - 10000);
-    setMinValue(value);
-    minValRef.current = value;
-    onChange({ min: value, max: maxValue });
+  const handleValueChange = (newValues) => {
+    setValues(newValues);
   };
 
-  const handleMaxChange = (e) => {
-    const value = Math.max(Number(e.target.value), minValue + 10000);
-    setMaxValue(value);
-    maxValRef.current = value;
-    onChange({ min: minValue, max: value });
+  const handleValueCommit = (newValues) => {
+    onChange({ min: newValues[0], max: newValues[1] });
   };
 
-  const getPercent = (value) => ((value - MIN_PRICE) / (MAX_PRICE - MIN_PRICE)) * 100;
+  const formatValue = (value) => {
+    if (value >= 1000000) {
+      return `${getCurrencySymbol(currency)}${(value / 1000000).toFixed(1)}M`;
+    }
+    if (value >= 1000) {
+      return `${getCurrencySymbol(currency)}${(value / 1000).toFixed(0)}K`;
+    }
+    return `${getCurrencySymbol(currency)}${value}`;
+  };
+
+  const presets = [
+    { label: `Under ${formatValue(500000)}`, min: 0, max: 500000 },
+    { label: `${formatValue(500000)} - ${formatValue(1000000)}`, min: 500000, max: 1000000 },
+    { label: `${formatValue(1000000)} - ${formatValue(5000000)}`, min: 1000000, max: 5000000 },
+    { label: `${formatValue(5000000)}+`, min: 5000000, max: 10000000 },
+  ];
 
   return (
-    <div className="priceRangeSlider">
-      <div className="priceInputs">
-        <div className="priceInput">
-          <label>Min</label>
-          <div className="inputWrapper">
-            <span className="currencySymbol">{getCurrencySymbol(currency)}</span>
+    <div className="price-slider">
+      {/* Price Inputs */}
+      <div className="price-inputs">
+        <div className="price-input-group">
+          <label>Min Price</label>
+          <div className="price-input">
+            <span className="currency">{getCurrencySymbol(currency)}</span>
             <input
               type="number"
-              value={minValue}
-              onChange={handleMinChange}
+              value={values[0]}
+              onChange={(e) => {
+                const newMin = Math.min(Number(e.target.value), values[1] - 10000);
+                setValues([newMin, values[1]]);
+                onChange({ min: newMin, max: values[1] });
+              }}
               min={MIN_PRICE}
               max={MAX_PRICE}
               step={10000}
             />
           </div>
         </div>
-        <span className="separator">—</span>
-        <div className="priceInput">
-          <label>Max</label>
-          <div className="inputWrapper">
-            <span className="currencySymbol">{getCurrencySymbol(currency)}</span>
+        <div className="price-separator">—</div>
+        <div className="price-input-group">
+          <label>Max Price</label>
+          <div className="price-input">
+            <span className="currency">{getCurrencySymbol(currency)}</span>
             <input
               type="number"
-              value={maxValue}
-              onChange={handleMaxChange}
+              value={values[1]}
+              onChange={(e) => {
+                const newMax = Math.max(Number(e.target.value), values[0] + 10000);
+                setValues([values[0], newMax]);
+                onChange({ min: values[0], max: newMax });
+              }}
               min={MIN_PRICE}
               max={MAX_PRICE}
               step={10000}
             />
           </div>
         </div>
-      </div>
-      
-      <div className="sliderContainer" ref={sliderRef}>
-        <div className="sliderTrack"></div>
-        <div 
-          className="sliderRange"
-          style={{
-            left: `${getPercent(minValue)}%`,
-            width: `${getPercent(maxValue) - getPercent(minValue)}%`,
-          }}
-        ></div>
-        <input
-          type="range"
-          min={MIN_PRICE}
-          max={MAX_PRICE}
-          step={10000}
-          value={minValue}
-          onChange={handleMinChange}
-          className="thumb thumbMin"
-          style={{ zIndex: minValue > MAX_PRICE - 100000 && "5" }}
-        />
-        <input
-          type="range"
-          min={MIN_PRICE}
-          max={MAX_PRICE}
-          step={10000}
-          value={maxValue}
-          onChange={handleMaxChange}
-          className="thumb thumbMax"
-        />
       </div>
 
-      <div className="pricePresets">
-        <button onClick={() => onChange({ min: 0, max: 500000 })}>Under {formatPrice(500000, currency, { compact: true })}</button>
-        <button onClick={() => onChange({ min: 500000, max: 1000000 })}>$500K - $1M</button>
-        <button onClick={() => onChange({ min: 1000000, max: 5000000 })}>$1M - $5M</button>
-        <button onClick={() => onChange({ min: 5000000, max: 10000000 })}>$5M+</button>
+      {/* Radix Slider */}
+      <div className="slider-wrapper">
+        <Slider.Root
+          className="slider-root"
+          min={MIN_PRICE}
+          max={MAX_PRICE}
+          step={10000}
+          value={values}
+          onValueChange={handleValueChange}
+          onValueCommit={handleValueCommit}
+        >
+          <Slider.Track className="slider-track">
+            <Slider.Range className="slider-range" />
+          </Slider.Track>
+          <Slider.Thumb className="slider-thumb" aria-label="Min price" />
+          <Slider.Thumb className="slider-thumb" aria-label="Max price" />
+        </Slider.Root>
+      </div>
+
+      {/* Price Presets */}
+      <div className="price-presets">
+        {presets.map((preset, index) => (
+          <button
+            key={index}
+            className={`preset-btn ${values[0] === preset.min && values[1] === preset.max ? 'active' : ''}`}
+            onClick={() => {
+              setValues([preset.min, preset.max]);
+              onChange({ min: preset.min, max: preset.max });
+            }}
+          >
+            {preset.label}
+          </button>
+        ))}
       </div>
     </div>
   );
@@ -149,7 +159,7 @@ function Filter() {
     const filters = [];
     if (query.type) filters.push({ key: 'type', label: query.type === 'buy' ? 'For Sale' : 'For Rent' });
     if (query.city) filters.push({ key: 'city', label: query.city });
-    if (query.property) filters.push({ key: 'property', label: query.property });
+    if (query.property) filters.push({ key: 'property', label: query.property.charAt(0).toUpperCase() + query.property.slice(1) });
     if (query.minPrice > 0 || query.maxPrice < 10000000) {
       filters.push({ key: 'price', label: `${formatPrice(query.minPrice, currency, { compact: true })} - ${formatPrice(query.maxPrice, currency, { compact: true })}` });
     }
@@ -207,37 +217,60 @@ function Filter() {
 
   return (
     <div className="filter">
-      <div className="filterHeader">
-        <h1>
-          Search results for <span>{searchParams.get("city") || "All Locations"}</span>
-        </h1>
-        {activeFilters.length > 0 && (
-          <button className="clearAllBtn" onClick={clearAllFilters}>
-            Clear all filters
-          </button>
-        )}
+      {/* Filter Header */}
+      <div className="filter-header">
+        <div className="header-content">
+          <h1>
+            Search results for <span>{searchParams.get("city") || "All Locations"}</span>
+          </h1>
+          {activeFilters.length > 0 && (
+            <motion.button 
+              className="clear-all-btn"
+              onClick={clearAllFilters}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Clear all
+            </motion.button>
+          )}
+        </div>
       </div>
 
       {/* Active Filter Chips */}
-      {activeFilters.length > 0 && (
-        <div className="activeFilters">
-          {activeFilters.map((filter) => (
-            <span key={filter.key} className="filterChip">
-              {filter.label}
-              <button onClick={() => clearFilter(filter.key)}>
-                <CloseIcon />
-              </button>
-            </span>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {activeFilters.length > 0 && (
+          <motion.div 
+            className="active-filters"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+          >
+            {activeFilters.map((filter, index) => (
+              <motion.span
+                key={filter.key}
+                className="filter-chip"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ delay: index * 0.05 }}
+              >
+                {filter.label}
+                <button onClick={() => clearFilter(filter.key)}>
+                  <X size={12} />
+                </button>
+              </motion.span>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Main Filter Bar */}
-      <div className="filterBar">
+      <div className="filter-bar">
         {/* Location */}
-        <div className="filterItem locationInput">
+        <div className="filter-item location">
           <label>Location</label>
-          <div className="inputWrapper">
+          <div className="input-wrapper">
+            <MapPin size={16} className="input-icon" />
             <input
               type="text"
               name="city"
@@ -249,67 +282,91 @@ function Filter() {
         </div>
 
         {/* Type */}
-        <div className="filterItem">
+        <div className="filter-item select">
           <label>Type</label>
-          <select name="type" onChange={handleChange} value={query.type}>
-            <option value="">Any</option>
-            <option value="buy">Buy</option>
-            <option value="rent">Rent</option>
-          </select>
-          <ChevronIcon />
+          <div className="select-wrapper">
+            <select name="type" onChange={handleChange} value={query.type}>
+              <option value="">Any</option>
+              <option value="buy">Buy</option>
+              <option value="rent">Rent</option>
+            </select>
+            <ChevronDown size={16} className="select-icon" />
+          </div>
         </div>
 
         {/* Property */}
-        <div className="filterItem">
+        <div className="filter-item select">
           <label>Property</label>
-          <select name="property" onChange={handleChange} value={query.property}>
-            <option value="">Any</option>
-            <option value="apartment">Apartment</option>
-            <option value="house">House</option>
-            <option value="condo">Condo</option>
-            <option value="land">Land</option>
-          </select>
-          <ChevronIcon />
+          <div className="select-wrapper">
+            <select name="property" onChange={handleChange} value={query.property}>
+              <option value="">Any</option>
+              <option value="apartment">Apartment</option>
+              <option value="house">House</option>
+              <option value="condo">Condo</option>
+              <option value="land">Land</option>
+            </select>
+            <ChevronDown size={16} className="select-icon" />
+          </div>
         </div>
 
         {/* Bedrooms */}
-        <div className="filterItem">
+        <div className="filter-item select">
           <label>Bedrooms</label>
-          <select name="bedroom" onChange={handleChange} value={query.bedroom}>
-            <option value="">Any</option>
-            <option value="1">1+</option>
-            <option value="2">2+</option>
-            <option value="3">3+</option>
-            <option value="4">4+</option>
-            <option value="5">5+</option>
-          </select>
-          <ChevronIcon />
+          <div className="select-wrapper">
+            <select name="bedroom" onChange={handleChange} value={query.bedroom}>
+              <option value="">Any</option>
+              <option value="1">1+</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+              <option value="5">5+</option>
+            </select>
+            <ChevronDown size={16} className="select-icon" />
+          </div>
         </div>
 
         {/* Search Button */}
-        <button className="searchBtn" onClick={handleFilter}>
-          <SearchIcon />
+        <motion.button 
+          className="search-btn"
+          onClick={handleFilter}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <Search size={18} />
           <span>Search</span>
-        </button>
+        </motion.button>
       </div>
 
       {/* Expandable Price Filter */}
-      <div className={`priceFilterSection ${expanded ? "expanded" : ""}`}>
-        <button className="expandBtn" onClick={() => setExpanded(!expanded)}>
+      <div className={`price-section ${expanded ? "expanded" : ""}`}>
+        <motion.button 
+          className="expand-btn"
+          onClick={() => setExpanded(!expanded)}
+          whileTap={{ scale: 0.98 }}
+        >
+          <SlidersHorizontal size={16} />
           <span>Price Range</span>
-          <ChevronIcon />
-        </button>
+          <ChevronDown size={16} className={`expand-icon ${expanded ? 'rotated' : ''}`} />
+        </motion.button>
         
-        {expanded && (
-          <div className="priceFilterContent animate-fadeInUp">
-            <PriceRangeSlider
-              min={query.minPrice}
-              max={query.maxPrice}
-              onChange={handlePriceChange}
-              currency={currency}
-            />
-          </div>
-        )}
+        <AnimatePresence>
+          {expanded && (
+            <motion.div
+              className="price-content"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <PriceRangeSlider
+                min={query.minPrice}
+                max={query.maxPrice}
+                onChange={handlePriceChange}
+                currency={currency}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

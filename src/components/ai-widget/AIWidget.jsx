@@ -3,39 +3,16 @@ import "./aiWidget.scss";
 import apiRequest from "../../lib/apiRequest";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-
-// Icons
-const SparkleIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0L14.59 8.41L23 11L14.59 13.59L12 22L9.41 13.59L1 11L9.41 8.41L12 0Z"/>
-  </svg>
-);
-
-const CloseIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 6 6 18"/>
-    <path d="m6 6 12 12"/>
-  </svg>
-);
-
-const MinimizeIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
-  </svg>
-);
-
-const SendIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m22 2-7 20-4-9-9-4Z"/>
-    <path d="M22 2 11 13"/>
-  </svg>
-);
-
-const NewChatIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 5v14m-7-7h14"/>
-  </svg>
-);
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Sparkles, 
+  X, 
+  Minus, 
+  Send, 
+  Plus,
+  MessageCircle,
+  ArrowRight
+} from "lucide-react";
 
 function AIWidget() {
   const { currentUser } = useContext(AuthContext);
@@ -132,100 +109,162 @@ function AIWidget() {
   };
 
   return (
-    <div className={`aiWidget ${isOpen ? "open" : ""} ${isMinimized ? "minimized" : ""}`}>
+    <div className={`ai-widget ${isOpen ? "open" : ""} ${isMinimized ? "minimized" : ""}`}>
       {/* Floating Trigger Button */}
-      <button 
-        className={`widgetTrigger ${isOpen ? "hidden" : ""}`} 
-        onClick={toggleWidget}
-        aria-label="Open AI Assistant"
-      >
-        <SparkleIcon />
-        <span className="pulseRing"></span>
-      </button>
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            className="widget-trigger"
+            onClick={toggleWidget}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Open AI Assistant"
+          >
+            <Sparkles size={24} />
+            <span className="trigger-pulse" />
+            <span className="trigger-label">AI</span>
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* Minimized State */}
+      <AnimatePresence>
+        {isOpen && isMinimized && (
+          <motion.button
+            className="widget-minimized"
+            onClick={() => setIsMinimized(false)}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Sparkles size={18} />
+            <span>Runo AI</span>
+            <span className="minimized-badge">1</span>
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Widget Panel */}
-      {isOpen && (
-        <div className="widgetPanel animate-scaleIn">
-          {/* Header */}
-          <div className="widgetHeader">
-            <div className="headerLeft">
-              <div className="aiAvatar">
-                <SparkleIcon />
+      <AnimatePresence>
+        {isOpen && !isMinimized && (
+          <motion.div
+            className="widget-panel"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          >
+            {/* Header */}
+            <div className="widget-header">
+              <div className="header-left">
+                <div className="ai-avatar">
+                  <Sparkles size={18} />
+                </div>
+                <div className="header-info">
+                  <h3>Runo AI</h3>
+                  <span className={`status ${loading ? "thinking" : "online"}`}>
+                    <span className="status-dot" />
+                    {loading ? "Thinking..." : "Online"}
+                  </span>
+                </div>
               </div>
-              <div className="headerInfo">
-                <h3>Runo AI</h3>
-                <span className={`status ${loading ? "thinking" : "online"}`}>
-                  {loading ? "Thinking..." : "Online"}
-                </span>
+              <div className="header-actions">
+                <motion.button
+                  onClick={handleNewChat}
+                  title="New Chat"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Plus size={16} />
+                </motion.button>
+                <motion.button
+                  onClick={minimizeWidget}
+                  title="Minimize"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Minus size={16} />
+                </motion.button>
+                <motion.button
+                  onClick={closeWidget}
+                  title="Close"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <X size={16} />
+                </motion.button>
               </div>
             </div>
-            <div className="headerActions">
-              <button onClick={handleNewChat} title="New Chat">
-                <NewChatIcon />
-              </button>
-              <button onClick={minimizeWidget} title="Minimize">
-                <MinimizeIcon />
-              </button>
-              <button onClick={closeWidget} title="Close">
-                <CloseIcon />
-              </button>
-            </div>
-          </div>
 
-          {/* Messages */}
-          <div className="widgetMessages">
-            {messages.map((m, i) => (
-              <div key={i} className={`message ${m.isAi ? "ai" : "user"} animate-fadeInUp`}>
-                {m.isAi && (
-                  <div className="aiAvatar">
-                    <SparkleIcon />
-                  </div>
-                )}
-                <div className="messageBubble">
-                  <p>{m.text}</p>
-                  {m.link && (
-                    <Link to={m.link} className="actionLink" onClick={closeWidget}>
-                      View Listings →
-                    </Link>
+            {/* Messages */}
+            <div className="widget-messages">
+              {messages.map((m, i) => (
+                <motion.div
+                  key={i}
+                  className={`message ${m.isAi ? "ai" : "user"}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  {m.isAi && (
+                    <div className="message-avatar">
+                      <Sparkles size={14} />
+                    </div>
                   )}
+                  <div className="message-bubble">
+                    <p>{m.text}</p>
+                    {m.link && (
+                      <Link to={m.link} className="action-link" onClick={closeWidget}>
+                        View Listings
+                        <ArrowRight size={14} />
+                      </Link>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+              {loading && (
+                <div className="message ai">
+                  <div className="message-avatar">
+                    <Sparkles size={14} />
+                  </div>
+                  <div className="message-bubble typing">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
                 </div>
-              </div>
-            ))}
-            {loading && (
-              <div className="message ai">
-                <div className="aiAvatar">
-                  <SparkleIcon />
-                </div>
-                <div className="messageBubble typing">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-              </div>
-            )}
-            <div ref={messageEndRef} />
-          </div>
+              )}
+              <div ref={messageEndRef} />
+            </div>
 
-          {/* Input */}
-          <div className="widgetInput">
-            <input
-              ref={inputRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Ask about properties..."
-              disabled={loading}
-            />
-            <button 
-              onClick={handleSend} 
-              disabled={loading || !input.trim()}
-              className="sendBtn"
-            >
-              <SendIcon />
-            </button>
-          </div>
-        </div>
-      )}
+            {/* Input */}
+            <div className="widget-input">
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Ask about properties..."
+                disabled={loading}
+              />
+              <motion.button
+                onClick={handleSend}
+                disabled={loading || !input.trim()}
+                className="send-btn"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Send size={18} />
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

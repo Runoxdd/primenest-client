@@ -1,15 +1,20 @@
 import { useState } from "react";
 import "./searchBar.scss";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Search, MapPin, DollarSign } from "lucide-react";
 
-const types = ["buy", "rent"];
+const types = [
+  { value: "buy", label: "Buy" },
+  { value: "rent", label: "Rent" }
+];
 
 function SearchBar() {
   const [query, setQuery] = useState({
     type: "buy",
     city: "",
-    minPrice: 0,
-    maxPrice: 0,
+    minPrice: "",
+    maxPrice: "",
   });
 
   const switchType = (val) => {
@@ -20,55 +25,91 @@ function SearchBar() {
     setQuery((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const buildSearchUrl = () => {
+    const params = new URLSearchParams();
+    params.set("type", query.type);
+    if (query.city) params.set("city", query.city);
+    if (query.minPrice) params.set("minPrice", query.minPrice);
+    if (query.maxPrice) params.set("maxPrice", query.maxPrice);
+    return `/list?${params.toString()}`;
+  };
+
   return (
-    <div className="searchBar">
-      <div className="type">
+    <div className="search-bar">
+      {/* Type Toggle */}
+      <div className="search-type-toggle">
         {types.map((type) => (
-          <button
-            key={type}
-            onClick={() => switchType(type)}
-            className={query.type === type ? "active" : ""}
+          <motion.button
+            key={type.value}
+            onClick={() => switchType(type.value)}
+            className={`type-btn ${query.type === type.value ? "active" : ""}`}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            {type}
-          </button>
+            {type.label}
+          </motion.button>
         ))}
       </div>
-      <form>
-        <div className="inputItem">
+
+      {/* Search Form */}
+      <div className="search-form">
+        {/* Location Input */}
+        <div className="search-field location">
+          <MapPin size={18} className="field-icon" />
           <input
             type="text"
             name="city"
-            placeholder="City Location"
+            placeholder="Enter city or area"
+            value={query.city}
             onChange={handleChange}
           />
         </div>
-        <div className="inputItem">
+
+        {/* Divider */}
+        <div className="field-divider" />
+
+        {/* Min Price */}
+        <div className="search-field price">
+          <DollarSign size={18} className="field-icon" />
           <input
             type="number"
             name="minPrice"
             min={0}
-            placeholder="Min Price"
+            placeholder="Min price"
+            value={query.minPrice}
             onChange={handleChange}
           />
         </div>
-        <div className="inputItem">
+
+        {/* Divider */}
+        <div className="field-divider" />
+
+        {/* Max Price */}
+        <div className="search-field price">
+          <DollarSign size={18} className="field-icon" />
           <input
             type="number"
             name="maxPrice"
             min={0}
-            placeholder="Max Price"
+            placeholder="Max price"
+            value={query.maxPrice}
             onChange={handleChange}
           />
         </div>
-        <Link
-          to={`/list?type=${query.type}&city=${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}
-          className="searchLink"
-        >
-          <button type="button">
-            <img src="/search.png" alt="search" />
-          </button>
+
+        {/* Search Button */}
+        <Link to={buildSearchUrl()} className="search-btn-link">
+          <motion.button
+            type="button"
+            className="search-btn"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Search size={20} />
+            <span>Search</span>
+          </motion.button>
         </Link>
-      </form>
+      </div>
     </div>
   );
 }

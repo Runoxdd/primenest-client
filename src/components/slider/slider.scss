@@ -1,134 +1,216 @@
 // ============================================
-// PrimeNest Slider Component Styles
-// Modern Earth-Tone Design
+// PrimeNest Slider Component Styles v2.0
+// Modern Image Gallery
 // ============================================
 
 @import "../../styles/_design-system.scss";
-@import "../../responsive.scss";
 
 .slider {
   width: 100%;
-  height: 420px;
+  height: 100%;
+}
+
+// ============================================
+// Full Screen Modal
+// ============================================
+
+.full-slider {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
   display: flex;
-  gap: $space-4;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10000;
+  padding: $space-6;
 
-  @include sm {
-    height: auto;
-    flex-direction: column;
+  &:focus {
+    outline: none;
+  }
+}
+
+.nav-arrow {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: $radius-full;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+
+  @include md {
+    width: 48px;
+    height: 48px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
   }
 
-  .fullSlider {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background-color: var(--bg-overlay);
-    backdrop-filter: blur(15px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 10000;
-    animation: fadeIn 0.3s ease-out;
-
-    .arrow {
-      flex: 1;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover {
-        background: var(--surface-hover);
-      }
-
-      img {
-        width: 45px;
-        filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(212, 163, 115, 0.5));
-
-        @include sm { width: 30px; }
-
-        &.right { transform: rotate(180deg); }
-      }
-    }
-
-    .imgContainer {
-      flex: 10;
-      height: 85%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      img {
-        max-width: 90%;
-        max-height: 100%;
-        object-fit: contain;
-        border-radius: $radius-xl;
-        border: 1px solid var(--border-medium);
-        box-shadow: var(--shadow-2xl);
-      }
-    }
-
-    .close {
-      position: absolute;
-      top: 30px;
-      right: 40px;
-      color: var(--accent-primary);
-      font-size: 36px;
-      font-weight: 300;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover { 
-        transform: rotate(90deg) scale(1.2); 
-        color: var(--text-primary);
-      }
-    }
+  &:hover {
+    background: var(--accent-primary);
+    transform: scale(1.1);
   }
+
+  &.left {
+    margin-right: $space-4;
+  }
+
+  &.right {
+    margin-left: $space-4;
+  }
+}
+
+.image-container {
+  flex: 1;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: $radius-xl;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: $space-6;
+  right: $space-6;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: $radius-full;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--status-error);
+    transform: rotate(90deg);
+  }
+}
+
+.image-counter {
+  position: absolute;
+  bottom: $space-6;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: $space-2 $space-4;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $radius-full;
+  color: white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+// ============================================
+// Gallery Grid
+// ============================================
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: $space-3;
+  height: 100%;
+  width: 100%;
+
+  @include md {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+}
+
+.main-image {
+  position: relative;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  cursor: pointer;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: $radius-xl;
-    cursor: pointer;
-    border: 1px solid var(--border-light);
-    transition: all 0.4s ease;
-
-    &:hover {
-      border-color: var(--accent-primary);
-      box-shadow: var(--shadow-glow);
-      transform: scale(1.01);
-    }
   }
 
-  .bigImage {
-    flex: 3;
-    @include sm { height: 280px; }
-  }
-
-  .smallImages {
-    flex: 1;
+  .image-overlay {
+    position: absolute;
+    inset: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: $space-3;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 
-    @include sm {
-      flex-direction: row;
-      height: 100px;
+    span {
+      padding: $space-3 $space-5;
+      background: white;
+      color: var(--text-primary);
+      border-radius: $radius-lg;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
     }
+  }
 
-    img {
-      height: calc(33.33% - 8px);
-      @include sm { height: 100%; }
-    }
+  &:hover .image-overlay {
+    opacity: 1;
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.thumbnail-grid {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  gap: $space-3;
+  height: 100%;
+
+  @include md {
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    height: 80px;
+  }
+}
+
+.thumbnail {
+  position: relative;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}
+
+.more-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
 }

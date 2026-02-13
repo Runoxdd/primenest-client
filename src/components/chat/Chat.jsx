@@ -5,6 +5,18 @@ import apiRequest from "../../lib/apiRequest";
 import { format } from "timeago.js";
 import { SocketContext } from "../../context/SocketContext";
 import { useNotificationStore } from "../../lib/notificationStore";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  MessageCircle, 
+  X, 
+  Send, 
+  User,
+  Phone,
+  Video,
+  MoreVertical,
+  Check,
+  CheckCheck
+} from "lucide-react";
 
 function Chat({ chats }) {
   const [chat, setChat] = useState(null);
@@ -82,55 +94,116 @@ function Chat({ chats }) {
   }, [socket, chat]);
 
   return (
-    <div className="chat">
-      <div className="messages">
-        <h1>Messages</h1>
-        {chats?.map((c) => (
-          <div
-            className={`message ${(!c.seenBy.includes(currentUser.id) && chat?.id !== c.id) ? "unread" : ""}`}
-            key={c.id}
-            onClick={() => handleOpenChat(c.id, c.receiver)}
-          >
-            <div className="avatarWrapper">
-              <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
-              {(!c.seenBy.includes(currentUser.id) && chat?.id !== c.id) && <div className="onlineDot" />}
-            </div>
-            <div className="messageInfo">
-              <span>{c.receiver.username}</span>
-              <p>{c.lastMessage}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      {chat && (
-        <div className="chatBox">
-          <div className="top">
-            <div className="user">
-              <img src={chat.receiver.avatar || "/noavatar.jpg"} alt="" />
-              <b>{chat.receiver.username}</b>
-            </div>
-            <span className="close" onClick={() => setChat(null)}>✕</span>
-          </div>
-          <div className="center">
-            {chat.messages.map((message) => (
-              <div
-                className={`chatMessage ${message.userId === currentUser.id ? "own" : ""}`}
-                key={message.id}
-              >
-                <p>{message.text}</p>
-                <span>{format(message.createdAt)}</span>
-              </div>
-            ))}
-            <div ref={messageEndRef}></div>
-          </div>
-          <form onSubmit={handleSubmit} className="bottom">
-            <textarea name="text" placeholder="Send a secure message..."></textarea>
-            <button>
-               <img src="/send.png" alt="Send" style={{width: '20px', filter: 'brightness(0) invert(1)'}} />
-            </button>
-          </form>
+    <div className="chat-container">
+      {/* Conversations List */}
+      <div className="conversations-list">
+        <div className="list-header">
+          <h2>Messages</h2>
+          <span className="message-count">{chats?.length || 0}</span>
         </div>
-      )}
+
+        <div className="conversations">
+          {chats?.map((c, index) => (
+            <motion.div
+              key={c.id}
+              className={`conversation ${(!c.seenBy.includes(currentUser.id) && chat?.id !== c.id) ? "unread" : ""} ${chat?.id === c.id ? "active" : ""}`}
+              onClick={() => handleOpenChat(c.id, c.receiver)}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.05 }}
+            >
+              <div className="conversation-avatar">
+                <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
+                {(!c.seenBy.includes(currentUser.id) && chat?.id !== c.id) && (
+                  <span className="unread-dot" />
+                )}
+              </div>
+              <div className="conversation-info">
+                <span className="conversation-name">{c.receiver.username}</span>
+                <p className="conversation-preview">{c.lastMessage}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Chat Box */}
+      <AnimatePresence>
+        {chat && (
+          <motion.div
+            className="chat-box"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+          >
+            {/* Chat Header */}
+            <div className="chat-header">
+              <div className="chat-user">
+                <img src={chat.receiver.avatar || "/noavatar.jpg"} alt="" />
+                <div className="user-info">
+                  <span className="user-name">{chat.receiver.username}</span>
+                  <span className="user-status">Online</span>
+                </div>
+              </div>
+              <div className="chat-actions">
+                <button className="action-btn">
+                  <Phone size={18} />
+                </button>
+                <button className="action-btn">
+                  <Video size={18} />
+                </button>
+                <button className="action-btn" onClick={() => setChat(null)}>
+                  <X size={18} />
+                </button>
+              </div>
+            </div>
+
+            {/* Messages */}
+            <div className="chat-messages">
+              {chat.messages.map((message, index) => (
+                <motion.div
+                  key={message.id}
+                  className={`message ${message.userId === currentUser.id ? "own" : ""}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.02 }}
+                >
+                  <div className="message-bubble">
+                    <p>{message.text}</p>
+                    <div className="message-meta">
+                      <span className="message-time">{format(message.createdAt)}</span>
+                      {message.userId === currentUser.id && (
+                        <span className="message-status">
+                          <CheckCheck size={14} />
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+              <div ref={messageEndRef} />
+            </div>
+
+            {/* Input */}
+            <form onSubmit={handleSubmit} className="chat-input">
+              <input
+                type="text"
+                name="text"
+                placeholder="Type a message..."
+                autoComplete="off"
+              />
+              <motion.button
+                type="submit"
+                className="send-btn"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Send size={18} />
+              </motion.button>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

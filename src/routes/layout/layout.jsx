@@ -8,12 +8,12 @@ import { AuthContext } from "../../context/AuthContext";
 function Layout() {
   return (
     <div className="layout">
-      <div className="navbar">
+      <div className="layout-navbar">
         <Navbar />
       </div>
-      <div className="content">
+      <main className="layout-content">
         <Outlet />
-      </div>
+      </main>
       <AIWidget />
     </div>
   );
@@ -28,12 +28,12 @@ function RequireAuth() {
 
   return (
     <div className="layout">
-      <div className="navbar">
+      <div className="layout-navbar">
         <Navbar />
       </div>
-      <div className="content">
+      <main className="layout-content">
         <Outlet />
-      </div>
+      </main>
       <AIWidget />
     </div>
   );

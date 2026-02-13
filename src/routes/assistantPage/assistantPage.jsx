@@ -3,6 +3,20 @@ import apiRequest from "../../lib/apiRequest";
 import "./assistantPage.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Bot, 
+  Send, 
+  RotateCcw,
+  User,
+  Sparkles,
+  MapPin,
+  TrendingUp,
+  Shield,
+  ExternalLink,
+  Loader2,
+  MessageSquare
+} from "lucide-react";
 
 function AssistantPage() {
   const { currentUser } = useContext(AuthContext);
@@ -12,7 +26,7 @@ function AssistantPage() {
     const savedChat = localStorage.getItem(chatKey);
     return savedChat ? JSON.parse(savedChat) : [
       { 
-        text: "Hi there! I'm Runo, your global PrimeNest advisor. How can I assist your property search today?", 
+        text: "Hi there! I'm Runo, your PrimeNest AI advisor. I can help you find properties, analyze markets, and answer questions about real estate. How can I assist you today?", 
         isAi: true 
       }
     ];
@@ -21,6 +35,7 @@ function AssistantPage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messageEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     localStorage.setItem(chatKey, JSON.stringify(messages));
@@ -29,11 +44,12 @@ function AssistantPage() {
 
   const handleNewChat = () => {
     const initialMsg = [{ 
-      text: "New session initialized. How can I help?", 
+      text: "New conversation started. How can I help you find your perfect property?", 
       isAi: true 
     }];
     setMessages(initialMsg);
     localStorage.removeItem(chatKey);
+    inputRef.current?.focus();
   };
 
   const handleSend = async () => {
@@ -50,111 +66,184 @@ function AssistantPage() {
       const aiMsg = { 
         text: res.data.reply, 
         isAi: true, 
-        link: res.data.searchUrl, 
-        // We keep explanation in the object for data integrity, 
-        // but we simply won't render it below.
+        link: res.data.searchUrl,
         explanation: res.data.explanation 
       };
       setMessages((prev) => [...prev, aiMsg]);
     } catch (err) {
       setMessages((prev) => [
         ...prev, 
-        { text: "Connection interrupted. Please re-establish uplink.", isAi: true }
+        { text: "I'm having trouble connecting right now. Please try again in a moment.", isAi: true }
       ]);
     } finally {
       setLoading(false);
     }
   };
 
+  const features = [
+    {
+      icon: Sparkles,
+      title: "Smart Search",
+      description: "Natural language property search across 50+ countries"
+    },
+    {
+      icon: TrendingUp,
+      title: "Market Insights",
+      description: "Real-time analysis of property trends and prices"
+    },
+    {
+      icon: Shield,
+      title: "Secure & Private",
+      description: "Your conversations are encrypted and protected"
+    }
+  ];
+
   return (
-    <div className="assistantPage">
-      <div className="gradient-bg"></div>
-      
-      <div className="contentWrapper">
-        <section className="heroSection">
-          <div className="textContainer">
-            <h1>Global <span>Intelligence</span></h1>
-            <p>
-              Your worldwide real estate companion. Runo leverages hybrid AI to navigate 
-              international property markets instantly.
-            </p>
+    <div className="assistant-page">
+      {/* Hero Section */}
+      <motion.section 
+        className="hero-section"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="hero-content">
+          <div className="hero-badge">
+            <Sparkles size={14} />
+            <span>AI-Powered</span>
           </div>
-          <div className="imageContainer">
-            <img src="/ai-visual.png" alt="AI Visual" />
-          </div>
-        </section>
+          <h1>
+            Meet <span>Runo</span>, Your AI Real Estate Advisor
+          </h1>
+          <p>
+            Powered by advanced AI, Runo helps you navigate the global property market 
+            with intelligent recommendations and instant insights.
+          </p>
+        </div>
+        <div className="hero-visual">
+          <div className="visual-glow" />
+          <Bot size={120} strokeWidth={1} />
+        </div>
+      </motion.section>
 
-        <section className="featuresGrid">
-          <div className="card">
-            <img src="/nlp.png" alt="" />
-            <h3>Intent Detection</h3>
-            <p>Advanced context handling for global queries.</p>
-          </div>
-          <div className="card">
-            <img src="/secure.png" alt="" />
-            <h3>Secure Session</h3>
-            <p>End-to-end encryption for your property search.</p>
-          </div>
-          <div className="card">
-            <img src="/logic.png" alt="" />
-            <h3>Market Analysis</h3>
-            <p>Real-time data processing across 50+ countries.</p>
-          </div>
-        </section>
-
-        <section className="chatSection">
-          <div className="chatHeader">
-            <div className="status">
-              <div className="dot"></div>
-              <span>{loading ? "PROCESSING..." : "RUNO ONLINE"}</span>
-            </div>
-            <div className="headerActions">
-              <button className="newChatBtn" onClick={handleNewChat}>
-                <span className="plus">+</span> NEW SESSION
-              </button>
-            </div>
-          </div>
-          
-          <div className="messages">
-            {messages.map((m, i) => (
-              <div key={i} className={`messageRow ${m.isAi ? "ai" : "user"}`}>
-                <div className="messageBubble">
-                  <p>{m.text}</p>
-                  {/* EXPLANATION REMOVED FROM HERE */}
-                  {m.link && (
-                    <Link to={m.link} className="actionBtn">
-                      View Matching Listings
-                    </Link>
-                  )}
+      {/* Features */}
+      <section className="features-section">
+        <div className="features-grid">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+            return (
+              <motion.div 
+                key={index}
+                className="feature-card"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <div className="feature-icon">
+                  <Icon size={24} />
                 </div>
-              </div>
-            ))}
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Chat Section */}
+      <section className="chat-section">
+        <div className="chat-container">
+          {/* Chat Header */}
+          <div className="chat-header">
+            <div className="chat-status">
+              <div className={`status-dot ${loading ? "processing" : "online"}`} />
+              <span>{loading ? "Thinking..." : "Runo Online"}</span>
+            </div>
+            <button className="new-chat-btn" onClick={handleNewChat}>
+              <RotateCcw size={16} />
+              <span>New Chat</span>
+            </button>
+          </div>
+
+          {/* Messages */}
+          <div className="messages-container">
+            <AnimatePresence>
+              {messages.map((message, index) => (
+                <motion.div
+                  key={index}
+                  className={`message ${message.isAi ? "ai" : "user"}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="message-avatar">
+                    {message.isAi ? <Bot size={20} /> : <User size={20} />}
+                  </div>
+                  <div className="message-content">
+                    <p>{message.text}</p>
+                    {message.link && (
+                      <Link to={message.link} className="message-link">
+                        <ExternalLink size={14} />
+                        <span>View Matching Listings</span>
+                      </Link>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+
             {loading && (
-              <div className="messageRow ai">
-                <div className="messageBubble loading-bubble">
-                  Analyzing Global Data Stream...
+              <motion.div
+                className="message ai"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <div className="message-avatar">
+                  <Bot size={20} />
                 </div>
-              </div>
+                <div className="message-content loading">
+                  <div className="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </motion.div>
             )}
             <div ref={messageEndRef} />
           </div>
-        </section>
-      </div>
 
-      <div className="stickyInputArea">
-        <div className="inputContainer">
-          <input 
-            value={input} 
-            onChange={(e) => setInput(e.target.value)} 
-            onKeyDown={(e) => e.key === "Enter" && handleSend()}
-            placeholder="Search London apartments, Tokyo lofts..." 
-            disabled={loading}
-          />
-          <button onClick={handleSend} disabled={loading || !input.trim()}>
-            {loading ? "..." : "Send"}
-          </button>
+          {/* Input Area */}
+          <div className="input-area">
+            <div className="input-container">
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                placeholder="Ask about properties, markets, or neighborhoods..."
+                disabled={loading}
+              />
+              <motion.button
+                className="send-btn"
+                onClick={handleSend}
+                disabled={loading || !input.trim()}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {loading ? (
+                  <Loader2 size={20} className="animate-spin" />
+                ) : (
+                  <Send size={20} />
+                )}
+              </motion.button>
+            </div>
+            <p className="input-hint">
+              Try: "Find apartments in Lagos under $500k" or "What's the market trend in London?"
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

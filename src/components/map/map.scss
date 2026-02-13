@@ -1,6 +1,6 @@
 // ============================================
-// PrimeNest Map Component Styles
-// Modern Earth-Tone Design
+// PrimeNest Map Component Styles v2.0
+// Modern Minimalist Map
 // ============================================
 
 @import "../../styles/_design-system.scss";
@@ -8,35 +8,40 @@
 .map {
   width: 100%;
   height: 100%;
-  border-radius: $radius-2xl;
-  border: 1px solid var(--border-medium);
-  background-color: var(--bg-secondary) !important;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: $radius-xl;
+  border: 1px solid var(--border-light);
+  background: var(--surface-secondary) !important;
   overflow: hidden;
 
   // Custom Zoom Controls
   .leaflet-control-zoom {
     border: none !important;
-    margin: $space-5 !important;
+    margin: $space-4 !important;
+    box-shadow: var(--shadow-md);
 
     .leaflet-control-zoom-in,
     .leaflet-control-zoom-out {
       background: var(--surface-primary) !important;
       backdrop-filter: blur(10px);
-      color: var(--accent-primary) !important;
-      border: 1px solid var(--accent-primary) !important;
-      transition: all 0.3s ease;
+      color: var(--text-primary) !important;
+      border: 1px solid var(--border-light) !important;
+      transition: all 0.2s ease;
       font-weight: $font-weight-bold;
+      width: 36px !important;
+      height: 36px !important;
+      line-height: 36px !important;
+      font-size: 18px !important;
 
       &:hover {
         background: var(--accent-primary) !important;
         color: white !important;
-        box-shadow: var(--shadow-glow);
+        border-color: var(--accent-primary) !important;
       }
     }
 
     .leaflet-control-zoom-in {
       border-radius: $radius-lg $radius-lg 0 0 !important;
+      border-bottom: none !important;
     }
     .leaflet-control-zoom-out {
       border-radius: 0 0 $radius-lg $radius-lg !important;
@@ -44,27 +49,62 @@
   }
 
   .leaflet-container {
-    background: var(--bg-secondary) !important;
+    background: var(--surface-secondary) !important;
+    font-family: $font-sans !important;
   }
 
-  // Tactical Attribution
+  // Attribution
   .leaflet-control-attribution {
-    background: var(--bg-tertiary) !important;
-    backdrop-filter: blur(5px);
-    color: var(--text-secondary) !important;
-    font-size: 9px;
-    padding: 2px 10px !important;
-    border-radius: $radius-lg 0 0 0;
+    background: var(--surface-primary) !important;
+    backdrop-filter: blur(10px);
+    color: var(--text-tertiary) !important;
+    font-size: 10px;
+    padding: $space-1 $space-3 !important;
+    border-radius: $radius-md 0 0 0;
+    border-top: 1px solid var(--border-light);
+    border-right: 1px solid var(--border-light);
     
     a { 
       color: var(--accent-primary); 
       text-decoration: none;
-      &:hover { text-decoration: underline; }
+
+      &:hover { 
+        text-decoration: underline; 
+      }
     }
   }
 
-  // Ensure map images (tiles) have a slight warm tint to match theme
+  // Map tiles - subtle styling
   .leaflet-tile-container {
-    filter: hue-rotate(20deg) brightness(0.9) contrast(1.1);
+    filter: saturate(0.9) brightness(0.98);
+  }
+
+  // Popup styling
+  .leaflet-popup-content-wrapper {
+    background: var(--surface-primary) !important;
+    border-radius: $radius-lg !important;
+    box-shadow: var(--shadow-lg) !important;
+    border: 1px solid var(--border-light) !important;
+    padding: 0 !important;
+  }
+
+  .leaflet-popup-content {
+    margin: 0 !important;
+    min-width: 200px;
+  }
+
+  .leaflet-popup-tip {
+    background: var(--surface-primary) !important;
+    border: 1px solid var(--border-light) !important;
+  }
+
+  .leaflet-popup-close-button {
+    color: var(--text-tertiary) !important;
+    font-size: 20px !important;
+    padding: $space-2 $space-3 !important;
+
+    &:hover {
+      color: var(--text-primary) !important;
+    }
   }
 }

@@ -1,11 +1,11 @@
 // ============================================
-// PrimeNest AI Widget Styles
-// Floating Chat Widget with Modern Design
+// PrimeNest AI Widget Styles v2.0
+// Premium SaaS Glassmorphism Panel
 // ============================================
 
 @import "../../styles/_design-system.scss";
 
-.aiWidget {
+.ai-widget {
   position: fixed;
   bottom: $space-6;
   right: $space-6;
@@ -15,356 +15,379 @@
     bottom: $space-4;
     right: $space-4;
   }
+}
 
-  // Floating Trigger Button
-  .widgetTrigger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
+// ============================================
+// TRIGGER BUTTON
+// ============================================
+
+.widget-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--brand-gradient);
+  border: none;
+  border-radius: $radius-full;
+  color: white;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-xl), var(--shadow-glow-lg);
+  }
+
+  .trigger-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: $radius-full;
     background: var(--brand-gradient);
-    border: none;
-    border-radius: 50%;
+    animation: pulseRing 2s ease-out infinite;
+  }
+
+  .trigger-label {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    padding: 2px 6px;
+    background: var(--status-error);
     color: white;
-    cursor: pointer;
-    box-shadow: var(--shadow-xl);
-    transition: all 0.3s ease;
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    border-radius: $radius-full;
+  }
+
+  svg {
     position: relative;
-
-    &:hover {
-      transform: scale(1.1);
-      box-shadow: var(--shadow-glow);
-    }
-
-    &:active {
-      transform: scale(0.95);
-    }
-
-    &.hidden {
-      display: none;
-    }
-
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .pulseRing {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: var(--accent-primary);
-      animation: pulseRing 2s ease-out infinite;
-    }
+    z-index: 1;
   }
+}
 
-  // Widget Panel
-  .widgetPanel {
-    width: 380px;
-    max-width: calc(100vw - $space-8);
-    height: 520px;
-    max-height: calc(100vh - 100px);
-    background: var(--bg-card);
-    border: 1px solid var(--border-light);
-    border-radius: $radius-2xl;
-    box-shadow: var(--shadow-2xl);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transform-origin: bottom right;
+// ============================================
+// MINIMIZED STATE
+// ============================================
 
-    @include mobile {
-      width: calc(100vw - $space-8);
-      height: calc(100vh - 120px);
-      max-width: none;
-      max-height: none;
-      border-radius: $radius-xl;
-    }
+.widget-minimized {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: var(--surface-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  border-radius: $radius-full;
+  color: var(--text-primary);
+  font-size: $text-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+
+  .minimized-badge {
+    padding: 2px 6px;
+    background: var(--accent-primary);
+    color: white;
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    border-radius: $radius-full;
   }
+}
 
-  // Header
-  .widgetHeader {
+// ============================================
+// WIDGET PANEL
+// ============================================
+
+.widget-panel {
+  width: 380px;
+  height: 520px;
+  max-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-glass);
+  border-radius: $radius-3xl;
+  box-shadow: var(--shadow-2xl);
+  overflow: hidden;
+
+  @include mobile {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
+}
+
+// ============================================
+// HEADER
+// ============================================
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-4;
+  background: var(--surface-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+
+  .header-left {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: $space-4;
-    background: var(--brand-gradient);
-    color: white;
+    gap: $space-3;
 
-    .headerLeft {
+    .ai-avatar {
       display: flex;
       align-items: center;
-      gap: $space-3;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: var(--brand-gradient);
+      border-radius: $radius-lg;
+      color: white;
+    }
 
-      .aiAvatar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: $radius-lg;
-
-        svg {
-          width: 20px;
-          height: 20px;
-        }
+    .header-info {
+      h3 {
+        font-size: $text-sm;
+        font-weight: $font-weight-semibold;
+        color: var(--text-primary);
       }
 
-      .headerInfo {
-        h3 {
-          font-size: $font-size-base;
-          font-weight: $font-weight-semibold;
-          margin-bottom: 2px;
+      .status {
+        display: flex;
+        align-items: center;
+        gap: $space-2;
+        font-size: $text-xs;
+        color: var(--text-tertiary);
+
+        .status-dot {
+          width: 6px;
+          height: 6px;
+          background: var(--status-success);
+          border-radius: 50%;
         }
 
-        .status {
-          font-size: $font-size-xs;
-          opacity: 0.9;
-
-          &.online::before {
-            content: "";
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: #7CB07E;
-            border-radius: 50%;
-            margin-right: $space-1;
-          }
-
-          &.thinking::before {
-            content: "";
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: #E8C547;
-            border-radius: 50%;
-            margin-right: $space-1;
-            animation: pulse 1s ease-in-out infinite;
-          }
+        &.thinking .status-dot {
+          background: var(--status-warning);
+          animation: pulse 1s ease-in-out infinite;
         }
       }
     }
+  }
 
-    .headerActions {
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+
+    button {
       display: flex;
-      gap: $space-2;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: transparent;
+      border: none;
+      border-radius: $radius-lg;
+      color: var(--text-tertiary);
+      cursor: pointer;
+      transition: all 0.15s ease;
 
-      button {
-        display: flex;
+      &:hover {
+        background: var(--surface-hover);
+        color: var(--text-primary);
+      }
+    }
+  }
+}
+
+// ============================================
+// MESSAGES
+// ============================================
+
+.widget-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  @include custom-scrollbar(4px);
+
+  .message {
+    display: flex;
+    gap: $space-2;
+    max-width: 85%;
+
+    &.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    &.ai {
+      align-self: flex-start;
+    }
+
+    .message-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--brand-gradient);
+      border-radius: $radius-lg;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .message-bubble {
+      padding: $space-3 $space-4;
+      border-radius: $radius-xl;
+      font-size: $text-sm;
+      line-height: $leading-relaxed;
+
+      p {
+        margin: 0;
+        color: inherit;
+      }
+
+      .action-link {
+        display: inline-flex;
         align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
+        gap: $space-2;
+        margin-top: $space-2;
+        padding: $space-2 $space-3;
         background: rgba(255, 255, 255, 0.1);
-        border: none;
-        border-radius: $radius-md;
-        color: white;
-        cursor: pointer;
-        transition: all 0.2s ease;
+        border-radius: $radius-lg;
+        font-size: $text-xs;
+        font-weight: $font-weight-medium;
+        color: inherit;
+        text-decoration: none;
+        transition: all 0.15s ease;
 
         &:hover {
           background: rgba(255, 255, 255, 0.2);
         }
-
-        svg {
-          width: 16px;
-          height: 16px;
-        }
       }
     }
-  }
 
-  // Messages
-  .widgetMessages {
-    flex: 1;
-    overflow-y: auto;
-    padding: $space-4;
-    display: flex;
-    flex-direction: column;
-    gap: $space-3;
-    background: var(--bg-secondary);
-
-    &::-webkit-scrollbar {
-      width: 6px;
+    &.user .message-bubble {
+      background: var(--brand-gradient);
+      color: white;
+      border-bottom-right-radius: $radius-sm;
     }
 
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: var(--border-medium);
-      border-radius: $radius-full;
-    }
-
-    .message {
-      display: flex;
-      gap: $space-2;
-      animation-duration: 0.3s;
-
-      &.user {
-        flex-direction: row-reverse;
-
-        .messageBubble {
-          background: var(--accent-primary);
-          color: white;
-          border-radius: $radius-xl $radius-xl 4px $radius-xl;
-        }
-      }
-
-      &.ai {
-        .messageBubble {
-          background: var(--bg-card);
-          border: 1px solid var(--border-light);
-          border-radius: $radius-xl $radius-xl $radius-xl 4px;
-        }
-      }
-
-      .aiAvatar {
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 28px;
-        height: 28px;
-        background: var(--brand-gradient);
-        border-radius: $radius-md;
-        color: white;
-
-        svg {
-          width: 14px;
-          height: 14px;
-        }
-      }
-
-      .messageBubble {
-        max-width: 80%;
-        padding: $space-3 $space-4;
-        font-size: $font-size-sm;
-        line-height: $line-height-relaxed;
-
-        p {
-          margin: 0;
-          color: inherit;
-        }
-
-        .actionLink {
-          display: inline-block;
-          margin-top: $space-2;
-          padding: $space-2 $space-3;
-          background: var(--accent-secondary);
-          color: var(--text-primary);
-          border-radius: $radius-lg;
-          font-size: $font-size-xs;
-          font-weight: $font-weight-semibold;
-          text-decoration: none;
-          transition: all 0.3s ease;
-
-          &:hover {
-            background: var(--accent-primary);
-            color: white;
-          }
-        }
-
-        // Typing indicator
-        &.typing {
-          display: flex;
-          gap: 4px;
-          padding: $space-4;
-
-          span {
-            width: 8px;
-            height: 8px;
-            background: var(--text-tertiary);
-            border-radius: 50%;
-            animation: typingDot 1.4s ease-in-out infinite;
-
-            &:nth-child(1) { animation-delay: 0s; }
-            &:nth-child(2) { animation-delay: 0.2s; }
-            &:nth-child(3) { animation-delay: 0.4s; }
-          }
-        }
-      }
-    }
-  }
-
-  // Input
-  .widgetInput {
-    display: flex;
-    gap: $space-2;
-    padding: $space-4;
-    background: var(--bg-card);
-    border-top: 1px solid var(--border-light);
-
-    input {
-      flex: 1;
-      padding: $space-3 $space-4;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-light);
-      border-radius: $radius-xl;
-      font-size: $font-size-sm;
+    &.ai .message-bubble {
+      background: var(--surface-secondary);
       color: var(--text-primary);
-      transition: all 0.3s ease;
-
-      &:focus {
-        outline: none;
-        border-color: var(--accent-primary);
-        box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
-      }
-
-      &::placeholder {
-        color: var(--text-muted);
-      }
+      border-bottom-left-radius: $radius-sm;
     }
 
-    .sendBtn {
+    // Typing indicator
+    .typing {
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      background: var(--brand-gradient);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      flex-shrink: 0;
+      gap: 4px;
+      padding: $space-3 $space-4;
 
-      &:hover:not(:disabled) {
-        transform: scale(1.05);
-        box-shadow: var(--shadow-md);
-      }
+      span {
+        width: 6px;
+        height: 6px;
+        background: var(--text-tertiary);
+        border-radius: 50%;
+        animation: typingDot 1.4s ease-in-out infinite;
 
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      svg {
-        width: 18px;
-        height: 18px;
+        &:nth-child(1) { animation-delay: 0s; }
+        &:nth-child(2) { animation-delay: 0.15s; }
+        &:nth-child(3) { animation-delay: 0.3s; }
       }
     }
   }
 }
 
-// Minimized state - show small bar
-.aiWidget.minimized {
-  .widgetPanel {
-    height: auto;
-    min-height: auto;
+// ============================================
+// INPUT
+// ============================================
 
-    .widgetMessages,
-    .widgetInput {
-      display: none;
+.widget-input {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-4;
+  background: var(--surface-secondary);
+  border-top: 1px solid var(--border-subtle);
+
+  input {
+    flex: 1;
+    padding: $space-3 $space-4;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: $radius-xl;
+    color: var(--text-primary);
+    font-size: $text-sm;
+    transition: all 0.15s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--input-focus);
+      box-shadow: 0 0 0 3px var(--input-focus-ring);
+    }
+
+    &::placeholder {
+      color: var(--input-placeholder);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  .send-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--brand-gradient);
+    border: none;
+    border-radius: $radius-xl;
+    color: white;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover:not(:disabled) {
+      box-shadow: var(--shadow-glow);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
 }
 
-// Animation for typing dots
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
 @keyframes typingDot {
   0%, 60%, 100% {
     transform: translateY(0);
@@ -373,17 +396,5 @@
   30% {
     transform: translateY(-4px);
     opacity: 1;
-  }
-}
-
-// Pulse ring animation
-@keyframes pulseRing {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
   }
 }

@@ -1,70 +1,130 @@
 // ============================================
-// PrimeNest Layout Styles
-// Modern Earth-Tone Design
+// PrimeNest Layout Styles v2.0
+// Responsive Grid System
 // ============================================
 
 @import "../../styles/_design-system.scss";
-@import "../../responsive.scss";
 
 .layout {
-  height: 100vh;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 $space-8;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-primary);
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg-primary);
+  position: relative;
 
-  @include lg {
-    max-width: 1280px;
-    padding: 0 $space-5;
+  // Background gradient mesh
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-mesh);
+    z-index: -1;
+    pointer-events: none;
   }
+}
 
-  @include md {
-    max-width: 100%;
-  }
+.layout-navbar {
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+  flex-shrink: 0;
+}
 
-  @include sm {
-    padding: 0 $space-4;
-  }
+.layout-content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
-  .navbar {
-    height: 72px;
-    z-index: $z-index-sticky;
-  }
+  // Container for pages that need max-width
+  .page-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: $space-6;
+    padding-top: $space-8;
 
-  .content {
-    flex: 1;
-    height: calc(100vh - 72px);
-    overflow-y: auto;
-    padding-top: $space-5;
-    
-    // Custom Scrollbar
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-primary) transparent;
-
-    &::-webkit-scrollbar {
-      width: 6px;
+    @include mobile {
+      padding: $space-4;
+      padding-top: $space-6;
     }
-    
-    &::-webkit-scrollbar-track {
-      background: transparent;
+
+    // Narrow container for forms, profile pages
+    &.narrow {
+      max-width: 800px;
     }
 
-    &::-webkit-scrollbar-thumb {
-      background: var(--brand-gradient);
-      border-radius: $radius-full;
+    // Wide container for listings
+    &.wide {
+      max-width: 1600px;
     }
   }
 }
 
-// Global Link Styles
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.2s ease;
+// ============================================
+// PAGE TRANSITIONS
+// ============================================
 
-  &:hover {
-    color: var(--accent-primary);
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+// ============================================
+// RESPONSIVE UTILITIES
+// ============================================
+
+// Hide on mobile
+.hide-mobile {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+// Hide on desktop
+.hide-desktop {
+  @include desktop {
+    display: none !important;
+  }
+}
+
+// Show on mobile only
+.show-mobile {
+  display: none !important;
+  
+  @include mobile {
+    display: block !important;
+  }
+}
+
+// Show on desktop only
+.show-desktop {
+  @include mobile {
+    display: none !important;
+  }
+  
+  @include desktop {
+    display: block !important;
   }
 }

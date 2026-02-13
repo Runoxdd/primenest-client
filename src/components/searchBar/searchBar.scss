@@ -1,146 +1,187 @@
 // ============================================
-// PrimeNest SearchBar Component Styles
-// Modern Earth-Tone Design
+// PrimeNest Search Bar Styles v2.0
+// Modern Glassmorphism Search Experience
 // ============================================
 
 @import "../../styles/_design-system.scss";
-@import "../../responsive.scss";
 
-.searchBar {
+.search-bar {
   display: flex;
   flex-direction: column;
+  gap: $space-3;
+}
 
-  .type {
-    display: flex;
-    gap: 2px;
+// ============================================
+// TYPE TOGGLE
+// ============================================
 
-    button {
-      padding: $space-4 $space-8;
-      border: 1px solid var(--border-light);
-      border-bottom: none;
-      cursor: pointer;
-      background: var(--surface-primary);
-      backdrop-filter: blur(10px);
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      font-weight: $font-weight-bold;
-      font-size: $font-size-xs;
-      letter-spacing: 1.5px;
-      transition: all 0.3s ease;
-      border-radius: $radius-lg $radius-lg 0 0;
+.search-type-toggle {
+  display: flex;
+  gap: $space-1;
+  padding: $space-1;
+  background: var(--surface-secondary);
+  border-radius: $radius-xl;
+  width: fit-content;
 
-      &.active {
-        background: var(--brand-gradient);
-        color: white;
-        border-color: var(--accent-primary);
-        box-shadow: 0 -4px 15px rgba(212, 163, 115, 0.2);
-      }
+  .type-btn {
+    padding: $space-2 $space-5;
+    background: transparent;
+    border: none;
+    border-radius: $radius-lg;
+    font-size: $text-sm;
+    font-weight: $font-weight-medium;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    transition: all 0.2s ease;
 
-      &:hover:not(.active) {
-        background: var(--surface-hover);
-        color: var(--text-primary);
+    &:hover {
+      color: var(--text-primary);
+    }
+
+    &.active {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+}
+
+// ============================================
+// SEARCH FORM
+// ============================================
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2;
+  background: var(--surface-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  border-radius: $radius-2xl;
+  box-shadow: var(--shadow-lg);
+
+  @include mobile {
+    flex-direction: column;
+    background: var(--bg-elevated);
+    backdrop-filter: none;
+    border-radius: $radius-xl;
+    padding: $space-3;
+  }
+}
+
+// ============================================
+// SEARCH FIELD
+// ============================================
+
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex: 1;
+  padding: $space-3;
+
+  @include mobile {
+    width: 100%;
+    padding: $space-3 $space-4;
+    background: var(--surface-secondary);
+    border-radius: $radius-lg;
+  }
+
+  .field-icon {
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: $text-sm;
+    color: var(--text-primary);
+    outline: none;
+    min-width: 0;
+
+    &::placeholder {
+      color: var(--text-muted);
+    }
+
+    &[type="number"] {
+      -moz-appearance: textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
       }
     }
   }
 
-  form {
-    background: var(--surface-primary);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border-light);
-    display: flex;
-    align-items: center;
-    height: 75px;
-    border-radius: 0 $radius-xl $radius-xl $radius-xl;
-    padding: $space-2;
-    box-shadow: var(--shadow-xl);
+  &.location {
+    flex: 1.5;
+  }
 
-    @include sm {
-      flex-direction: column;
-      height: auto;
-      border-radius: 0 0 $radius-xl $radius-xl;
-      padding: $space-5;
-      gap: $space-4;
+  &.price {
+    flex: 1;
+    max-width: 140px;
+
+    @include mobile {
+      max-width: none;
     }
+  }
+}
 
-    .inputItem {
-      flex: 1;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      border-right: 1px solid var(--border-light);
+// ============================================
+// FIELD DIVIDER
+// ============================================
 
-      @include sm {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--border-light);
-        padding-bottom: $space-3;
-      }
+.field-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-default);
 
-      &:last-of-type {
-        border-right: none;
-      }
-    }
+  @include mobile {
+    display: none;
+  }
+}
 
-    input {
-      background: transparent;
-      border: none;
-      padding: 0 $space-6;
-      height: 100%;
-      color: var(--text-primary);
-      width: 100%;
-      font-size: $font-size-base;
-      font-weight: $font-weight-medium;
+// ============================================
+// SEARCH BUTTON
+// ============================================
 
-      &::placeholder {
-        color: var(--text-muted);
-      }
+.search-btn-link {
+  text-decoration: none;
+}
 
-      &:focus {
-        outline: none;
-      }
-    }
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: $space-3 $space-6;
+  background: var(--brand-gradient);
+  border: none;
+  border-radius: $radius-xl;
+  color: white;
+  font-size: $text-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
 
-    .searchLink {
-      height: 100%;
-      display: flex;
-      align-items: center;
+  &:hover {
+    box-shadow: var(--shadow-glow);
+  }
 
-      @include sm {
-        width: 100%;
-        margin-top: $space-3;
-      }
+  @include mobile {
+    width: 100%;
+    padding: $space-4;
+  }
 
-      button {
-        background: var(--brand-gradient);
-        height: 58px;
-        width: 85px;
-        border: none;
-        border-radius: $radius-xl;
-        margin-left: $space-3;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.4s ease;
-        box-shadow: var(--shadow-md);
-
-        @include sm {
-          width: 100%;
-          height: 55px;
-          margin-left: 0;
-        }
-
-        img {
-          width: 24px;
-          filter: brightness(0) invert(1);
-        }
-
-        &:hover {
-          transform: scale(1.05) translateY(-2px);
-          box-shadow: var(--shadow-glow);
-          filter: brightness(1.1);
-        }
-      }
+  span {
+    @include max-md {
+      display: none;
     }
   }
 }

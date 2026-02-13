@@ -1,31 +1,67 @@
 // ============================================
-// PrimeNest Design System
-// Modern Earth-Tone Color Palette with Light/Dark Themes
+// PrimeNest Design System v2.0
+// Modern Minimalist Design with Premium Aesthetics
+// Inspired by Hombox Architecture & Premium SaaS Platforms
 // ============================================
 
 // ============================================
 // COLOR PALETTE
 // ============================================
 
-// Primary Earth Tones
-$color-sage: #CCD5AE;
-$color-cream: #E9EDC9;
-$color-offwhite: #FEFAE0;
-$color-sand: #FAEDCD;
-$color-terracotta: #D4A373;
+// Primary Neutrals - The Foundation
+$gray-950: #0A0A0B;      // Near black - backgrounds, text
+$gray-900: #111113;      // Dark surfaces
+$gray-850: #161618;      // Elevated dark surfaces
+$gray-800: #1C1C1F;      // Card backgrounds (dark mode)
+$gray-700: #27272A;      // Borders, dividers
+$gray-600: #3F3F46;      // Muted text
+$gray-500: #52525B;      // Secondary text
+$gray-400: #71717A;      // Tertiary text
+$gray-300: #A1A1AA;      // Placeholders
+$gray-200: #D4D4D8;      // Disabled states
+$gray-100: #E4E4E7;      // Light borders
+$gray-75:  #F4F4F5;      // Light secondary background
+$gray-50:  #FAFAFA;      // Light backgrounds
+$white:    #FFFFFF;      // Pure white
 
-// Extended Neutrals
-$color-dark: #1A1A1A;
-$color-charcoal: #2D2D2D;
-$color-gray: #5C5C5C;
-$color-light-gray: #8A8A8A;
-$color-silver: #C4C4C4;
+// Accent Colors - Sophisticated & Intentional
+$accent-50:  #EEF2FF;
+$accent-100: #E0E7FF;
+$accent-200: #C7D2FE;
+$accent-300: #A5B4FC;
+$accent-400: #818CF8;
+$accent-500: #6366F1;     // Indigo - primary actions
+$accent-600: #4F46E5;     // Hover state
+$accent-700: #4338CA;
+$accent-800: #3730A3;
+$accent-900: #312E81;
+
+// Secondary Accent - Violet
+$violet-400: #A78BFA;
+$violet-500: #8B5CF6;
+$violet-600: #7C3AED;
+
+// Tertiary Accent - Emerald (for success states)
+$emerald-400: #34D399;
+$emerald-500: #10B981;
+$emerald-600: #059669;
 
 // Semantic Colors
-$color-success: #7CB07E;
-$color-warning: #E8C547;
-$color-error: #D47373;
-$color-info: #73A9D4;
+$success-light: #D1FAE5;
+$success: #10B981;
+$success-dark: #065F46;
+
+$warning-light: #FEF3C7;
+$warning: #F59E0B;
+$warning-dark: #B45309;
+
+$error-light: #FEE2E2;
+$error: #EF4444;
+$error-dark: #B91C1C;
+
+$info-light: #DBEAFE;
+$info: #3B82F6;
+$info-dark: #1D4ED8;
 
 // ============================================
 // LIGHT THEME (Default)
@@ -33,88 +69,113 @@ $color-info: #73A9D4;
 
 :root, [data-theme="light"] {
   // Background Colors
-  --bg-primary: #{$color-offwhite};
-  --bg-secondary: #{$color-cream};
-  --bg-tertiary: #{$color-sand};
-  --bg-card: #FFFFFF;
-  --bg-elevated: #FFFFFF;
+  --bg-primary: #{$gray-50};
+  --bg-secondary: #{$gray-75};
+  --bg-tertiary: #{$gray-100};
+  --bg-elevated: #{$white};
   --bg-overlay: rgba(0, 0, 0, 0.5);
+  --bg-glass: rgba(255, 255, 255, 0.8);
   
   // Surface Colors
-  --surface-primary: #FFFFFF;
-  --surface-secondary: #{$color-cream};
-  --surface-hover: rgba(212, 163, 115, 0.1);
-  --surface-active: rgba(204, 213, 174, 0.3);
+  --surface-primary: #{$white};
+  --surface-secondary: #{$gray-75};
+  --surface-tertiary: #{$gray-100};
+  --surface-hover: rgba(99, 102, 241, 0.08);
+  --surface-active: rgba(99, 102, 241, 0.12);
+  --surface-glass: rgba(255, 255, 255, 0.9);
   
   // Text Colors
-  --text-primary: #{$color-dark};
-  --text-secondary: #{$color-charcoal};
-  --text-tertiary: #{$color-gray};
-  --text-muted: #{$color-light-gray};
-  --text-inverse: #{$color-offwhite};
+  --text-primary: #{$gray-950};
+  --text-secondary: #{$gray-600};
+  --text-tertiary: #{$gray-400};
+  --text-muted: #{$gray-300};
+  --text-inverse: #{$white};
   
   // Accent Colors
-  --accent-primary: #{$color-terracotta};
-  --accent-secondary: #{$color-sage};
-  --accent-tertiary: #{$color-sand};
+  --accent-primary: #{$accent-500};
+  --accent-primary-hover: #{$accent-600};
+  --accent-primary-light: #{$accent-100};
+  --accent-secondary: #{$violet-500};
+  --accent-tertiary: #{$emerald-500};
   
   // Brand Colors
-  --brand-primary: #{$color-terracotta};
-  --brand-secondary: #{$color-sage};
-  --brand-gradient: linear-gradient(135deg, #{$color-sage}, #{$color-terracotta});
+  --brand-primary: #{$accent-500};
+  --brand-secondary: #{$violet-500};
+  --brand-gradient: linear-gradient(135deg, #{$accent-500} 0%, #{$violet-500} 100%);
+  --brand-gradient-subtle: linear-gradient(135deg, #{$accent-100} 0%, #{$violet-100} 100%);
   
   // Border Colors
-  --border-light: rgba(0, 0, 0, 0.06);
-  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-subtle: rgba(0, 0, 0, 0.04);
+  --border-default: rgba(0, 0, 0, 0.08);
+  --border-emphasis: rgba(0, 0, 0, 0.12);
   --border-strong: rgba(0, 0, 0, 0.2);
-  --border-accent: #{$color-terracotta};
+  --border-accent: #{$accent-500};
+  --border-glass: rgba(255, 255, 255, 0.2);
   
   // Shadow Colors
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
-  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
-  --shadow-glow: 0 0 30px rgba(212, 163, 115, 0.3);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06);
+  --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.12), 0 12px 24px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.25);
+  --shadow-glow-lg: 0 0 60px rgba(99, 102, 241, 0.35);
   
   // Input Colors
-  --input-bg: #FFFFFF;
-  --input-border: #{$color-silver};
-  --input-focus: #{$color-terracotta};
-  --input-placeholder: #{$color-light-gray};
+  --input-bg: #{$white};
+  --input-border: #{$gray-200};
+  --input-border-hover: #{$gray-300};
+  --input-focus: #{$accent-500};
+  --input-focus-ring: rgba(99, 102, 241, 0.2);
+  --input-placeholder: #{$gray-300};
   
   // Button Colors
-  --btn-primary-bg: #{$color-terracotta};
-  --btn-primary-text: #FFFFFF;
-  --btn-primary-hover: darken($color-terracotta, 8%);
-  --btn-secondary-bg: #{$color-sage};
-  --btn-secondary-text: #{$color-dark};
-  --btn-secondary-hover: darken($color-sage, 5%);
+  --btn-primary-bg: #{$accent-500};
+  --btn-primary-hover: #{$accent-600};
+  --btn-primary-text: #{$white};
+  --btn-secondary-bg: #{$gray-100};
+  --btn-secondary-hover: #{$gray-200};
+  --btn-secondary-text: #{$gray-950};
+  --btn-ghost-hover: rgba(99, 102, 241, 0.08);
   
   // Status Colors
-  --status-success: #{$color-success};
-  --status-warning: #{$color-warning};
-  --status-error: #{$color-error};
-  --status-info: #{$color-info};
+  --status-success: #{$success};
+  --status-success-bg: #{$success-light};
+  --status-warning: #{$warning};
+  --status-warning-bg: #{$warning-light};
+  --status-error: #{$error};
+  --status-error-bg: #{$error-light};
+  --status-info: #{$info};
+  --status-info-bg: #{$info-light};
   
   // Chat Colors
-  --chat-bg: #{$color-cream};
-  --chat-bubble-user: #{$color-terracotta};
-  --chat-bubble-ai: #FFFFFF;
-  --chat-bubble-other: #{$color-sage};
+  --chat-bg: #{$gray-75};
+  --chat-bubble-user: #{$accent-500};
+  --chat-bubble-user-text: #{$white};
+  --chat-bubble-other: #{$white};
+  --chat-bubble-other-text: #{$gray-950};
+  --chat-bubble-ai: linear-gradient(135deg, #{$accent-500} 0%, #{$violet-500} 100%);
   
   // Navbar
-  --navbar-bg: rgba(254, 250, 224, 0.9);
-  --navbar-border: rgba(0, 0, 0, 0.06);
+  --navbar-bg: rgba(250, 250, 250, 0.85);
+  --navbar-border: rgba(0, 0, 0, 0.04);
   
   // Card
-  --card-bg: #FFFFFF;
+  --card-bg: #{$white};
   --card-border: rgba(0, 0, 0, 0.06);
-  --card-shadow: #{'0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05)'};
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --card-hover-shadow: 0 12px 32px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.04);
   
   // Price Badge
-  --price-badge-bg: #{$color-terracotta};
-  --price-badge-text: #FFFFFF;
+  --price-badge-bg: #{$gray-950};
+  --price-badge-text: #{$white};
+  
+  // Special Effects
+  --glass-blur: 20px;
+  --gradient-mesh: radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.06) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, rgba(99, 102, 241, 0.04) 0px, transparent 50%);
 }
 
 // ============================================
@@ -123,88 +184,113 @@ $color-info: #73A9D4;
 
 [data-theme="dark"] {
   // Background Colors
-  --bg-primary: #0F0F0F;
-  --bg-secondary: #1A1A1A;
-  --bg-tertiary: #252525;
-  --bg-card: #1A1A1A;
-  --bg-elevated: #252525;
+  --bg-primary: #{$gray-950};
+  --bg-secondary: #{$gray-900};
+  --bg-tertiary: #{$gray-800};
+  --bg-elevated: #{$gray-850};
   --bg-overlay: rgba(0, 0, 0, 0.7);
+  --bg-glass: rgba(17, 17, 19, 0.85);
   
   // Surface Colors
-  --surface-primary: #1A1A1A;
-  --surface-secondary: #252525;
-  --surface-hover: rgba(212, 163, 115, 0.15);
-  --surface-active: rgba(204, 213, 174, 0.2);
+  --surface-primary: #{$gray-900};
+  --surface-secondary: #{$gray-800};
+  --surface-tertiary: #{$gray-700};
+  --surface-hover: rgba(99, 102, 241, 0.12);
+  --surface-active: rgba(99, 102, 241, 0.18);
+  --surface-glass: rgba(28, 28, 31, 0.9);
   
   // Text Colors
-  --text-primary: #{$color-offwhite};
-  --text-secondary: #{$color-cream};
-  --text-tertiary: #{$color-silver};
-  --text-muted: #{$color-light-gray};
-  --text-inverse: #{$color-dark};
+  --text-primary: #{$gray-50};
+  --text-secondary: #{$gray-200};
+  --text-tertiary: #{$gray-400};
+  --text-muted: #{$gray-500};
+  --text-inverse: #{$gray-950};
   
   // Accent Colors
-  --accent-primary: #{$color-terracotta};
-  --accent-secondary: #{$color-sage};
-  --accent-tertiary: #{$color-sand};
+  --accent-primary: #{$accent-400};
+  --accent-primary-hover: #{$accent-300};
+  --accent-primary-light: rgba(99, 102, 241, 0.15);
+  --accent-secondary: #{$violet-400};
+  --accent-tertiary: #{$emerald-400};
   
   // Brand Colors
-  --brand-primary: #{$color-terracotta};
-  --brand-secondary: #{$color-sage};
-  --brand-gradient: linear-gradient(135deg, #{$color-sage}, #{$color-terracotta});
+  --brand-primary: #{$accent-400};
+  --brand-secondary: #{$violet-400};
+  --brand-gradient: linear-gradient(135deg, #{$accent-400} 0%, #{$violet-400} 100%);
+  --brand-gradient-subtle: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
   
   // Border Colors
-  --border-light: rgba(255, 255, 255, 0.06);
-  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-emphasis: rgba(255, 255, 255, 0.12);
   --border-strong: rgba(255, 255, 255, 0.2);
-  --border-accent: #{$color-terracotta};
+  --border-accent: #{$accent-400};
+  --border-glass: rgba(255, 255, 255, 0.1);
   
   // Shadow Colors
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5), 0 10px 10px rgba(0, 0, 0, 0.3);
-  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 40px rgba(212, 163, 115, 0.25);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.4);
+  --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.6), 0 12px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.3);
+  --shadow-glow-lg: 0 0 60px rgba(99, 102, 241, 0.4);
   
   // Input Colors
-  --input-bg: #252525;
-  --input-border: #3A3A3A;
-  --input-focus: #{$color-terracotta};
-  --input-placeholder: #{$color-gray};
+  --input-bg: #{$gray-800};
+  --input-border: #{$gray-700};
+  --input-border-hover: #{$gray-600};
+  --input-focus: #{$accent-400};
+  --input-focus-ring: rgba(99, 102, 241, 0.25);
+  --input-placeholder: #{$gray-500};
   
   // Button Colors
-  --btn-primary-bg: #{$color-terracotta};
-  --btn-primary-text: #FFFFFF;
-  --btn-primary-hover: lighten($color-terracotta, 8%);
-  --btn-secondary-bg: #{$color-sage};
-  --btn-secondary-text: #{$color-dark};
-  --btn-secondary-hover: lighten($color-sage, 5%);
+  --btn-primary-bg: #{$accent-500};
+  --btn-primary-hover: #{$accent-400};
+  --btn-primary-text: #{$white};
+  --btn-secondary-bg: #{$gray-800};
+  --btn-secondary-hover: #{$gray-700};
+  --btn-secondary-text: #{$gray-50};
+  --btn-ghost-hover: rgba(99, 102, 241, 0.12);
   
   // Status Colors
-  --status-success: #{lighten($color-success, 10%)};
-  --status-warning: #{lighten($color-warning, 10%)};
-  --status-error: #{lighten($color-error, 10%)};
-  --status-info: #{lighten($color-info, 10%)};
+  --status-success: #{$emerald-400};
+  --status-success-bg: rgba(16, 185, 129, 0.15);
+  --status-warning: #{$warning};
+  --status-warning-bg: rgba(245, 158, 11, 0.15);
+  --status-error: #{$error};
+  --status-error-bg: rgba(239, 68, 68, 0.15);
+  --status-info: #{$info};
+  --status-info-bg: rgba(59, 130, 246, 0.15);
   
   // Chat Colors
-  --chat-bg: #1A1A1A;
-  --chat-bubble-user: #{$color-terracotta};
-  --chat-bubble-ai: #252525;
-  --chat-bubble-other: #2D3A2D;
+  --chat-bg: #{$gray-900};
+  --chat-bubble-user: #{$accent-500};
+  --chat-bubble-user-text: #{$white};
+  --chat-bubble-other: #{$gray-800};
+  --chat-bubble-other-text: #{$gray-50};
+  --chat-bubble-ai: linear-gradient(135deg, #{$accent-500} 0%, #{$violet-500} 100%);
   
   // Navbar
-  --navbar-bg: rgba(15, 15, 15, 0.9);
-  --navbar-border: rgba(255, 255, 255, 0.06);
+  --navbar-bg: rgba(10, 10, 11, 0.85);
+  --navbar-border: rgba(255, 255, 255, 0.04);
   
   // Card
-  --card-bg: #1A1A1A;
+  --card-bg: #{$gray-900};
   --card-border: rgba(255, 255, 255, 0.06);
-  --card-shadow: #{'0 4px 6px rgba(0, 0, 0, 0.4)'};
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --card-hover-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
   
   // Price Badge
-  --price-badge-bg: #{$color-terracotta};
-  --price-badge-text: #FFFFFF;
+  --price-badge-bg: #{$white};
+  --price-badge-text: #{$gray-950};
+  
+  // Special Effects
+  --glass-blur: 20px;
+  --gradient-mesh: radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, rgba(99, 102, 241, 0.06) 0px, transparent 50%);
 }
 
 // ============================================
@@ -213,20 +299,22 @@ $color-info: #73A9D4;
 
 // Font Families
 $font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-$font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-$font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+$font-display: 'Cal Sans', 'Inter', -apple-system, sans-serif;
+$font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
 
-// Font Sizes
-$font-size-xs: 0.75rem;    // 12px
-$font-size-sm: 0.875rem;   // 14px
-$font-size-base: 1rem;     // 16px
-$font-size-lg: 1.125rem;   // 18px
-$font-size-xl: 1.25rem;    // 20px
-$font-size-2xl: 1.5rem;    // 24px
-$font-size-3xl: 2rem;      // 32px
-$font-size-4xl: 2.5rem;    // 40px
-$font-size-5xl: 3rem;      // 48px
-$font-size-6xl: 4rem;      // 64px
+// Font Sizes - Using a modular scale (1.25 ratio)
+$text-2xs: 0.625rem;    // 10px - tiny labels
+$text-xs: 0.75rem;      // 12px - captions, labels
+$text-sm: 0.875rem;     // 14px - body small
+$text-base: 1rem;       // 16px - body
+$text-lg: 1.125rem;     // 18px - large body
+$text-xl: 1.25rem;      // 20px - small headings
+$text-2xl: 1.5rem;      // 24px - headings
+$text-3xl: 1.875rem;    // 30px - large headings
+$text-4xl: 2.25rem;     // 36px - display
+$text-5xl: 3rem;        // 48px - hero
+$text-6xl: 3.75rem;     // 60px - large hero
+$text-7xl: 4.5rem;      // 72px - extra large hero
 
 // Font Weights
 $font-weight-light: 300;
@@ -235,62 +323,88 @@ $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-extrabold: 800;
-$font-weight-black: 900;
 
 // Line Heights
-$line-height-tight: 1.1;
-$line-height-snug: 1.25;
-$line-height-normal: 1.5;
-$line-height-relaxed: 1.6;
-$line-height-loose: 1.8;
+$leading-none: 1;
+$leading-tight: 1.15;
+$leading-snug: 1.25;
+$leading-normal: 1.5;
+$leading-relaxed: 1.6;
+$leading-loose: 1.8;
 
 // Letter Spacing
-$letter-spacing-tight: -0.02em;
-$letter-spacing-normal: 0;
-$letter-spacing-wide: 0.02em;
-$letter-spacing-wider: 0.05em;
-$letter-spacing-widest: 0.1em;
+$tracking-tighter: -0.03em;
+$tracking-tight: -0.02em;
+$tracking-normal: 0;
+$tracking-wide: 0.02em;
+$tracking-wider: 0.05em;
+$tracking-widest: 0.1em;
 
 // ============================================
-// SPACING
+// SPACING (8px base unit)
 // ============================================
 
 $space-0: 0;
-$space-1: 0.25rem;   // 4px
-$space-2: 0.5rem;    // 8px
-$space-3: 0.75rem;   // 12px
-$space-4: 1rem;      // 16px
-$space-5: 1.5rem;    // 24px
-$space-6: 2rem;      // 32px
-$space-7: 2.5rem;    // 40px
-$space-8: 3rem;      // 48px
-$space-10: 4rem;     // 64px
-$space-12: 5rem;     // 80px
-$space-16: 8rem;     // 128px
-$space-20: 10rem;    // 160px
-$space-24: 12rem;    // 192px
+$space-px: 1px;
+$space-0-5: 0.125rem;   // 2px
+$space-1: 0.25rem;      // 4px
+$space-1-5: 0.375rem;   // 6px
+$space-2: 0.5rem;       // 8px
+$space-2-5: 0.625rem;   // 10px
+$space-3: 0.75rem;      // 12px
+$space-3-5: 0.875rem;   // 14px
+$space-4: 1rem;         // 16px
+$space-5: 1.25rem;      // 20px
+$space-6: 1.5rem;       // 24px
+$space-7: 1.75rem;      // 28px
+$space-8: 2rem;         // 32px
+$space-9: 2.25rem;      // 36px
+$space-10: 2.5rem;      // 40px
+$space-11: 2.75rem;     // 44px
+$space-12: 3rem;        // 48px
+$space-14: 3.5rem;      // 56px
+$space-16: 4rem;        // 64px
+$space-20: 5rem;        // 80px
+$space-24: 6rem;        // 96px
+$space-28: 7rem;        // 112px
+$space-32: 8rem;        // 128px
 
 // ============================================
 // BORDER RADIUS
 // ============================================
 
 $radius-none: 0;
-$radius-sm: 0.25rem;    // 4px
-$radius-md: 0.5rem;     // 8px
-$radius-lg: 0.75rem;    // 12px
-$radius-xl: 1rem;       // 16px
-$radius-2xl: 1.5rem;    // 24px
-$radius-3xl: 2rem;      // 32px
+$radius-sm: 0.25rem;     // 4px
+$radius-md: 0.375rem;    // 6px
+$radius-lg: 0.5rem;      // 8px
+$radius-xl: 0.75rem;     // 12px
+$radius-2xl: 1rem;       // 16px
+$radius-3xl: 1.5rem;     // 24px
+$radius-4xl: 2rem;       // 32px
 $radius-full: 9999px;
 
 // ============================================
 // TRANSITIONS
 // ============================================
 
-$transition-fast: 150ms ease;
-$transition-normal: 250ms ease;
-$transition-slow: 350ms ease;
-$transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+$duration-75: 75ms;
+$duration-100: 100ms;
+$duration-150: 150ms;
+$duration-200: 200ms;
+$duration-300: 300ms;
+$duration-500: 500ms;
+
+$ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-in: cubic-bezier(0.4, 0, 1, 1);
+$ease-out: cubic-bezier(0, 0, 0.2, 1);
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+$ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+$transition-fast: $duration-150 $ease-default;
+$transition-normal: $duration-200 $ease-default;
+$transition-slow: $duration-300 $ease-default;
+$transition-spring: $duration-300 $ease-spring;
 
 // ============================================
 // Z-INDEX SCALE
@@ -304,11 +418,13 @@ $z-index-modal: 500;
 $z-index-popover: 600;
 $z-index-tooltip: 700;
 $z-index-toast: 800;
+$z-index-max: 9999;
 
 // ============================================
 // BREAKPOINTS
 // ============================================
 
+$breakpoint-xs: 375px;
 $breakpoint-sm: 640px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 1024px;
@@ -319,26 +435,86 @@ $breakpoint-2xl: 1536px;
 // MIXINS
 // ============================================
 
+// Responsive Breakpoints - Mobile First
+@mixin xs {
+  @media (min-width: $breakpoint-xs) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (min-width: $breakpoint-2xl) {
+    @content;
+  }
+}
+
+// Max-width breakpoints - Desktop First
+@mixin max-sm {
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    @content;
+  }
+}
+
+@mixin max-md {
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+@mixin max-lg {
+  @media (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
+}
+
+// Mobile specific (max-width: 767px)
 @mixin mobile {
   @media (max-width: #{$breakpoint-md - 1px}) {
     @content;
   }
 }
 
+// Tablet (768px - 1023px)
 @mixin tablet {
-  @media (min-width: #{$breakpoint-md}) and (max-width: #{$breakpoint-lg - 1px}) {
+  @media (min-width: $breakpoint-md) and (max-width: #{$breakpoint-lg - 1px}) {
     @content;
   }
 }
 
+// Desktop (1024px+)
 @mixin desktop {
-  @media (min-width: #{$breakpoint-lg}) {
+  @media (min-width: $breakpoint-lg) {
     @content;
   }
 }
 
+// Large Desktop (1280px+)
 @mixin large-desktop {
-  @media (min-width: #{$breakpoint-xl}) {
+  @media (min-width: $breakpoint-xl) {
     @content;
   }
 }
@@ -356,17 +532,31 @@ $breakpoint-2xl: 1536px;
   justify-content: space-between;
 }
 
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 // Glassmorphism effect
-@mixin glass($blur: 20px, $opacity: 0.8) {
-  background: rgba(var(--bg-card-rgb, 255, 255, 255), $opacity);
+@mixin glass($blur: 20px, $bg-opacity: 0.8) {
+  background: var(--bg-glass);
   backdrop-filter: blur($blur);
   -webkit-backdrop-filter: blur($blur);
+  border: 1px solid var(--border-glass);
+}
+
+@mixin glass-card {
+  background: var(--surface-glass);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--border-glass);
 }
 
 // Focus ring
-@mixin focus-ring {
+@mixin focus-ring($color: var(--accent-primary)) {
   outline: none;
-  box-shadow: 0 0 0 3px rgba($color-terracotta, 0.4);
+  box-shadow: 0 0 0 3px var(--input-focus-ring);
 }
 
 // Truncate text
@@ -374,6 +564,14 @@ $breakpoint-2xl: 1536px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+// Multi-line truncate
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 // Visually hidden (for accessibility)
@@ -389,6 +587,52 @@ $breakpoint-2xl: 1536px;
   border: 0;
 }
 
+// Gradient text
+@mixin gradient-text($gradient: var(--brand-gradient)) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Smooth scroll
+@mixin smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Hide scrollbar
+@mixin hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Custom scrollbar
+@mixin custom-scrollbar($width: 6px, $track: var(--bg-secondary), $thumb: var(--accent-primary)) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $track;
+    border-radius: $radius-full;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $thumb;
+    border-radius: $radius-full;
+    
+    &:hover {
+      background: var(--accent-primary-hover);
+    }
+  }
+}
+
 // ============================================
 // UTILITY CLASSES
 // ============================================
@@ -402,4 +646,21 @@ $breakpoint-2xl: 1536px;
               color 0.3s ease, 
               border-color 0.3s ease,
               box-shadow 0.3s ease !important;
+}
+
+// Screen reader only
+.sr-only {
+  @include visually-hidden;
+}
+
+// Not screen reader only
+.not-sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
 }

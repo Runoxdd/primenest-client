@@ -1,6 +1,6 @@
 // ============================================
-// PrimeNest List Component Styles
-// Modern Earth-Tone Design
+// PrimeNest List Component Styles v2.0
+// Modern Property List
 // ============================================
 
 @import "../../styles/_design-system.scss";
@@ -8,51 +8,42 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: $space-6; 
-  padding-bottom: $space-10;
-
-  // Smoother entrance for the listings
-  animation: fadeInList 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-
-  .noItems {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 80px $space-10;
-    background: var(--surface-primary);
-    border: 1px dashed var(--border-medium);
-    border-radius: $radius-3xl;
-    text-align: center;
-    backdrop-filter: blur(10px);
-
-    .icon {
-      font-size: 40px;
-      margin-bottom: $space-4;
-      filter: drop-shadow(0 0 10px rgba(212, 163, 115, 0.4));
-    }
-
-    p {
-      color: var(--text-primary);
-      font-size: $font-size-lg;
-      font-weight: $font-weight-semibold;
-      margin-bottom: $space-2;
-    }
-
-    span {
-      color: var(--text-secondary);
-      font-size: $font-size-sm;
-    }
-  }
+  gap: $space-5;
 }
 
-@keyframes fadeInList {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-16 $space-8;
+  background: var(--surface-primary);
+  border: 1px dashed var(--border-light);
+  border-radius: $radius-2xl;
+  text-align: center;
+
+  .empty-icon {
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-secondary);
+    border-radius: $radius-2xl;
+    margin-bottom: $space-6;
+    color: var(--text-tertiary);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  h3 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: var(--text-primary);
+    margin-bottom: $space-2;
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: var(--text-tertiary);
+    max-width: 280px;
   }
 }
