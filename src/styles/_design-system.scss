@@ -37,6 +37,10 @@ $accent-800: #3730A3;
 $accent-900: #312E81;
 
 // Secondary Accent - Violet
+$violet-50:  #F5F3FF;
+$violet-100: #EDE9FE;
+$violet-200: #DDD6FE;
+$violet-300: #C4B5FD;
 $violet-400: #A78BFA;
 $violet-500: #8B5CF6;
 $violet-600: #7C3AED;
@@ -302,6 +306,10 @@ $font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, s
 $font-display: 'Cal Sans', 'Inter', -apple-system, sans-serif;
 $font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
 
+// Font Family Aliases (for backward compatibility)
+$font-sans: $font-primary;
+$font-serif: Georgia, 'Times New Roman', serif;
+
 // Font Sizes - Using a modular scale (1.25 ratio)
 $text-2xs: 0.625rem;    // 10px - tiny labels
 $text-xs: 0.75rem;      // 12px - captions, labels
@@ -315,6 +323,20 @@ $text-4xl: 2.25rem;     // 36px - display
 $text-5xl: 3rem;        // 48px - hero
 $text-6xl: 3.75rem;     // 60px - large hero
 $text-7xl: 4.5rem;      // 72px - extra large hero
+
+// Font Size Aliases (for backward compatibility)
+$font-size-2xs: $text-2xs;
+$font-size-xs: $text-xs;
+$font-size-sm: $text-sm;
+$font-size-base: $text-base;
+$font-size-lg: $text-lg;
+$font-size-xl: $text-xl;
+$font-size-2xl: $text-2xl;
+$font-size-3xl: $text-3xl;
+$font-size-4xl: $text-4xl;
+$font-size-5xl: $text-5xl;
+$font-size-6xl: $text-6xl;
+$font-size-7xl: $text-7xl;
 
 // Font Weights
 $font-weight-light: 300;
