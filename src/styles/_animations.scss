@@ -1,0 +1,565 @@
+// ============================================
+// PrimeNest Animation System
+// Fluid, modern animations and micro-interactions
+// ============================================
+
+// ============================================
+// KEYFRAME ANIMATIONS
+// ============================================
+
+// Fade In
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Fade In Up
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Fade In Down
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Fade In Scale
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Slide In Right
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Slide In Left
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Slide Up (for modals/panels)
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Slide Down
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Scale In (for popovers)
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Scale Out
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+// Float (for hero elements)
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+// Pulse (for status indicators)
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(var(--accent-primary-rgb, 212, 163, 115), 0.5);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(var(--accent-primary-rgb, 212, 163, 115), 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(var(--accent-primary-rgb, 212, 163, 115), 0);
+  }
+}
+
+// Pulse Ring (for AI widget button)
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+// Bounce
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+// Shake (for errors)
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+// Spin (for loading)
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Shimmer (for loading skeletons)
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+// Typing dots
+@keyframes typingDot {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+// Gradient shift (for backgrounds)
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// Ripple (for button clicks)
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+// Glow pulse
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(var(--accent-primary-rgb, 212, 163, 115), 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(var(--accent-primary-rgb, 212, 163, 115), 0.6);
+  }
+}
+
+// Card hover lift
+@keyframes cardLift {
+  from {
+    transform: translateY(0);
+    box-shadow: var(--shadow-md);
+  }
+  to {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+// Message appear
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// ============================================
+// ANIMATION UTILITY CLASSES
+// ============================================
+
+// Fade animations
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.animate-fadeInDown {
+  animation: fadeInDown 0.4s ease forwards;
+}
+
+.animate-fadeInScale {
+  animation: fadeInScale 0.3s ease forwards;
+}
+
+// Slide animations
+.animate-slideInRight {
+  animation: slideInRight 0.4s ease forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.4s ease forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+// Scale animations
+.animate-scaleIn {
+  animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-scaleOut {
+  animation: scaleOut 0.2s ease forwards;
+}
+
+// Continuous animations
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s ease infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+// Staggered animation delays
+@for $i from 1 through 10 {
+  .animate-delay-#{$i} {
+    animation-delay: #{$i * 0.1}s;
+  }
+}
+
+// ============================================
+// TRANSITION UTILITIES
+// ============================================
+
+.transition-none {
+  transition: none !important;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.transition-fast {
+  transition: all 0.15s ease;
+}
+
+.transition-slow {
+  transition: all 0.5s ease;
+}
+
+.transition-spring {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+// Transform utilities
+.transform-none {
+  transform: none !important;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+  
+  &:hover {
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+// ============================================
+// LOADING STATES
+// ============================================
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md, 8px);
+}
+
+.skeleton-text {
+  @extend .skeleton;
+  height: 1em;
+  margin-bottom: 0.5em;
+  
+  &:last-child {
+    width: 70%;
+  }
+}
+
+.skeleton-avatar {
+  @extend .skeleton;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.skeleton-card {
+  @extend .skeleton;
+  height: 200px;
+  border-radius: var(--radius-xl, 16px);
+}
+
+// ============================================
+// TYPING INDICATOR
+// ============================================
+
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  background: var(--chat-bubble-ai);
+  border-radius: var(--radius-xl, 16px);
+  border-bottom-left-radius: 4px;
+  
+  span {
+    width: 8px;
+    height: 8px;
+    background: var(--text-tertiary);
+    border-radius: 50%;
+    animation: typingDot 1.4s ease-in-out infinite;
+    
+    &:nth-child(1) {
+      animation-delay: 0s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+// ============================================
+// BUTTON RIPPLE EFFECT
+// ============================================
+
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 50%;
+    transform: scale(1);
+    transform-origin: center;
+  }
+  
+  &:active::after {
+    animation: ripple 0.6s ease-out;
+  }
+}
+
+// ============================================
+// PAGE TRANSITIONS
+// ============================================
+
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+// ============================================
+// MESSAGE ANIMATIONS
+// ============================================
+
+.message-enter {
+  animation: messageAppear 0.3s ease forwards;
+}
+
+.message-bubble {
+  animation: messageAppear 0.3s ease forwards;
+  
+  &.user {
+    animation-delay: 0.05s;
+  }
+  
+  &.ai {
+    animation-delay: 0.1s;
+  }
+}

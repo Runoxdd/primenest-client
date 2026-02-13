@@ -1,65 +1,71 @@
+// ============================================
+// PrimeNest New Post Page Styles
+// Modern Earth-Tone Design
+// ============================================
+
+@import "../../styles/_design-system.scss";
 @import "../../responsive.scss";
 
 .newPostPage {
   height: 100%;
   display: flex;
-  background-color: #030008;
+  background-color: var(--bg-primary);
 
   .formContainer {
     flex: 3;
     overflow-y: auto;
-    padding-bottom: 50px;
+    padding-bottom: $space-12;
 
     &::-webkit-scrollbar { width: 5px; }
-    &::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
+    &::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: $radius-full; }
 
     h1 {
-      margin: 40px 50px;
-      font-weight: 800;
-      color: #fff;
+      margin: $space-10 $space-12;
+      font-weight: $font-weight-extrabold;
+      color: var(--text-primary);
       letter-spacing: -1px;
     }
 
     .wrapper {
-      margin: 0 50px;
+      margin: 0 $space-12;
 
       form {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        gap: 25px;
+        gap: $space-6;
 
         .item {
           width: 30%;
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: $space-3;
 
           @include md { width: 45%; }
           @include sm { width: 100%; }
 
           label {
-            font-size: 13px;
-            color: #a855f7;
-            font-weight: 700;
+            font-size: $font-size-xs;
+            color: var(--accent-primary);
+            font-weight: $font-weight-bold;
             text-transform: uppercase;
             letter-spacing: 1px;
           }
 
           input, select {
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            background-color: rgba(15, 23, 42, 0.6);
-            color: white;
-            font-size: 15px;
-            transition: 0.3s;
+            padding: $space-4;
+            border-radius: $radius-lg;
+            border: 1px solid var(--input-border);
+            background-color: var(--input-bg);
+            color: var(--text-primary);
+            font-size: $font-size-base;
+            transition: all 0.3s ease;
 
             &:focus {
               outline: none;
-              border-color: #a855f7;
-              background-color: rgba(168, 85, 247, 0.05);
-              box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+              border-color: var(--input-focus);
+              background-color: var(--surface-hover);
+              box-shadow: 0 0 15px rgba(212, 163, 115, 0.2);
             }
           }
 
@@ -68,24 +74,24 @@
             margin-bottom: 100px;
 
             .quill {
-              background-color: rgba(15, 23, 42, 0.6);
-              border-radius: 12px;
-              color: white;
-              border: 1px solid rgba(168, 85, 247, 0.2);
+              background-color: var(--input-bg);
+              border-radius: $radius-lg;
+              color: var(--text-primary);
+              border: 1px solid var(--input-border);
               
               .ql-toolbar {
                 border: none;
-                border-bottom: 1px solid rgba(168, 85, 247, 0.2);
-                background: rgba(10, 5, 20, 0.8);
-                border-radius: 12px 12px 0 0;
-                .ql-stroke { stroke: #94a3b8; }
-                .ql-picker { color: #94a3b8; }
+                border-bottom: 1px solid var(--border-light);
+                background: var(--bg-secondary);
+                border-radius: $radius-lg $radius-lg 0 0;
+                .ql-stroke { stroke: var(--text-secondary); }
+                .ql-picker { color: var(--text-secondary); }
               }
 
               .ql-container {
                 border: none;
                 height: 250px;
-                font-size: 16px;
+                font-size: $font-size-base;
               }
             }
           }
@@ -93,20 +99,20 @@
 
         .sendButton {
           width: 100%;
-          padding: 20px;
-          border-radius: 14px;
+          padding: $space-5;
+          border-radius: $radius-xl;
           border: none;
-          background: linear-gradient(135deg, #a855f7, #6366f1);
+          background: var(--brand-gradient);
           color: white;
-          font-weight: 800;
-          font-size: 18px;
+          font-weight: $font-weight-extrabold;
+          font-size: $font-size-lg;
           cursor: pointer;
-          transition: 0.4s;
-          box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+          transition: all 0.4s ease;
+          box-shadow: var(--shadow-md);
 
           &:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.5);
+            box-shadow: var(--shadow-glow);
             filter: brightness(1.1);
           }
         }
@@ -116,37 +122,40 @@
 
   .sideContainer {
     flex: 1.5;
-    background-color: rgba(3, 0, 8, 0.5);
+    background-color: var(--bg-secondary);
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    padding: 40px;
+    gap: $space-6;
+    padding: $space-10;
     align-items: center;
-    border-left: 1px solid rgba(168, 85, 247, 0.1);
+    border-left: 1px solid var(--border-light);
 
     @include md { display: none; }
 
     .imageGrid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: $space-3;
       width: 100%;
 
       img {
         width: 100%;
         height: 140px;
         object-fit: cover;
-        border-radius: 14px;
-        border: 1px solid rgba(168, 85, 247, 0.3);
-        transition: 0.3s;
+        border-radius: $radius-xl;
+        border: 1px solid var(--border-medium);
+        transition: all 0.3s ease;
         
-        &:hover { transform: scale(1.05); border-color: #a855f7; }
+        &:hover { 
+          transform: scale(1.05); 
+          border-color: var(--accent-primary); 
+        }
       }
     }
 
     .uploadHint {
-      color: #475569;
-      font-size: 12px;
+      color: var(--text-muted);
+      font-size: $font-size-xs;
       text-transform: uppercase;
       letter-spacing: 1px;
     }

@@ -1,4 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+// ============================================
+// PrimeNest Main Stylesheet
+// Modern Earth-Tone Design System
+// ============================================
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+// Import Design System
+@import "./styles/_design-system.scss";
+
+// Import Animations
+@import "./styles/_animations.scss";
+
+// ============================================
+// BASE STYLES
+// ============================================
 
 * {
   padding: 0;
@@ -11,79 +27,381 @@ html {
 }
 
 body {
-  font-family: "Lato", sans-serif;
-  background-color: #030008; // Deepest Obsidian
-  color: #f1f5f9;
+  font-family: $font-primary;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-// Ensure the main app container fills the viewport
 #root {
-  height: 100vh;
+  min-height: 100vh;
+}
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: var(--text-primary);
+}
+
+h1 { font-size: $font-size-5xl; }
+h2 { font-size: $font-size-4xl; }
+h3 { font-size: $font-size-3xl; }
+h4 { font-size: $font-size-2xl; }
+h5 { font-size: $font-size-xl; }
+h6 { font-size: $font-size-lg; }
+
+p {
+  font-size: $font-size-base;
+  line-height: $line-height-relaxed;
+  color: var(--text-secondary);
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.3s ease;
 }
 
-// Global Luxury Bold Styling
 b, strong {
-  color: #ffffff;
-  font-weight: 800;
-  letter-spacing: 0.3px;
+  color: var(--text-primary);
+  font-weight: $font-weight-bold;
 }
 
-// Interactive Selection (Neon Purple Tint)
+// ============================================
+// SELECTION
+// ============================================
+
 ::selection {
-  background-color: rgba(168, 85, 247, 0.3);
-  color: #ffffff;
+  background-color: rgba(212, 163, 115, 0.3);
+  color: var(--text-primary);
 }
 
-// Premium "Obsidian" Scrollbar
+// ============================================
+// SCROLLBAR
+// ============================================
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #030008;
+  background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #1e1b4b, #312e81); // Subtle Deep Indigo
-  border: 2px solid #030008;
-  border-radius: 20px;
+  background: var(--accent-secondary);
+  border: 2px solid var(--bg-secondary);
+  border-radius: $radius-full;
   
   &:hover {
-    background: #a855f7; // Glow purple on hover
+    background: var(--accent-primary);
   }
 }
 
-// Input defaults for the whole app
-input, button, textarea {
+// ============================================
+// FORM ELEMENTS
+// ============================================
+
+input, button, textarea, select {
   font-family: inherit;
+  font-size: $font-size-base;
 }
 
-// Global Layout utility for responsive images
+input, textarea, select {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: $radius-lg;
+  padding: $space-3 $space-4;
+  color: var(--text-primary);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+  }
+  
+  &::placeholder {
+    color: var(--input-placeholder);
+  }
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  padding: $space-3 $space-5;
+  border-radius: $radius-lg;
+  font-weight: $font-weight-semibold;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: var(--btn-primary-hover);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// ============================================
+// IMAGES
+// ============================================
+
 img {
   max-width: 100%;
   display: block;
 }
 
-// Feature: Dynamic Background Glow (Optional)
-// Add this if you want a subtle purple aura in the corners of the app
-body::before {
-  content: "";
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 $space-5;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  @include flex-center;
+}
+
+.flex-between {
+  @include flex-between;
+}
+
+.grid {
+  display: grid;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.sr-only {
+  @include visually-hidden;
+}
+
+.truncate {
+  @include truncate;
+}
+
+// Text utilities
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-muted { color: var(--text-muted); }
+.text-accent { color: var(--accent-primary); }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+// Background utilities
+.bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-card { background-color: var(--bg-card); }
+
+// Spacing utilities
+@each $name, $value in (1: $space-1, 2: $space-2, 3: $space-3, 4: $space-4, 5: $space-5, 6: $space-6, 8: $space-8, 10: $space-10) {
+  .mt-#{$name} { margin-top: $value; }
+  .mb-#{$name} { margin-bottom: $value; }
+  .ml-#{$name} { margin-left: $value; }
+  .mr-#{$name} { margin-right: $value; }
+  .mx-#{$name} { margin-left: $value; margin-right: $value; }
+  .my-#{$name} { margin-top: $value; margin-bottom: $value; }
+  .pt-#{$name} { padding-top: $value; }
+  .pb-#{$name} { padding-bottom: $value; }
+  .pl-#{$name} { padding-left: $value; }
+  .pr-#{$name} { padding-right: $value; }
+  .px-#{$name} { padding-left: $value; padding-right: $value; }
+  .py-#{$name} { padding-top: $value; padding-bottom: $value; }
+}
+
+// Border radius utilities
+.rounded { border-radius: $radius-md; }
+.rounded-lg { border-radius: $radius-lg; }
+.rounded-xl { border-radius: $radius-xl; }
+.rounded-2xl { border-radius: $radius-2xl; }
+.rounded-full { border-radius: $radius-full; }
+
+// Shadow utilities
+.shadow { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+.shadow-glow { box-shadow: var(--shadow-glow); }
+
+// ============================================
+// RESPONSIVE BREAKPOINTS
+// ============================================
+
+@mixin sm {
+  @media (max-width: 639px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (max-width: 1279px) {
+    @content;
+  }
+}
+
+// ============================================
+// COMPONENT PRESETS
+// ============================================
+
+// Card base
+.card-base {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: $radius-2xl;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+// Button variants
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: $space-3 $space-5;
+  border-radius: $radius-lg;
+  font-weight: $font-weight-semibold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  
+  &-primary {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    
+    &:hover {
+      background: var(--btn-primary-hover);
+      transform: translateY(-2px);
+    }
+  }
+  
+  &-secondary {
+    background: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text);
+    
+    &:hover {
+      background: var(--btn-secondary-hover);
+      transform: translateY(-2px);
+    }
+  }
+  
+  &-outline {
+    background: transparent;
+    border: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
+    
+    &:hover {
+      background: var(--accent-primary);
+      color: white;
+    }
+  }
+  
+  &-ghost {
+    background: transparent;
+    color: var(--text-primary);
+    
+    &:hover {
+      background: var(--surface-hover);
+    }
+  }
+}
+
+// Badge
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: $space-1 $space-3;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+  
+  &-primary {
+    background: var(--accent-primary);
+    color: white;
+  }
+  
+  &-secondary {
+    background: var(--accent-secondary);
+    color: var(--text-primary);
+  }
+}
+
+// ============================================
+// BACKGROUND EFFECTS
+// ============================================
+
+.gradient-bg {
   position: fixed;
-  top: -10%;
-  right: -10%;
+  top: 0;
+  right: 0;
   width: 50vw;
   height: 50vw;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.03) 0%, transparent 70%);
+  background: radial-gradient(
+    circle at top right,
+    rgba(212, 163, 115, 0.08) 0%,
+    rgba(204, 213, 174, 0.05) 30%,
+    transparent 70%
+  );
   z-index: -1;
   pointer-events: none;
+  filter: blur(60px);
+}
+
+[data-theme="dark"] .gradient-bg {
+  background: radial-gradient(
+    circle at top right,
+    rgba(212, 163, 115, 0.1) 0%,
+    rgba(204, 213, 174, 0.05) 30%,
+    transparent 70%
+  );
 }

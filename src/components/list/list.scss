@@ -1,8 +1,15 @@
+// ============================================
+// PrimeNest List Component Styles
+// Modern Earth-Tone Design
+// ============================================
+
+@import "../../styles/_design-system.scss";
+
 .list {
   display: flex;
   flex-direction: column;
-  gap: 25px; 
-  padding-bottom: 40px;
+  gap: $space-6; 
+  padding-bottom: $space-10;
 
   // Smoother entrance for the listings
   animation: fadeInList 0.8s cubic-bezier(0.22, 1, 0.36, 1);
@@ -12,29 +19,29 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 80px 40px;
-    background: rgba(168, 85, 247, 0.02); // Very faint purple tint
-    border: 1px dashed rgba(168, 85, 247, 0.2);
-    border-radius: 32px;
+    padding: 80px $space-10;
+    background: var(--surface-primary);
+    border: 1px dashed var(--border-medium);
+    border-radius: $radius-3xl;
     text-align: center;
     backdrop-filter: blur(10px);
 
     .icon {
       font-size: 40px;
-      margin-bottom: 15px;
-      filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.4));
+      margin-bottom: $space-4;
+      filter: drop-shadow(0 0 10px rgba(212, 163, 115, 0.4));
     }
 
     p {
-      color: #ffffff;
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
+      color: var(--text-primary);
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      margin-bottom: $space-2;
     }
 
     span {
-      color: #94a3b8;
-      font-size: 14px;
+      color: var(--text-secondary);
+      font-size: $font-size-sm;
     }
   }
 }

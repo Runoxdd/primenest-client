@@ -1,11 +1,17 @@
+// ============================================
+// PrimeNest Contact Page Styles
+// Modern Earth-Tone Design
+// ============================================
+
+@import "../../styles/_design-system.scss";
 @import "../../responsive.scss";
 
 .contactPage {
-  background-color: #030008;
-  min-height: calc(100vh - 85px);
+  background-color: var(--bg-primary);
+  min-height: calc(100vh - 72px);
   display: flex;
   align-items: center;
-  padding: 40px 20px;
+  padding: $space-10 $space-5;
 
   .container {
     max-width: 1100px;
@@ -16,7 +22,7 @@
 
     @include md {
       flex-direction: column;
-      gap: 50px;
+      gap: $space-12;
       text-align: center;
     }
 
@@ -24,41 +30,43 @@
       flex: 1;
 
       h1 {
+        font-family: $font-display;
         font-size: 52px;
-        font-weight: 900;
-        margin-bottom: 20px;
+        font-weight: $font-weight-black;
+        margin-bottom: $space-5;
         span {
-          background: linear-gradient(90deg, #a855f7, #6366f1);
+          background: var(--brand-gradient);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
       }
 
       p {
-        color: #94a3b8;
+        color: var(--text-secondary);
         line-height: 1.6;
-        font-size: 18px;
-        margin-bottom: 40px;
+        font-size: $font-size-lg;
+        margin-bottom: $space-10;
       }
 
       .info {
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: $space-6;
 
         .item {
           display: flex;
           align-items: center;
-          gap: 20px;
+          gap: $space-5;
           @include md { justify-content: center; }
 
           .icon {
             font-size: 24px;
             width: 50px;
             height: 50px;
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            border-radius: 12px;
+            background: var(--surface-hover);
+            border: 1px solid var(--accent-primary);
+            border-radius: $radius-lg;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -66,16 +74,16 @@
 
           .details {
             .label {
-              font-size: 12px;
+              font-size: $font-size-xs;
               text-transform: uppercase;
-              color: #a855f7;
-              font-weight: 700;
+              color: var(--accent-primary);
+              font-weight: $font-weight-bold;
               margin: 0;
             }
             p {
               margin: 0;
-              color: #fff;
-              font-size: 16px;
+              color: var(--text-primary);
+              font-size: $font-size-base;
             }
           }
         }
@@ -84,48 +92,50 @@
 
     .formContainer {
       flex: 1;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 40px;
-      border-radius: 24px;
-      border: 1px solid rgba(168, 85, 247, 0.15);
+      background: var(--surface-primary);
+      padding: $space-10;
+      border-radius: $radius-2xl;
+      border: 1px solid var(--border-light);
       backdrop-filter: blur(10px);
       width: 100%;
+      box-shadow: var(--shadow-lg);
 
       form {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: $space-5;
 
         input, select, textarea {
           width: 100%;
-          padding: 15px;
-          background: rgba(0, 0, 0, 0.3);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-          color: white;
-          font-size: 16px;
+          padding: $space-4;
+          background: var(--input-bg);
+          border: 1px solid var(--input-border);
+          border-radius: $radius-lg;
+          color: var(--text-primary);
+          font-size: $font-size-base;
           outline: none;
+          transition: all 0.3s ease;
 
           &:focus {
-            border-color: #a855f7;
+            border-color: var(--input-focus);
           }
         }
 
         button {
-          padding: 15px;
-          background: linear-gradient(90deg, #a855f7, #6366f1);
+          padding: $space-4;
+          background: var(--brand-gradient);
           border: none;
-          border-radius: 10px;
+          border-radius: $radius-lg;
           color: white;
-          font-weight: 700;
+          font-weight: $font-weight-bold;
           cursor: pointer;
-          transition: 0.3s;
+          transition: all 0.3s ease;
           text-transform: uppercase;
           letter-spacing: 1px;
 
           &:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(168, 85, 247, 0.4);
+            box-shadow: var(--shadow-glow);
           }
         }
       }

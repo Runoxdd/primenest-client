@@ -1,0 +1,403 @@
+// ============================================
+// PrimeNest Design System
+// Modern Earth-Tone Color Palette with Light/Dark Themes
+// ============================================
+
+// ============================================
+// COLOR PALETTE
+// ============================================
+
+// Primary Earth Tones
+$color-sage: #CCD5AE;
+$color-cream: #E9EDC9;
+$color-offwhite: #FEFAE0;
+$color-sand: #FAEDCD;
+$color-terracotta: #D4A373;
+
+// Extended Neutrals
+$color-dark: #1A1A1A;
+$color-charcoal: #2D2D2D;
+$color-gray: #5C5C5C;
+$color-light-gray: #8A8A8A;
+$color-silver: #C4C4C4;
+
+// Semantic Colors
+$color-success: #7CB07E;
+$color-warning: #E8C547;
+$color-error: #D47373;
+$color-info: #73A9D4;
+
+// ============================================
+// LIGHT THEME (Default)
+// ============================================
+
+:root, [data-theme="light"] {
+  // Background Colors
+  --bg-primary: #{$color-offwhite};
+  --bg-secondary: #{$color-cream};
+  --bg-tertiary: #{$color-sand};
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --bg-overlay: rgba(0, 0, 0, 0.5);
+  
+  // Surface Colors
+  --surface-primary: #FFFFFF;
+  --surface-secondary: #{$color-cream};
+  --surface-hover: rgba(212, 163, 115, 0.1);
+  --surface-active: rgba(204, 213, 174, 0.3);
+  
+  // Text Colors
+  --text-primary: #{$color-dark};
+  --text-secondary: #{$color-charcoal};
+  --text-tertiary: #{$color-gray};
+  --text-muted: #{$color-light-gray};
+  --text-inverse: #{$color-offwhite};
+  
+  // Accent Colors
+  --accent-primary: #{$color-terracotta};
+  --accent-secondary: #{$color-sage};
+  --accent-tertiary: #{$color-sand};
+  
+  // Brand Colors
+  --brand-primary: #{$color-terracotta};
+  --brand-secondary: #{$color-sage};
+  --brand-gradient: linear-gradient(135deg, #{$color-sage}, #{$color-terracotta});
+  
+  // Border Colors
+  --border-light: rgba(0, 0, 0, 0.06);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-strong: rgba(0, 0, 0, 0.2);
+  --border-accent: #{$color-terracotta};
+  
+  // Shadow Colors
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 30px rgba(212, 163, 115, 0.3);
+  
+  // Input Colors
+  --input-bg: #FFFFFF;
+  --input-border: #{$color-silver};
+  --input-focus: #{$color-terracotta};
+  --input-placeholder: #{$color-light-gray};
+  
+  // Button Colors
+  --btn-primary-bg: #{$color-terracotta};
+  --btn-primary-text: #FFFFFF;
+  --btn-primary-hover: darken($color-terracotta, 8%);
+  --btn-secondary-bg: #{$color-sage};
+  --btn-secondary-text: #{$color-dark};
+  --btn-secondary-hover: darken($color-sage, 5%);
+  
+  // Status Colors
+  --status-success: #{$color-success};
+  --status-warning: #{$color-warning};
+  --status-error: #{$color-error};
+  --status-info: #{$color-info};
+  
+  // Chat Colors
+  --chat-bg: #{$color-cream};
+  --chat-bubble-user: #{$color-terracotta};
+  --chat-bubble-ai: #FFFFFF;
+  --chat-bubble-other: #{$color-sage};
+  
+  // Navbar
+  --navbar-bg: rgba(254, 250, 224, 0.9);
+  --navbar-border: rgba(0, 0, 0, 0.06);
+  
+  // Card
+  --card-bg: #FFFFFF;
+  --card-border: rgba(0, 0, 0, 0.06);
+  --card-shadow: #{'0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05)'};
+  
+  // Price Badge
+  --price-badge-bg: #{$color-terracotta};
+  --price-badge-text: #FFFFFF;
+}
+
+// ============================================
+// DARK THEME
+// ============================================
+
+[data-theme="dark"] {
+  // Background Colors
+  --bg-primary: #0F0F0F;
+  --bg-secondary: #1A1A1A;
+  --bg-tertiary: #252525;
+  --bg-card: #1A1A1A;
+  --bg-elevated: #252525;
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+  
+  // Surface Colors
+  --surface-primary: #1A1A1A;
+  --surface-secondary: #252525;
+  --surface-hover: rgba(212, 163, 115, 0.15);
+  --surface-active: rgba(204, 213, 174, 0.2);
+  
+  // Text Colors
+  --text-primary: #{$color-offwhite};
+  --text-secondary: #{$color-cream};
+  --text-tertiary: #{$color-silver};
+  --text-muted: #{$color-light-gray};
+  --text-inverse: #{$color-dark};
+  
+  // Accent Colors
+  --accent-primary: #{$color-terracotta};
+  --accent-secondary: #{$color-sage};
+  --accent-tertiary: #{$color-sand};
+  
+  // Brand Colors
+  --brand-primary: #{$color-terracotta};
+  --brand-secondary: #{$color-sage};
+  --brand-gradient: linear-gradient(135deg, #{$color-sage}, #{$color-terracotta});
+  
+  // Border Colors
+  --border-light: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-accent: #{$color-terracotta};
+  
+  // Shadow Colors
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5), 0 10px 10px rgba(0, 0, 0, 0.3);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 40px rgba(212, 163, 115, 0.25);
+  
+  // Input Colors
+  --input-bg: #252525;
+  --input-border: #3A3A3A;
+  --input-focus: #{$color-terracotta};
+  --input-placeholder: #{$color-gray};
+  
+  // Button Colors
+  --btn-primary-bg: #{$color-terracotta};
+  --btn-primary-text: #FFFFFF;
+  --btn-primary-hover: lighten($color-terracotta, 8%);
+  --btn-secondary-bg: #{$color-sage};
+  --btn-secondary-text: #{$color-dark};
+  --btn-secondary-hover: lighten($color-sage, 5%);
+  
+  // Status Colors
+  --status-success: #{lighten($color-success, 10%)};
+  --status-warning: #{lighten($color-warning, 10%)};
+  --status-error: #{lighten($color-error, 10%)};
+  --status-info: #{lighten($color-info, 10%)};
+  
+  // Chat Colors
+  --chat-bg: #1A1A1A;
+  --chat-bubble-user: #{$color-terracotta};
+  --chat-bubble-ai: #252525;
+  --chat-bubble-other: #2D3A2D;
+  
+  // Navbar
+  --navbar-bg: rgba(15, 15, 15, 0.9);
+  --navbar-border: rgba(255, 255, 255, 0.06);
+  
+  // Card
+  --card-bg: #1A1A1A;
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-shadow: #{'0 4px 6px rgba(0, 0, 0, 0.4)'};
+  
+  // Price Badge
+  --price-badge-bg: #{$color-terracotta};
+  --price-badge-text: #FFFFFF;
+}
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+// Font Families
+$font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+$font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+// Font Sizes
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 2rem;      // 32px
+$font-size-4xl: 2.5rem;    // 40px
+$font-size-5xl: 3rem;      // 48px
+$font-size-6xl: 4rem;      // 64px
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Line Heights
+$line-height-tight: 1.1;
+$line-height-snug: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.6;
+$line-height-loose: 1.8;
+
+// Letter Spacing
+$letter-spacing-tight: -0.02em;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.02em;
+$letter-spacing-wider: 0.05em;
+$letter-spacing-widest: 0.1em;
+
+// ============================================
+// SPACING
+// ============================================
+
+$space-0: 0;
+$space-1: 0.25rem;   // 4px
+$space-2: 0.5rem;    // 8px
+$space-3: 0.75rem;   // 12px
+$space-4: 1rem;      // 16px
+$space-5: 1.5rem;    // 24px
+$space-6: 2rem;      // 32px
+$space-7: 2.5rem;    // 40px
+$space-8: 3rem;      // 48px
+$space-10: 4rem;     // 64px
+$space-12: 5rem;     // 80px
+$space-16: 8rem;     // 128px
+$space-20: 10rem;    // 160px
+
+// ============================================
+// BORDER RADIUS
+// ============================================
+
+$radius-none: 0;
+$radius-sm: 0.25rem;    // 4px
+$radius-md: 0.5rem;     // 8px
+$radius-lg: 0.75rem;    // 12px
+$radius-xl: 1rem;       // 16px
+$radius-2xl: 1.5rem;    // 24px
+$radius-3xl: 2rem;      // 32px
+$radius-full: 9999px;
+
+// ============================================
+// TRANSITIONS
+// ============================================
+
+$transition-fast: 150ms ease;
+$transition-normal: 250ms ease;
+$transition-slow: 350ms ease;
+$transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+// ============================================
+// Z-INDEX SCALE
+// ============================================
+
+$z-index-dropdown: 100;
+$z-index-sticky: 200;
+$z-index-fixed: 300;
+$z-index-modal-backdrop: 400;
+$z-index-modal: 500;
+$z-index-popover: 600;
+$z-index-tooltip: 700;
+$z-index-toast: 800;
+
+// ============================================
+// BREAKPOINTS
+// ============================================
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// ============================================
+// MIXINS
+// ============================================
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-md}) and (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media (min-width: #{$breakpoint-xl}) {
+    @content;
+  }
+}
+
+// Flexbox utilities
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Glassmorphism effect
+@mixin glass($blur: 20px, $opacity: 0.8) {
+  background: rgba(var(--bg-card-rgb, 255, 255, 255), $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+// Focus ring
+@mixin focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba($color-terracotta, 0.4);
+}
+
+// Truncate text
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Visually hidden (for accessibility)
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+// Theme transition helper
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease,
+              box-shadow 0.3s ease !important;
+}

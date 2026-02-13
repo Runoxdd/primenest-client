@@ -1,23 +1,23 @@
-@import "../../responsive.scss";
+// ============================================
+// PrimeNest Layout Styles
+// Modern Earth-Tone Design
+// ============================================
 
-// Global reset for the Cyberpunk Obsidian theme
-:root {
-  background-color: #030008; 
-  color: #f8fafc;
-}
+@import "../../styles/_design-system.scss";
+@import "../../responsive.scss";
 
 .layout {
   height: 100vh;
-  max-width: 1440px; // Slightly wider for modern screens
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 $space-8;
   display: flex;
   flex-direction: column;
-  background-color: #030008;
+  background-color: var(--bg-primary);
 
   @include lg {
     max-width: 1280px;
-    padding: 0 20px;
+    padding: 0 $space-5;
   }
 
   @include md {
@@ -25,26 +25,26 @@
   }
 
   @include sm {
-    padding: 0 15px;
+    padding: 0 $space-4;
   }
 
   .navbar {
-    height: 100px;
-    z-index: 1000;
+    height: 72px;
+    z-index: $z-index-sticky;
   }
 
   .content {
     flex: 1;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 72px);
     overflow-y: auto;
-    padding-top: 20px;
+    padding-top: $space-5;
     
-    // Premium AI Scrollbar
+    // Custom Scrollbar
     scrollbar-width: thin;
-    scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+    scrollbar-color: var(--accent-primary) transparent;
 
     &::-webkit-scrollbar {
-      width: 5px;
+      width: 6px;
     }
     
     &::-webkit-scrollbar-track {
@@ -52,15 +52,19 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: linear-gradient(to bottom, #a855f7, #6366f1);
-      border-radius: 20px;
-      box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+      background: var(--brand-gradient);
+      border-radius: $radius-full;
     }
   }
 }
 
-// Global Link Hover fix
+// Global Link Styles
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--accent-primary);
+  }
 }

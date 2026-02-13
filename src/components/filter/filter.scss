@@ -1,134 +1,463 @@
-@import "../../responsive.scss";
+// ============================================
+// PrimeNest Filter Styles
+// Modern Filter with Price Range Slider
+// ============================================
+
+@import "../../styles/_design-system.scss";
 
 .filter {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  background: rgba(255, 255, 255, 0.02);
-  padding: 30px;
-  border-radius: 24px;
-  border: 1px solid rgba(168, 85, 247, 0.15);
-  backdrop-filter: blur(15px);
-  margin-bottom: 30px;
+  padding: $space-6 0;
+  background: var(--bg-secondary);
+  border-radius: $radius-2xl;
+  margin-bottom: $space-6;
 
-  h1 {
-    font-weight: 700;
-    font-size: 26px;
-    color: #ffffff;
-    letter-spacing: -0.5px;
-
-    span {
-      background: linear-gradient(90deg, #a855f7, #6366f1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-transform: capitalize;
-      margin-left: 8px;
-    }
-  }
-
-  .item {
+  // Filter Header
+  .filterHeader {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 $space-6;
+    margin-bottom: $space-4;
 
-    label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: #a855f7;
-      font-weight: 800;
+    h1 {
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      color: var(--text-primary);
+
+      span {
+        color: var(--accent-primary);
+      }
     }
 
-    input,
-    select {
-      background-color: rgba(3, 0, 8, 0.6);
-      color: #fff;
-      padding: 14px;
-      border: 1px solid rgba(168, 85, 247, 0.2);
-      border-radius: 12px;
-      font-size: 14px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    .clearAllBtn {
+      background: transparent;
+      border: none;
+      color: var(--text-tertiary);
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      cursor: pointer;
+      padding: $space-2 $space-3;
+      border-radius: $radius-lg;
+      transition: all 0.3s ease;
 
-      &:focus {
-        outline: none;
-        border-color: #a855f7;
-        background-color: rgba(168, 85, 247, 0.05);
-        box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
-      }
-
-      &::placeholder {
-        color: #555;
-      }
-      
-      option {
-        background-color: #030008;
-        color: white;
+      &:hover {
+        background: var(--surface-hover);
+        color: var(--status-error);
       }
     }
   }
 
-  .top {
-    width: 100%;
-    .item {
-      input {
-        width: 100%;
-        font-size: 16px;
-      }
-    }
-  }
-
-  .bottom {
+  // Active Filter Chips
+  .activeFilters {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
+    gap: $space-2;
+    padding: 0 $space-6;
+    margin-bottom: $space-4;
 
-    @include sm {
-      gap: 15px; 
-    }
+    .filterChip {
+      display: inline-flex;
+      align-items: center;
+      gap: $space-2;
+      padding: $space-2 $space-3;
+      background: var(--accent-secondary);
+      color: var(--text-primary);
+      border-radius: $radius-full;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
 
-    .item {
-      flex: 1;
-      min-width: 130px;
-      
-      @include sm {
-        min-width: calc(50% - 10px); 
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        background: rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 50%;
+        color: inherit;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.2);
+        }
+
+        svg {
+          width: 12px;
+          height: 12px;
+        }
       }
-      
-      input, select {
+    }
+  }
+
+  // Filter Bar
+  .filterBar {
+    display: flex;
+    align-items: flex-end;
+    gap: $space-3;
+    padding: 0 $space-6;
+    flex-wrap: wrap;
+
+    .filterItem {
+      flex: 1;
+      min-width: 140px;
+      position: relative;
+
+      label {
+        display: block;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: $letter-spacing-wide;
+        margin-bottom: $space-2;
+      }
+
+      select {
         width: 100%;
+        padding: $space-3 $space-10 $space-3 $space-4;
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        border-radius: $radius-lg;
+        color: var(--text-primary);
+        font-size: $font-size-base;
+        font-weight: $font-weight-medium;
+        cursor: pointer;
+        appearance: none;
+        transition: all 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: var(--accent-primary);
+          box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+        }
+      }
+
+      svg {
+        position: absolute;
+        right: $space-3;
+        bottom: 14px;
+        color: var(--text-tertiary);
+        pointer-events: none;
+        transition: transform 0.3s ease;
+      }
+
+      &.locationInput {
+        flex: 2;
+        min-width: 200px;
+
+        .inputWrapper {
+          position: relative;
+
+          input {
+            width: 100%;
+            padding: $space-3 $space-4;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: $radius-lg;
+            color: var(--text-primary);
+            font-size: $font-size-base;
+            transition: all 0.3s ease;
+
+            &:focus {
+              outline: none;
+              border-color: var(--accent-primary);
+              box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+            }
+
+            &::placeholder {
+              color: var(--text-muted);
+            }
+          }
+        }
       }
     }
 
     .searchBtn {
-      align-self: flex-end;
-      height: 48px;
-      width: 70px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #a855f7, #6366f1);
+      gap: $space-2;
+      padding: $space-3 $space-6;
+      background: var(--brand-gradient);
+      color: white;
       border: none;
-      border-radius: 12px;
+      border-radius: $radius-lg;
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
-
-      @include sm {
-        width: 100%; 
-        margin-top: 10px;
-        align-self: stretch; 
-      }
-
-      img {
-        width: 22px;
-        height: 22px;
-        filter: brightness(0) invert(1);
-      }
+      box-shadow: var(--shadow-md);
 
       &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+        box-shadow: var(--shadow-glow);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  // Price Filter Section
+  .priceFilterSection {
+    margin-top: $space-4;
+    padding: 0 $space-6;
+
+    .expandBtn {
+      display: flex;
+      align-items: center;
+      gap: $space-2;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      cursor: pointer;
+      padding: $space-2 0;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: var(--text-primary);
+      }
+
+      svg {
+        transition: transform 0.3s ease;
+      }
+    }
+
+    &.expanded .expandBtn svg {
+      transform: rotate(180deg);
+    }
+
+    .priceFilterContent {
+      padding: $space-4 0;
+    }
+  }
+}
+
+// Price Range Slider
+.priceRangeSlider {
+  .priceInputs {
+    display: flex;
+    align-items: flex-end;
+    gap: $space-4;
+    margin-bottom: $space-5;
+
+    .priceInput {
+      flex: 1;
+
+      label {
+        display: block;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: $letter-spacing-wide;
+        margin-bottom: $space-2;
+      }
+
+      .inputWrapper {
+        display: flex;
+        align-items: center;
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        border-radius: $radius-lg;
+        padding: 0 $space-3;
+        transition: all 0.3s ease;
+
+        &:focus-within {
+          border-color: var(--accent-primary);
+          box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+        }
+
+        .currencySymbol {
+          color: var(--text-tertiary);
+          font-weight: $font-weight-semibold;
+          margin-right: $space-1;
+        }
+
+        input {
+          flex: 1;
+          border: none;
+          background: transparent;
+          padding: $space-3 0;
+          font-size: $font-size-base;
+          font-weight: $font-weight-medium;
+          color: var(--text-primary);
+          outline: none;
+          min-width: 0;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .separator {
+      color: var(--text-muted);
+      margin-bottom: $space-3;
+    }
+  }
+
+  .sliderContainer {
+    position: relative;
+    height: 24px;
+    margin: $space-4 0;
+
+    .sliderTrack {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      height: 4px;
+      background: var(--border-medium);
+      border-radius: $radius-full;
+    }
+
+    .sliderRange {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 4px;
+      background: var(--brand-gradient);
+      border-radius: $radius-full;
+    }
+
+    .thumb {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 3px solid var(--accent-primary);
+      border-radius: 50%;
+      cursor: pointer;
+      appearance: none;
+      pointer-events: none;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: var(--shadow-lg);
+      }
+
+      &::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border: 3px solid var(--accent-primary);
+        border-radius: 50%;
+        cursor: pointer;
+        pointer-events: auto;
+      }
+
+      &::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        background: white;
+        border: 3px solid var(--accent-primary);
+        border-radius: 50%;
+        cursor: pointer;
+        pointer-events: auto;
+      }
+
+      &.thumbMin {
+        z-index: 3;
+      }
+
+      &.thumbMax {
+        z-index: 4;
+      }
+    }
+  }
+
+  .pricePresets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-top: $space-4;
+
+    button {
+      padding: $space-2 $space-3;
+      background: var(--surface-secondary);
+      border: 1px solid var(--border-light);
+      border-radius: $radius-lg;
+      color: var(--text-secondary);
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--surface-hover);
+        border-color: var(--accent-primary);
+        color: var(--text-primary);
+      }
+    }
+  }
+}
+
+// Responsive
+@include mobile {
+  .filter {
+    padding: $space-4;
+    border-radius: $radius-xl;
+
+    .filterHeader {
+      padding: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $space-2;
+
+      h1 {
+        font-size: $font-size-xl;
+      }
+    }
+
+    .activeFilters {
+      padding: 0;
+    }
+
+    .filterBar {
+      padding: 0;
+      flex-direction: column;
+
+      .filterItem {
+        width: 100%;
+        min-width: auto;
+      }
+
+      .searchBtn {
+        width: 100%;
+      }
+    }
+
+    .priceFilterSection {
+      padding: 0;
+    }
+  }
+
+  .priceRangeSlider {
+    .priceInputs {
+      flex-direction: column;
+      gap: $space-3;
+
+      .separator {
+        display: none;
       }
     }
   }

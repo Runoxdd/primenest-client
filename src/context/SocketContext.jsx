@@ -10,7 +10,7 @@ export const SocketContextProvider = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const newSocket = io("https://primenest-socket.onrender.com", {
+    const newSocket = io("https://primenest-socket-7uvh.onrender.com", {
       withCredentials: true,
       transports: ["websocket"],
       reconnection: true,

@@ -1,0 +1,389 @@
+// ============================================
+// PrimeNest AI Widget Styles
+// Floating Chat Widget with Modern Design
+// ============================================
+
+@import "../../styles/_design-system.scss";
+
+.aiWidget {
+  position: fixed;
+  bottom: $space-6;
+  right: $space-6;
+  z-index: $z-index-modal;
+  
+  @include mobile {
+    bottom: $space-4;
+    right: $space-4;
+  }
+
+  // Floating Trigger Button
+  .widgetTrigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: var(--brand-gradient);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    box-shadow: var(--shadow-xl);
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-glow);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &.hidden {
+      display: none;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .pulseRing {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      animation: pulseRing 2s ease-out infinite;
+    }
+  }
+
+  // Widget Panel
+  .widgetPanel {
+    width: 380px;
+    max-width: calc(100vw - $space-8);
+    height: 520px;
+    max-height: calc(100vh - 100px);
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: $radius-2xl;
+    box-shadow: var(--shadow-2xl);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: bottom right;
+
+    @include mobile {
+      width: calc(100vw - $space-8);
+      height: calc(100vh - 120px);
+      max-width: none;
+      max-height: none;
+      border-radius: $radius-xl;
+    }
+  }
+
+  // Header
+  .widgetHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-4;
+    background: var(--brand-gradient);
+    color: white;
+
+    .headerLeft {
+      display: flex;
+      align-items: center;
+      gap: $space-3;
+
+      .aiAvatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: $radius-lg;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .headerInfo {
+        h3 {
+          font-size: $font-size-base;
+          font-weight: $font-weight-semibold;
+          margin-bottom: 2px;
+        }
+
+        .status {
+          font-size: $font-size-xs;
+          opacity: 0.9;
+
+          &.online::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #7CB07E;
+            border-radius: 50%;
+            margin-right: $space-1;
+          }
+
+          &.thinking::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #E8C547;
+            border-radius: 50%;
+            margin-right: $space-1;
+            animation: pulse 1s ease-in-out infinite;
+          }
+        }
+      }
+    }
+
+    .headerActions {
+      display: flex;
+      gap: $space-2;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: $radius-md;
+        color: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+
+  // Messages
+  .widgetMessages {
+    flex: 1;
+    overflow-y: auto;
+    padding: $space-4;
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    background: var(--bg-secondary);
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--border-medium);
+      border-radius: $radius-full;
+    }
+
+    .message {
+      display: flex;
+      gap: $space-2;
+      animation-duration: 0.3s;
+
+      &.user {
+        flex-direction: row-reverse;
+
+        .messageBubble {
+          background: var(--accent-primary);
+          color: white;
+          border-radius: $radius-xl $radius-xl 4px $radius-xl;
+        }
+      }
+
+      &.ai {
+        .messageBubble {
+          background: var(--bg-card);
+          border: 1px solid var(--border-light);
+          border-radius: $radius-xl $radius-xl $radius-xl 4px;
+        }
+      }
+
+      .aiAvatar {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        background: var(--brand-gradient);
+        border-radius: $radius-md;
+        color: white;
+
+        svg {
+          width: 14px;
+          height: 14px;
+        }
+      }
+
+      .messageBubble {
+        max-width: 80%;
+        padding: $space-3 $space-4;
+        font-size: $font-size-sm;
+        line-height: $line-height-relaxed;
+
+        p {
+          margin: 0;
+          color: inherit;
+        }
+
+        .actionLink {
+          display: inline-block;
+          margin-top: $space-2;
+          padding: $space-2 $space-3;
+          background: var(--accent-secondary);
+          color: var(--text-primary);
+          border-radius: $radius-lg;
+          font-size: $font-size-xs;
+          font-weight: $font-weight-semibold;
+          text-decoration: none;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: var(--accent-primary);
+            color: white;
+          }
+        }
+
+        // Typing indicator
+        &.typing {
+          display: flex;
+          gap: 4px;
+          padding: $space-4;
+
+          span {
+            width: 8px;
+            height: 8px;
+            background: var(--text-tertiary);
+            border-radius: 50%;
+            animation: typingDot 1.4s ease-in-out infinite;
+
+            &:nth-child(1) { animation-delay: 0s; }
+            &:nth-child(2) { animation-delay: 0.2s; }
+            &:nth-child(3) { animation-delay: 0.4s; }
+          }
+        }
+      }
+    }
+  }
+
+  // Input
+  .widgetInput {
+    display: flex;
+    gap: $space-2;
+    padding: $space-4;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-light);
+
+    input {
+      flex: 1;
+      padding: $space-3 $space-4;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-light);
+      border-radius: $radius-xl;
+      font-size: $font-size-sm;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+      }
+
+      &::placeholder {
+        color: var(--text-muted);
+      }
+    }
+
+    .sendBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: var(--brand-gradient);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+
+      &:hover:not(:disabled) {
+        transform: scale(1.05);
+        box-shadow: var(--shadow-md);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}
+
+// Minimized state - show small bar
+.aiWidget.minimized {
+  .widgetPanel {
+    height: auto;
+    min-height: auto;
+
+    .widgetMessages,
+    .widgetInput {
+      display: none;
+    }
+  }
+}
+
+// Animation for typing dots
+@keyframes typingDot {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+// Pulse ring animation
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}

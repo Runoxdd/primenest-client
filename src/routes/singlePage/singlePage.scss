@@ -1,30 +1,28 @@
+// ============================================
+// PrimeNest Single Page Styles
+// Modern Earth-Tone Design
+// ============================================
+
+@import "../../styles/_design-system.scss";
 @import "../../responsive.scss";
 
 .singlePage {
 
   .specimg {
-  // 1. Control the size
-  width: 18px;          // Small enough to match text height
-  height: 18px;         // Keep it square
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: $space-2;
+    opacity: 0.8;
+    filter: brightness(0) invert(1);
+    display: inline-block;
+    flex-shrink: 0;
+  }
   
-  // 2. Fix the alignment
-  object-fit: contain;  // Ensures the icon isn't stretched
-  vertical-align: middle; // Standard alignment for inline text
-  
-  // 3. Spacing
-  margin-right: 8px;    // Pushes the text away slightly
-  
-  // 4. Color/Look (Optional but great for dark themes)
-  opacity: 0.8;         // Makes it look slightly integrated
-  filter: brightness(0) invert(1); // Forces dark icons to become white (if needed)
-  
-  // 5. Layout fix inside the button
-  display: inline-block; 
-  flex-shrink: 0;       // Prevents the icon from getting crushed if text is long
-}
   display: flex;
   height: 100%;
-  background-color: #030008;
+  background-color: var(--bg-primary);
 
   @include md {
     flex-direction: column;
@@ -37,46 +35,56 @@
     overflow-y: auto;
 
     &::-webkit-scrollbar { width: 4px; }
-    &::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
+    &::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: $radius-full; }
 
     .wrapper {
-      padding: 20px 50px 50px 0;
-      @include lg { padding-right: 20px; }
-      @include md { padding: 20px; }
+      padding: $space-5 $space-12 $space-12 0;
+      @include lg { padding-right: $space-5; }
+      @include md { padding: $space-5; }
 
       .info {
-        margin-top: 40px;
+        margin-top: $space-10;
 
         .top {
           display: flex;
           justify-content: space-between;
-          @include sm { flex-direction: column; gap: 25px; }
+          @include sm { flex-direction: column; gap: $space-6; }
 
           .post {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: $space-4;
 
-            h1 { font-weight: 800; font-size: 32px; color: #fff; letter-spacing: -1px; }
+            h1 { 
+              font-weight: $font-weight-extrabold; 
+              font-size: 32px; 
+              color: var(--text-primary); 
+              letter-spacing: -1px; 
+            }
 
             .address {
               display: flex;
-              gap: 8px;
+              gap: $space-2;
               align-items: center;
-              color: #94a3b8;
-              font-size: 14px;
-              img { width: 16px; height: 16px; filter: brightness(0) invert(1); opacity: 0.6; }
+              color: var(--text-secondary);
+              font-size: $font-size-sm;
+              img { 
+                width: 16px; 
+                height: 16px; 
+                filter: brightness(0) invert(1); 
+                opacity: 0.6; 
+              }
             }
 
             .price {
-              padding: 10px 20px;
-              background: rgba(168, 85, 247, 0.1);
-              border: 1px solid rgba(168, 85, 247, 0.3);
-              color: #a855f7;
-              border-radius: 12px;
+              padding: $space-3 $space-5;
+              background: var(--surface-hover);
+              border: 1px solid var(--accent-primary);
+              color: var(--accent-primary);
+              border-radius: $radius-lg;
               width: max-content;
               font-size: 24px;
-              font-weight: 800;
+              font-weight: $font-weight-extrabold;
             }
           }
 
@@ -85,34 +93,43 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(168, 85, 247, 0.1);
+            padding: $space-5;
+            border-radius: $radius-xl;
+            background: var(--surface-primary);
+            border: 1px solid var(--border-light);
             min-width: 140px;
 
             img {
               width: 60px;
               height: 60px;
-              border-radius: 18px; // Squircle
+              border-radius: $radius-xl;
               object-fit: cover;
-              border: 2px solid #a855f7;
-              margin-bottom: 10px;
+              border: 2px solid var(--accent-primary);
+              margin-bottom: $space-3;
             }
 
-            span { color: #fff; font-weight: 700; font-size: 14px; }
-            p { color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+            span { 
+              color: var(--text-primary); 
+              font-weight: $font-weight-bold; 
+              font-size: $font-size-sm; 
+            }
+            p { 
+              color: var(--text-secondary); 
+              font-size: $font-size-xs; 
+              text-transform: uppercase; 
+              letter-spacing: 1px; 
+            }
           }
         }
 
         .bottom {
-          margin-top: 40px;
-          color: #cbd5e1;
+          margin-top: $space-10;
+          color: var(--text-secondary);
           line-height: 1.8;
-          font-size: 16px;
-          background: rgba(255, 255, 255, 0.02);
-          padding: 30px;
-          border-radius: 20px;
+          font-size: $font-size-base;
+          background: var(--surface-primary);
+          padding: $space-6;
+          border-radius: $radius-xl;
         }
       }
     }
@@ -120,104 +137,132 @@
 
   .features {
     flex: 2;
-    background-color: rgba(10, 5, 20, 0.5);
+    background-color: var(--bg-secondary);
     height: 100%;
     overflow-y: auto;
-    border-left: 1px solid rgba(168, 85, 247, 0.1);
+    border-left: 1px solid var(--border-light);
 
     .wrapper {
-      padding: 30px;
+      padding: $space-6;
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: $space-6;
 
       .title {
-        font-weight: 700;
-        font-size: 14px;
-        color: #a855f7;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-sm;
+        color: var(--accent-primary);
         text-transform: uppercase;
         letter-spacing: 2px;
       }
 
       .listVertical, .listHorizontal, .size {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 16px;
+        background: var(--surface-primary);
+        border: 1px solid var(--border-light);
+        border-radius: $radius-xl;
       }
 
       .feature {
         display: flex;
         align-items: center;
-        gap: 15px;
-        img { width: 20px; filter: brightness(0) invert(1); opacity: 0.8; }
+        gap: $space-4;
+        img { 
+          width: 20px; 
+          filter: brightness(0) invert(1); 
+          opacity: 0.8; 
+        }
         .featureText {
-          span { display: block; font-weight: 700; color: #fff; font-size: 14px; }
-          p { color: #94a3b8; font-size: 12px; }
+          span { 
+            display: block; 
+            font-weight: $font-weight-bold; 
+            color: var(--text-primary); 
+            font-size: $font-size-sm; 
+          }
+          p { 
+            color: var(--text-secondary); 
+            font-size: $font-size-xs; 
+          }
         }
       }
 
-      .listVertical { padding: 25px; display: flex; flex-direction: column; gap: 20px; }
+      .listVertical { 
+        padding: $space-6; 
+        display: flex; 
+        flex-direction: column; 
+        gap: $space-5; 
+      }
 
       .sizes {
         display: flex;
         justify-content: space-between;
-        gap: 15px;
+        gap: $space-4;
         .size {
           flex: 1;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 8px;
-          padding: 15px;
-          span { color: #fff; font-weight: 600; font-size: 12px; }
+          gap: $space-2;
+          padding: $space-4;
+          span { 
+            color: var(--text-primary); 
+            font-weight: $font-weight-semibold; 
+            font-size: $font-size-xs; 
+          }
         }
       }
 
       .listHorizontal {
-        padding: 20px;
+        padding: $space-5;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 10px;
-        @include lg { grid-template-columns: 1fr; gap: 20px; }
+        gap: $space-3;
+        @include lg { grid-template-columns: 1fr; gap: $space-5; }
       }
 
       .mapContainer {
         height: 200px;
-        border-radius: 20px;
+        border-radius: $radius-xl;
         overflow: hidden;
-        border: 2px solid rgba(168, 85, 247, 0.2);
+        border: 2px solid var(--border-medium);
       }
 
       .buttons {
         display: flex;
-        gap: 15px;
+        gap: $space-4;
         button {
           flex: 1;
-          padding: 18px;
+          padding: $space-4;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 10px;
-          border-radius: 14px;
-          font-weight: 700;
+          gap: $space-3;
+          border-radius: $radius-xl;
+          font-weight: $font-weight-bold;
           cursor: pointer;
-          transition: 0.3s;
-          font-size: 13px;
+          transition: all 0.3s ease;
+          font-size: $font-size-xs;
           text-transform: uppercase;
 
           &.chatBtn {
-            background: linear-gradient(135deg, #a855f7, #6366f1);
+            background: var(--brand-gradient);
             color: white;
             border: none;
-            &:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3); }
+            &:hover { 
+              transform: translateY(-3px); 
+              box-shadow: var(--shadow-glow); 
+            }
           }
 
           &.saveBtn {
             background: transparent;
-            color: #fff;
-            border: 1px solid rgba(168, 85, 247, 0.5);
-            &:hover { background: rgba(168, 85, 247, 0.1); }
-            &.saved { background: #fff; color: #030008; border: none; }
+            color: var(--text-primary);
+            border: 1px solid var(--accent-primary);
+            &:hover { background: var(--surface-hover); }
+            &.saved { 
+              background: var(--text-inverse); 
+              color: var(--text-primary); 
+              border: none; 
+            }
           }
         }
       }

@@ -1,5 +1,6 @@
 import "./layout.scss";
 import Navbar from "../../components/navbar/Navbar";
+import AIWidget from "../../components/ai-widget/AIWidget";
 import { Navigate, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -13,6 +14,7 @@ function Layout() {
       <div className="content">
         <Outlet />
       </div>
+      <AIWidget />
     </div>
   );
 }
@@ -32,6 +34,7 @@ function RequireAuth() {
       <div className="content">
         <Outlet />
       </div>
+      <AIWidget />
     </div>
   );
 }
