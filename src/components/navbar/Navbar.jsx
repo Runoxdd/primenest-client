@@ -184,7 +184,7 @@ function Navbar() {
                       <LayoutDashboard size={16} />
                       <span>Dashboard</span>
                     </NavLink>
-                    <NavLink to="/profile" className="dropdown-item" onClick={() => setUserMenuOpen(false)}>
+                    <NavLink to="/profile?tab=messages" className="dropdown-item" onClick={() => setUserMenuOpen(false)}>
                       <MessageCircle size={16} />
                       <span>Messages</span>
                       {number > 0 && <span className="dropdown-badge">{number}</span>}

@@ -185,7 +185,7 @@
   .header-actions {
     display: flex;
     align-items: center;
-    gap: $space-1;
+    gap: $space-2;
 
     button {
       display: flex;
@@ -193,16 +193,21 @@
       justify-content: center;
       width: 32px;
       height: 32px;
-      background: transparent;
-      border: none;
+      background: rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border-default);
       border-radius: $radius-lg;
-      color: var(--text-tertiary);
+      color: var(--text-primary);
       cursor: pointer;
       transition: all 0.15s ease;
 
       &:hover {
-        background: var(--surface-hover);
-        color: var(--text-primary);
+        background: var(--accent-primary);
+        border-color: var(--accent-primary);
+        color: white;
+      }
+
+      &:active {
+        transform: scale(0.95);
       }
     }
   }

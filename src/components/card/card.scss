@@ -227,20 +227,26 @@
     // Features
     .card-features {
       display: flex;
-      gap: $space-4;
-      padding-top: $space-3;
-      border-top: 1px solid var(--border-subtle);
+      gap: $space-3;
+      padding: $space-3;
+      background: var(--surface-secondary);
+      margin: $space-3 0 0;
+      border-radius: $radius-lg;
 
       .feature {
         display: flex;
         align-items: center;
         gap: $space-2;
+        padding: $space-2 $space-3;
+        background: var(--surface-primary);
+        border-radius: $radius-md;
         color: var(--text-secondary);
         font-size: $text-sm;
         font-weight: $font-weight-medium;
 
         svg {
-          color: var(--text-tertiary);
+          color: var(--accent-primary);
+          flex-shrink: 0;
         }
       }
     }
@@ -299,12 +305,24 @@
 
 @include mobile {
   .card {
+    border-radius: $radius-xl;
+
     .card-image {
       aspect-ratio: 16 / 10;
 
       .price-badge {
         .price {
           font-size: $text-base;
+        }
+      }
+
+      .quick-actions {
+        opacity: 1;
+        transform: translateY(0);
+
+        .action-btn {
+          width: 40px;
+          height: 40px;
         }
       }
     }
@@ -317,7 +335,14 @@
       }
 
       .card-features {
-        gap: $space-3;
+        gap: $space-2;
+        padding: $space-2;
+        margin-top: $space-2;
+
+        .feature {
+          padding: $space-1 $space-2;
+          font-size: $text-xs;
+        }
       }
     }
   }

@@ -128,16 +128,22 @@
 
 .properties-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: $space-6;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: $space-5;
 
   @include lg {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: $space-4;
   }
 
-  @include sm {
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-4;
+  }
+
+  @include mobile {
     grid-template-columns: 1fr;
+    gap: $space-3;
   }
 }
 

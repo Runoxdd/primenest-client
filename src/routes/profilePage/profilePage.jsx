@@ -2,7 +2,7 @@ import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import "./profilePage.scss";
 import apiRequest from "../../lib/apiRequest";
-import { Await, Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Await, Link, useLoaderData, useNavigate, useSearchParams } from "react-router-dom";
 import { Suspense, useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,7 +26,9 @@ function ProfilePage() {
   const data = useLoaderData();
   const { updateUser, currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("listings");
+  const [searchParams] = useSearchParams();
+  const initialTab = searchParams.get('tab') || 'listings';
+  const [activeTab, setActiveTab] = useState(initialTab);
 
   const handleLogout = async () => {
     try {
@@ -132,10 +134,6 @@ function ProfilePage() {
                   <h1>My Listings</h1>
                   <p>Manage your property listings</p>
                 </div>
-                <Link to="/add" className="header-action">
-                  <Plus size={18} />
-                  <span>New Listing</span>
-                </Link>
               </div>
               <Suspense 
                 fallback={
