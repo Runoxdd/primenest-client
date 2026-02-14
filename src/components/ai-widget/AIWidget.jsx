@@ -19,7 +19,6 @@ import {
 
 // Quick action suggestions for users
 const QUICK_ACTIONS = [
-  { icon: Building2, text: "Apartments in Lagos" },
   { icon: Home, text: "Houses under ₦5M" },
   { icon: MapPin, text: "2 bedroom flats for rent" },
 ];
@@ -37,7 +36,7 @@ function AIWidget() {
       { 
         text: "Hi! I'm Runo, your PrimeNest AI assistant. I can help you find your perfect property, answer questions about real estate, or provide market insights. What are you looking for today?", 
         isAi: true,
-        suggestions: ["Show me apartments in Lagos", "Find houses under ₦5M", "Real estate investment tips"]
+        suggestions: [ "Find houses under ₦5M", "Real estate investment tips"]
       }
     ];
   });
@@ -87,7 +86,7 @@ function AIWidget() {
     const initialMsg = [{ 
       text: "New conversation started! I'm ready to help you find your perfect property. What are you looking for?", 
       isAi: true,
-      suggestions: ["Apartments in Lagos", "Houses for rent", "Properties under ₦10M"]
+      suggestions: ["Apartments in Japan", "Houses for rent", "Properties under ₦10M"]
     }];
     setMessages(initialMsg);
     setSessionId(null);

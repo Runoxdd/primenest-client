@@ -131,9 +131,10 @@
 .properties-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: $space-4;
+  gap: $space-5;
   width: 100%;
   min-width: 0; // Fix grid overflow
+  align-items: stretch; // All cards same height in row
 
   @include lg {
     grid-template-columns: repeat(3, 1fr);
@@ -148,6 +149,12 @@
   @include mobile {
     grid-template-columns: 1fr;
     gap: $space-3;
+  }
+
+  // Ensure direct children (motion.div) stretch
+  > div {
+    display: flex;
+    align-items: stretch;
   }
 }
 

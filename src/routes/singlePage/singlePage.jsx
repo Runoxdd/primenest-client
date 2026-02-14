@@ -24,12 +24,14 @@ import {
   Wrench,
   User,
   Shield,
-  ArrowLeft
+  ArrowLeft,
+  Loader2
 } from "lucide-react";
 
 function SinglePage() {
   const post = useLoaderData();
   const [saved, setSaved] = useState(post.isSaved);
+  const [isCreatingChat, setIsCreatingChat] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -47,6 +49,9 @@ function SinglePage() {
   };
 
   const handleContact = async () => {
+    // Prevent multiple clicks
+    if (isCreatingChat) return;
+    
     if (!currentUser) {
       navigate("/login");
       return;
@@ -56,12 +61,17 @@ function SinglePage() {
       return;
     }
 
+    setIsCreatingChat(true);
     try {
-      await apiRequest.post("/chats", { receiverId: post.userId });
-      navigate("/profile");
+      const res = await apiRequest.post("/chats", { receiverId: post.userId });
+      // Navigate to messages page instead of profile
+      navigate("/messages");
     } catch (err) {
-      alert("Conversation already exists. Redirecting to messages.");
-      navigate("/profile");
+      console.error("Error creating chat:", err);
+      // Still navigate to messages - chat might already exist
+      navigate("/messages");
+    } finally {
+      setIsCreatingChat(false);
     }
   };
 
@@ -195,9 +205,19 @@ function SinglePage() {
               onClick={handleContact}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
+              disabled={isCreatingChat}
             >
-              <MessageSquare size={18} />
-              <span>Contact Agent</span>
+              {isCreatingChat ? (
+                <>
+                  <Loader2 size={18} className="animate-spin" />
+                  <span>Connecting...</span>
+                </>
+              ) : (
+                <>
+                  <MessageSquare size={18} />
+                  <span>Contact Agent</span>
+                </>
+              )}
             </motion.button>
           </div>
 

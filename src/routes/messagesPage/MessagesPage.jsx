@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Await, useLoaderData } from "react-router-dom";
+import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { SocketContext } from "../../context/SocketContext";
 import { useNotificationStore } from "../../lib/notificationStore";
@@ -17,7 +17,8 @@ import {
   ArrowLeft,
   Plus,
   Users,
-  Loader2
+  Loader2,
+  X
 } from "lucide-react";
 import "./messagesPage.scss";
 
@@ -25,20 +26,29 @@ function MessagesPage() {
   const [chat, setChat] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileListOpen, setIsMobileListOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  
   // Safe context access with fallback for SSR
   const socketContext = useContext(SocketContext) || {};
   const socket = socketContext.socket;
   const messageEndRef = useRef();
+  const chatMessagesRef = useRef();
   const data = useLoaderData();
   const decrease = useNotificationStore((state) => state.decrease);
 
   // Auto-scroll to bottom on new message
   useEffect(() => {
-    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [chat?.messages]);
 
   const handleOpenChat = async (id, receiver) => {
+    if (isLoading) return;
+    
+    setIsLoading(true);
     try {
       const res = await apiRequest("/chats/" + id);
       if (!res.data.seenBy.includes(currentUser.id)) {
@@ -47,7 +57,9 @@ function MessagesPage() {
       setChat({ ...res.data, receiver });
       setIsMobileListOpen(false);
     } catch (err) {
-      console.log(err);
+      console.log("Error opening chat:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,35 +67,42 @@ function MessagesPage() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const text = formData.get("text");
-    if (!text) return;
+    if (!text || !text.trim()) return;
+    
     try {
-      const res = await apiRequest.post("/messages/" + chat.id, { text });
-      setChat((prev) => ({ ...prev, messages: [...prev.messages, res.data] }));
+      const res = await apiRequest.post("/messages/" + chat.id, { text: text.trim() });
+      setChat((prev) => ({ 
+        ...prev, 
+        messages: [...prev.messages, res.data] 
+      }));
       e.target.reset();
-      socket.emit("sendMessage", {
-        receiverId: chat.receiver.id,
-        data: {
-          ...res.data,
-          chatId: chat.id,
-        },
-      });
+      
+      if (socket) {
+        socket.emit("sendMessage", {
+          receiverId: chat.receiver.id,
+          data: {
+            ...res.data,
+            chatId: chat.id,
+          },
+        });
+      }
     } catch (err) {
-      console.log(err);
+      console.log("Error sending message:", err);
     }
   };
 
+  // Socket message listener
   useEffect(() => {
     const read = async () => {
       try {
         await apiRequest.put("/chats/read/" + chat.id);
       } catch (err) {
-        console.log(err);
+        console.log("Error marking chat as read:", err);
       }
     };
 
     if (chat && socket) {
-      socket.off("getMessage");
-      socket.on("getMessage", (data) => {
+      const handleMessage = (data) => {
         if (chat.id === data.chatId) {
           setChat((prev) => ({
             ...prev,
@@ -91,12 +110,15 @@ function MessagesPage() {
           }));
           read();
         }
-      });
-    }
+      };
 
-    return () => {
-      if (socket) socket.off("getMessage");
-    };
+      socket.off("getMessage");
+      socket.on("getMessage", handleMessage);
+
+      return () => {
+        socket.off("getMessage", handleMessage);
+      };
+    }
   }, [socket, chat]);
 
   return (
@@ -106,9 +128,18 @@ function MessagesPage() {
         errorElement={<div className="error">Error loading chats</div>}
       >
         {(chatData) => {
-          const chats = chatData.data || [];
-          const filteredChats = chats.filter((c) =>
-            c.receiver.username.toLowerCase().includes(searchQuery.toLowerCase())
+          // Deduplicate chats by receiver ID
+          const rawChats = chatData.data || [];
+          const uniqueChats = rawChats.reduce((acc, chat) => {
+            const receiverId = chat.receiver?.id;
+            if (receiverId && !acc.find(c => c.receiver?.id === receiverId)) {
+              acc.push(chat);
+            }
+            return acc;
+          }, []);
+          
+          const filteredChats = uniqueChats.filter((c) =>
+            c.receiver?.username?.toLowerCase().includes(searchQuery.toLowerCase())
           );
 
           return (
@@ -116,8 +147,10 @@ function MessagesPage() {
               {/* Conversations Sidebar */}
               <div className={`conversations-sidebar ${isMobileListOpen ? "open" : ""}`}>
                 <div className="sidebar-header">
-                  <h1>Messages</h1>
-                  <span className="message-count">{chats.length}</span>
+                  <div className="header-title">
+                    <h1>Messages</h1>
+                    <span className="message-count">{uniqueChats.length}</span>
+                  </div>
                 </div>
 
                 {/* Search */}
@@ -129,51 +162,67 @@ function MessagesPage() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
+                  {searchQuery && (
+                    <button 
+                      className="clear-search"
+                      onClick={() => setSearchQuery("")}
+                    >
+                      <X size={16} />
+                    </button>
+                  )}
                 </div>
 
                 {/* Conversations List */}
                 <div className="conversations-list">
                   {filteredChats.length === 0 ? (
                     <div className="empty-state">
-                      <MessageCircle size={48} />
-                      <h3>No conversations yet</h3>
-                      <p>Start chatting with property owners</p>
+                      <MessageCircle size={48} strokeWidth={1.5} />
+                      <h3>{searchQuery ? "No matches found" : "No conversations yet"}</h3>
+                      <p>{searchQuery ? "Try a different search" : "Start chatting with property owners"}</p>
                     </div>
                   ) : (
-                    filteredChats.map((c, index) => (
-                      <motion.div
-                        key={c.id}
-                        className={`conversation-item ${
-                          !c.seenBy.includes(currentUser.id) && chat?.id !== c.id
-                            ? "unread"
-                            : ""
-                        } ${chat?.id === c.id ? "active" : ""}`}
-                        onClick={() => handleOpenChat(c.id, c.receiver)}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.03 }}
-                      >
-                        <div className="conversation-avatar">
-                          <img
-                            src={c.receiver.avatar || "/noavatar.jpg"}
-                            alt={c.receiver.username}
-                          />
-                          {!c.seenBy.includes(currentUser.id) &&
-                            chat?.id !== c.id && <span className="unread-dot" />}
-                        </div>
-                        <div className="conversation-content">
-                          <div className="conversation-header">
-                            <span className="conversation-name">
-                              {c.receiver.username}
-                            </span>
-                            <span className="conversation-time">
-                              {format(c.updatedAt)}
-                            </span>
+                    <AnimatePresence>
+                      {filteredChats.map((c, index) => (
+                        <motion.div
+                          key={c.id}
+                          className={`conversation-item ${
+                            !c.seenBy.includes(currentUser.id) && chat?.id !== c.id
+                              ? "unread"
+                              : ""
+                          } ${chat?.id === c.id ? "active" : ""}`}
+                          onClick={() => handleOpenChat(c.id, c.receiver)}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                          transition={{ delay: index * 0.03 }}
+                        >
+                          <div className="conversation-avatar">
+                            <img
+                              src={c.receiver.avatar || "/noavatar.jpg"}
+                              alt={c.receiver.username}
+                              onError={(e) => {
+                                e.target.src = "/noavatar.jpg";
+                              }}
+                            />
+                            {!c.seenBy.includes(currentUser.id) &&
+                              chat?.id !== c.id && <span className="unread-dot" />}
                           </div>
-                          <p className="conversation-preview">{c.lastMessage}</p>
-                        </div>
-                      </motion.div>
-                    ))
+                          <div className="conversation-content">
+                            <div className="conversation-header">
+                              <span className="conversation-name">
+                                {c.receiver.username}
+                              </span>
+                              <span className="conversation-time">
+                                {format(c.updatedAt)}
+                              </span>
+                            </div>
+                            <p className="conversation-preview">
+                              {c.lastMessage || "No messages yet"}
+                            </p>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
                   )}
                 </div>
               </div>
@@ -187,6 +236,7 @@ function MessagesPage() {
                       <button
                         className="back-btn"
                         onClick={() => setIsMobileListOpen(true)}
+                        aria-label="Back to conversations"
                       >
                         <ArrowLeft size={20} />
                       </button>
@@ -194,6 +244,9 @@ function MessagesPage() {
                         <img
                           src={chat.receiver.avatar || "/noavatar.jpg"}
                           alt={chat.receiver.username}
+                          onError={(e) => {
+                            e.target.src = "/noavatar.jpg";
+                          }}
                         />
                         <div className="user-info">
                           <span className="user-name">{chat.receiver.username}</span>
@@ -204,45 +257,54 @@ function MessagesPage() {
                         </div>
                       </div>
                       <div className="chat-actions">
-                        <button className="action-btn">
+                        <button className="action-btn" aria-label="Voice call">
                           <Phone size={18} />
                         </button>
-                        <button className="action-btn">
+                        <button className="action-btn" aria-label="Video call">
                           <Video size={18} />
                         </button>
-                        <button className="action-btn">
+                        <button className="action-btn" aria-label="More options">
                           <MoreVertical size={18} />
                         </button>
                       </div>
                     </div>
 
-                    {/* Messages */}
-                    <div className="chat-messages">
-                      {chat.messages.map((message, index) => (
-                        <motion.div
-                          key={message.id}
-                          className={`message ${
-                            message.userId === currentUser.id ? "own" : ""
-                          }`}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.02 }}
-                        >
-                          <div className="message-bubble">
-                            <p>{message.text}</p>
-                            <div className="message-meta">
-                              <span className="message-time">
-                                {format(message.createdAt)}
-                              </span>
-                              {message.userId === currentUser.id && (
-                                <span className="message-status">
-                                  <CheckCheck size={14} />
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        </motion.div>
-                      ))}
+                    {/* Messages - Scrollable Container */}
+                    <div className="chat-messages" ref={chatMessagesRef}>
+                      {chat.messages && chat.messages.length > 0 ? (
+                        <>
+                          {chat.messages.map((message, index) => (
+                            <motion.div
+                              key={message.id || index}
+                              className={`message ${
+                                message.userId === currentUser.id ? "own" : ""
+                              }`}
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: Math.min(index * 0.02, 0.5) }}
+                            >
+                              <div className="message-bubble">
+                                <p>{message.text}</p>
+                                <div className="message-meta">
+                                  <span className="message-time">
+                                    {format(message.createdAt)}
+                                  </span>
+                                  {message.userId === currentUser.id && (
+                                    <span className="message-status">
+                                      <CheckCheck size={14} />
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </>
+                      ) : (
+                        <div className="no-messages">
+                          <MessageCircle size={32} strokeWidth={1.5} />
+                          <p>No messages yet. Say hello!</p>
+                        </div>
+                      )}
                       <div ref={messageEndRef} />
                     </div>
 
@@ -253,12 +315,15 @@ function MessagesPage() {
                         name="text"
                         placeholder="Type a message..."
                         autoComplete="off"
+                        disabled={isLoading}
                       />
                       <motion.button
                         type="submit"
                         className="send-btn"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        disabled={isLoading}
+                        aria-label="Send message"
                       >
                         <Send size={18} />
                       </motion.button>
@@ -267,7 +332,7 @@ function MessagesPage() {
                 ) : (
                   <div className="no-chat-selected">
                     <div className="no-chat-content">
-                      <MessageCircle size={64} />
+                      <MessageCircle size={64} strokeWidth={1.5} />
                       <h2>Select a conversation</h2>
                       <p>Choose from your existing conversations or start a new one</p>
                     </div>
