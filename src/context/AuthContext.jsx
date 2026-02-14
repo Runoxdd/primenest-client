@@ -8,15 +8,31 @@ export const AuthContextProvider = ({ children }) => {
   );
 
   const updateUser = (data) => {
-    setCurrentUser(data);
+    // Store token separately if provided (for cross-domain auth)
+    if (data && data.token) {
+      localStorage.setItem("token", data.token);
+      const { token, ...userData } = data;
+      setCurrentUser(userData);
+    } else {
+      setCurrentUser(data);
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setCurrentUser(null);
   };
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser));
+    if (currentUser) {
+      localStorage.setItem("user", JSON.stringify(currentUser));
+    } else {
+      localStorage.removeItem("user");
+    }
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser,updateUser }}>
+    <AuthContext.Provider value={{ currentUser, updateUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

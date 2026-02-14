@@ -5,7 +5,21 @@ const apiRequest = axios.create({
   withCredentials: true,
 });
 
-// Add this interceptor to catch the EXACT error on your phone
+// Request interceptor to add Authorization header for cross-domain auth
+apiRequest.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor to catch errors
 apiRequest.interceptors.response.use(
   (response) => response,
   (error) => {

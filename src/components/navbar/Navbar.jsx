@@ -56,8 +56,7 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      // Add logout logic here if needed
-      updateUser(null);
+      updateUser(null); // This now also clears the token from localStorage
     } catch (err) {
       console.log(err);
     }

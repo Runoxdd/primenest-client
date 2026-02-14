@@ -32,7 +32,7 @@ function ProfilePage() {
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout");
-      updateUser(null);
+      updateUser(null); // This now also clears the token from localStorage
       navigate("/");
     } catch (err) {
       console.log(err);
