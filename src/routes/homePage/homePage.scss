@@ -245,10 +245,24 @@
   border-radius: $radius-3xl;
   overflow: hidden;
   box-shadow: var(--shadow-2xl);
+  min-height: 500px;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-secondary);
+
+  @include lg {
+    min-height: 400px;
+    aspect-ratio: 16 / 10;
+  }
+
+  @include mobile {
+    min-height: 300px;
+    aspect-ratio: 1 / 1;
+  }
 
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
   }
 
@@ -258,8 +272,10 @@
     background: linear-gradient(
       135deg,
       transparent 0%,
-      rgba(99, 102, 241, 0.1) 100%
+      transparent 50%,
+      rgba(99, 102, 241, 0.15) 100%
     );
+    pointer-events: none;
   }
 }
 
@@ -269,23 +285,36 @@
   display: flex;
   align-items: center;
   gap: $space-3;
-  padding: $space-4;
+  padding: $space-4 $space-5;
   background: var(--surface-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-glass);
   border-radius: $radius-xl;
   box-shadow: var(--shadow-lg);
+  z-index: 2;
+  min-width: 160px;
+
+  @include mobile {
+    padding: $space-3 $space-4;
+    min-width: 130px;
+  }
 
   .card-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     background: var(--accent-primary-light);
     color: var(--accent-primary);
     border-radius: $radius-lg;
+    flex-shrink: 0;
+
+    @include mobile {
+      width: 36px;
+      height: 36px;
+    }
 
     &.success {
       background: var(--status-success-bg);
@@ -296,36 +325,55 @@
   .card-content {
     display: flex;
     flex-direction: column;
+    gap: 2px;
 
     .card-value {
-      font-size: $text-lg;
+      font-size: $text-xl;
       font-weight: $font-weight-bold;
       color: var(--text-primary);
+      line-height: 1.2;
+
+      @include mobile {
+        font-size: $text-lg;
+      }
     }
 
     .card-label {
       font-size: $text-xs;
       color: var(--text-tertiary);
+      white-space: nowrap;
     }
   }
 
   &.card-1 {
-    bottom: 20%;
-    left: -40px;
+    bottom: 15%;
+    left: $space-6;
     animation: float 5s ease-in-out infinite;
 
+    @include lg {
+      left: $space-4;
+      bottom: 12%;
+    }
+
     @include mobile {
-      left: -20px;
+      left: $space-3;
+      bottom: 10%;
     }
   }
 
   &.card-2 {
-    top: 20%;
-    right: -40px;
+    top: 15%;
+    right: $space-6;
     animation: float 5s ease-in-out infinite 1s;
 
+    @include lg {
+      right: $space-4;
+      top: 12%;
+    }
+
     @include mobile {
-      right: -20px;
+      right: $space-3;
+      top: 10%;
     }
   }
 }

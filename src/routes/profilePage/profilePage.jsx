@@ -1,4 +1,3 @@
-import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import "./profilePage.scss";
 import apiRequest from "../../lib/apiRequest";
@@ -38,10 +37,6 @@ function ProfilePage() {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const scrollToChat = () => {
-    document.querySelector('.chatContainer')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -94,17 +89,14 @@ function ProfilePage() {
               <span>Saved Properties</span>
               <ChevronRight size={16} className="chevron" />
             </button>
-            <button 
-              className={`nav-item ${activeTab === "messages" ? "active" : ""}`}
-              onClick={() => {
-                setActiveTab("messages");
-                scrollToChat();
-              }}
+            <Link 
+              to="/messages"
+              className="nav-item"
             >
               <MessageSquare size={18} />
               <span>Messages</span>
               <ChevronRight size={16} className="chevron" />
-            </button>
+            </Link>
           </nav>
 
           {/* Quick Actions */}
@@ -219,33 +211,19 @@ function ProfilePage() {
                   <p>Your conversations with other users</p>
                 </div>
               </div>
-              <Suspense 
-                fallback={
-                  <div className="loading-state">
-                    <Loader2 size={32} className="animate-spin" />
-                    <p>Loading messages...</p>
-                  </div>
-                }
-              >
-                <Await resolve={data.chatResponse} errorElement={<ErrorState />}>
-                  {(chatResponse) => <Chat chats={chatResponse.data} />}
-                </Await>
-              </Suspense>
+              <div className="messages-redirect">
+                <MessageSquare size={48} />
+                <h3>Messages Moved</h3>
+                <p>We've upgraded our messaging experience! Visit the new dedicated messages page for a better chat experience.</p>
+                <Link to="/messages" className="redirect-btn">
+                  Open Messages
+                  <ChevronRight size={16} />
+                </Link>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </main>
-
-      {/* Mobile Chat FAB */}
-      <motion.div 
-        className="mobile-chat-fab"
-        onClick={scrollToChat}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <MessageSquare size={24} />
-        <span className="fab-label">Chat</span>
-      </motion.div>
     </div>
   );
 }

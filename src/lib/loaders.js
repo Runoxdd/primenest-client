@@ -22,3 +22,10 @@ export const profilePageLoader = () => { // Removed async
     chatResponse: chatPromise,
   });
 };
+
+export const messagesLoader = () => {
+  const chatPromise = apiRequest("/chats");
+  return defer({
+    chatResponse: chatPromise,
+  });
+};
