@@ -92,8 +92,14 @@ function HomePage() {
 
       {/* Hero Section */}
       <section className="hero-section">
+        {/* Background Image Layer */}
+        <div className="hero-background">
+          <img src="/bg.png" alt="Modern Architecture" className="hero-bg-image" />
+          <div className="hero-bg-overlay" />
+        </div>
+
+        {/* Content Layer */}
         <div className="hero-container">
-          {/* Left Content */}
           <motion.div 
             className="hero-content"
             initial={{ opacity: 0, y: 20 }}
@@ -175,48 +181,37 @@ function HomePage() {
               ))}
             </motion.div>
           </motion.div>
+        </div>
 
-          {/* Right Content - Hero Image */}
+        {/* Floating Cards Layer */}
+        <div className="hero-floating-elements">
           <motion.div 
-            className="hero-visual"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            className="floating-card card-1"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8 }}
           >
-            <div className="hero-image-wrapper">
-              <img src="/bg.png" alt="Modern Architecture" />
-              <div className="image-overlay" />
-              
-              {/* Floating Cards */}
-              <motion.div 
-                className="floating-card card-1"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8 }}
-              >
-                <div className="card-icon">
-                  <Building2 size={18} />
-                </div>
-                <div className="card-content">
-                  <span className="card-value">2,500+</span>
-                  <span className="card-label">Active Listings</span>
-                </div>
-              </motion.div>
+            <div className="card-icon">
+              <Building2 size={18} />
+            </div>
+            <div className="card-content">
+              <span className="card-value">2,500+</span>
+              <span className="card-label">Active Listings</span>
+            </div>
+          </motion.div>
 
-              <motion.div 
-                className="floating-card card-2"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.9 }}
-              >
-                <div className="card-icon success">
-                  <TrendingUp size={18} />
-                </div>
-                <div className="card-content">
-                  <span className="card-value">98%</span>
-                  <span className="card-label">Happy Clients</span>
-                </div>
-              </motion.div>
+          <motion.div 
+            className="floating-card card-2"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.9 }}
+          >
+            <div className="card-icon success">
+              <TrendingUp size={18} />
+            </div>
+            <div className="card-content">
+              <span className="card-value">98%</span>
+              <span className="card-label">Happy Clients</span>
             </div>
           </motion.div>
         </div>
