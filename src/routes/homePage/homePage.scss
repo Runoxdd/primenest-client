@@ -73,15 +73,16 @@
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 $space-6;
+  padding: 0 $space-8;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: $space-12;
+  gap: $space-16;
   align-items: center;
 
   @include lg {
     grid-template-columns: 1fr;
     gap: $space-8;
+    padding: 0 $space-6;
   }
 
   @include mobile {
@@ -94,7 +95,7 @@
 // ============================================
 
 .hero-content {
-  max-width: 600px;
+  max-width: 720px;
 
   @include lg {
     max-width: 100%;

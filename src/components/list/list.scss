@@ -1,14 +1,24 @@
 // ============================================
 // PrimeNest List Component Styles v2.0
-// Modern Property List
+// Modern Property List with Grid Layout
 // ============================================
 
 @import "../../styles/_design-system.scss";
 
 .list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: $space-5;
+  
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-4;
+  }
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $space-4;
+  }
 }
 
 .empty-state {
@@ -21,6 +31,7 @@
   border: 1px dashed var(--border-light);
   border-radius: $radius-2xl;
   text-align: center;
+  grid-column: 1 / -1; // Span all columns in grid
 
   .empty-icon {
     width: 96px;

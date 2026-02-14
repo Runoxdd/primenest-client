@@ -11,12 +11,23 @@ import {
   Send, 
   Plus,
   MessageCircle,
-  ArrowRight
+  ArrowRight,
+  Home,
+  Building2,
+  MapPin
 } from "lucide-react";
+
+// Quick action suggestions for users
+const QUICK_ACTIONS = [
+  { icon: Building2, text: "Apartments in Lagos" },
+  { icon: Home, text: "Houses under ₦5M" },
+  { icon: MapPin, text: "2 bedroom flats for rent" },
+];
 
 function AIWidget() {
   const { currentUser } = useContext(AuthContext);
   const chatKey = currentUser ? `primenest_widget_chat_${currentUser.id}` : "primenest_widget_chat";
+  const sessionKey = currentUser ? `primenest_widget_session_${currentUser.id}` : "primenest_widget_session";
   
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -24,22 +35,46 @@ function AIWidget() {
     const savedChat = localStorage.getItem(chatKey);
     return savedChat ? JSON.parse(savedChat) : [
       { 
-        text: "Hi! I'm Runo, your PrimeNest AI assistant. How can I help you find your dream property today?", 
-        isAi: true 
+        text: "Hi! I'm Runo, your PrimeNest AI assistant. I can help you find your perfect property, answer questions about real estate, or provide market insights. What are you looking for today?", 
+        isAi: true,
+        suggestions: ["Show me apartments in Lagos", "Find houses under ₦5M", "Real estate investment tips"]
       }
     ];
   });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sessionId, setSessionId] = useState(() => {
+    return localStorage.getItem(sessionKey) || null;
+  });
+  
   const messageEndRef = useRef(null);
   const inputRef = useRef(null);
+  const messagesContainerRef = useRef(null);
 
+  // Save chat to localStorage
   useEffect(() => {
     localStorage.setItem(chatKey, JSON.stringify(messages));
   }, [messages, chatKey]);
 
+  // Save session ID
   useEffect(() => {
-    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (sessionId) {
+      localStorage.setItem(sessionKey, sessionId);
+    }
+  }, [sessionId, sessionKey]);
+
+  // Smooth scroll to bottom
+  const scrollToBottom = () => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
   }, [messages]);
 
   useEffect(() => {
@@ -50,34 +85,58 @@ function AIWidget() {
 
   const handleNewChat = () => {
     const initialMsg = [{ 
-      text: "New session started. What are you looking for?", 
-      isAi: true 
+      text: "New conversation started! I'm ready to help you find your perfect property. What are you looking for?", 
+      isAi: true,
+      suggestions: ["Apartments in Lagos", "Houses for rent", "Properties under ₦10M"]
     }];
     setMessages(initialMsg);
+    setSessionId(null);
     localStorage.removeItem(chatKey);
+    localStorage.removeItem(sessionKey);
   };
 
-  const handleSend = async () => {
-    if (!input.trim() || loading) return;
+  const handleQuickAction = (actionText) => {
+    setInput(actionText);
+    handleSend(actionText);
+  };
 
-    const userQuery = input;
+  const handleSend = async (overrideText = null) => {
+    const textToSend = overrideText || input;
+    if (!textToSend.trim() || loading) return;
+
+    const userQuery = textToSend;
     setInput("");
     const userMsg = { text: userQuery, isAi: false };
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
 
     try {
-      const res = await apiRequest.post("/assistant/chat", { message: userQuery });
+      const res = await apiRequest.post("/assistant/chat", { 
+        message: userQuery,
+        sessionId: sessionId 
+      });
+      
+      // Store session ID for conversation continuity
+      if (res.data.sessionId) {
+        setSessionId(res.data.sessionId);
+      }
+      
       const aiMsg = { 
         text: res.data.reply, 
         isAi: true, 
         link: res.data.searchUrl,
+        suggestions: res.data.suggestions || null
       };
       setMessages((prev) => [...prev, aiMsg]);
     } catch (err) {
+      console.error("Chat error:", err);
       setMessages((prev) => [
         ...prev, 
-        { text: "Connection issue. Please try again.", isAi: true }
+        { 
+          text: "I'm having trouble connecting right now. Please try again in a moment.", 
+          isAi: true,
+          suggestions: ["Try again", "Browse properties instead"]
+        }
       ]);
     } finally {
       setLoading(false);
@@ -201,15 +260,15 @@ function AIWidget() {
               </div>
             </div>
 
-            {/* Messages */}
-            <div className="widget-messages">
+            {/* Messages Container - Independently Scrollable */}
+            <div className="widget-messages" ref={messagesContainerRef}>
               {messages.map((m, i) => (
                 <motion.div
                   key={i}
                   className={`message ${m.isAi ? "ai" : "user"}`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
+                  transition={{ delay: i * 0.03 }}
                 >
                   {m.isAi && (
                     <div className="message-avatar">
@@ -224,11 +283,30 @@ function AIWidget() {
                         <ArrowRight size={14} />
                       </Link>
                     )}
+                    {m.suggestions && m.suggestions.length > 0 && (
+                      <div className="message-suggestions">
+                        {m.suggestions.map((suggestion, idx) => (
+                          <button
+                            key={idx}
+                            className="suggestion-chip"
+                            onClick={() => handleQuickAction(suggestion)}
+                          >
+                            {suggestion}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ))}
+              
+              {/* Typing Indicator */}
               {loading && (
-                <div className="message ai">
+                <motion.div
+                  className="message ai"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
                   <div className="message-avatar">
                     <Sparkles size={14} />
                   </div>
@@ -237,10 +315,27 @@ function AIWidget() {
                     <span></span>
                     <span></span>
                   </div>
-                </div>
+                </motion.div>
               )}
+              
               <div ref={messageEndRef} />
             </div>
+
+            {/* Quick Actions */}
+            {!loading && messages.length <= 2 && (
+              <div className="quick-actions">
+                {QUICK_ACTIONS.map((action, idx) => (
+                  <button
+                    key={idx}
+                    className="quick-action-btn"
+                    onClick={() => handleQuickAction(action.text)}
+                  >
+                    <action.icon size={14} />
+                    <span>{action.text}</span>
+                  </button>
+                ))}
+              </div>
+            )}
 
             {/* Input */}
             <div className="widget-input">
@@ -253,7 +348,7 @@ function AIWidget() {
                 disabled={loading}
               />
               <motion.button
-                onClick={handleSend}
+                onClick={() => handleSend()}
                 disabled={loading || !input.trim()}
                 className="send-btn"
                 whileHover={{ scale: 1.05 }}

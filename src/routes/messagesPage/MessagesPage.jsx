@@ -16,7 +16,8 @@ import {
   Search,
   ArrowLeft,
   Plus,
-  Users
+  Users,
+  Loader2
 } from "lucide-react";
 import "./messagesPage.scss";
 
@@ -25,7 +26,9 @@ function MessagesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileListOpen, setIsMobileListOpen] = useState(true);
   const { currentUser } = useContext(AuthContext);
-  const { socket } = useContext(SocketContext);
+  // Safe context access with fallback for SSR
+  const socketContext = useContext(SocketContext) || {};
+  const socket = socketContext.socket;
   const messageEndRef = useRef();
   const data = useLoaderData();
   const decrease = useNotificationStore((state) => state.decrease);

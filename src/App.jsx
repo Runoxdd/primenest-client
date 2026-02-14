@@ -13,6 +13,19 @@ import AboutPage from "./routes/aboutPage/AboutPage";
 import ContactPage from "./routes/contactPage/ContactPage";
 import MessagesPage from "./routes/messagesPage/MessagesPage";
 import { listPageLoader, profilePageLoader, singlePageLoader, messagesLoader } from "./lib/loaders";
+import { Suspense } from "react";
+
+// Loading fallback component for Suspense
+function PageLoader() {
+  return (
+    <div className="page-loader">
+      <div className="loader-content">
+        <div className="loader-spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </div>
+  );
+}
 
 function App() {
   const router = createBrowserRouter([
@@ -38,7 +51,15 @@ function App() {
         { path: "/add", element: <NewPostPage /> },
         { path: "/edit/:id", element: <NewPostPage />, loader: singlePageLoader }, // EDIT ROUTE
         { path: "/assistant", element: <AssistantPage /> },
-        { path: "/messages", element: <MessagesPage />, loader: messagesLoader },
+        { 
+          path: "/messages", 
+          element: (
+            <Suspense fallback={<PageLoader />}>
+              <MessagesPage />
+            </Suspense>
+          ), 
+          loader: messagesLoader 
+        },
       ],
     },
   ]);

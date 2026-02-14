@@ -1,6 +1,7 @@
 // ============================================
 // PrimeNest AI Widget Styles v2.0
 // Premium SaaS Glassmorphism Panel
+// Flagship Feature - Pride and Joy
 // ============================================
 
 @import "../../styles/_design-system.scss";
@@ -26,18 +27,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   background: var(--brand-gradient);
   border: none;
   border-radius: $radius-full;
   color: white;
   cursor: pointer;
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
-  transition: all 0.2s ease;
+  box-shadow: 
+    var(--shadow-lg),
+    0 0 30px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: var(--shadow-xl), var(--shadow-glow-lg);
+    transform: scale(1.05);
+    box-shadow: 
+      var(--shadow-xl),
+      0 0 40px rgba(99, 102, 241, 0.4);
   }
 
   .trigger-pulse {
@@ -50,14 +56,15 @@
 
   .trigger-label {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    padding: 2px 6px;
-    background: var(--status-error);
+    top: -6px;
+    right: -6px;
+    padding: 3px 8px;
+    background: linear-gradient(135deg, #10B981, #059669);
     color: white;
     font-size: 10px;
     font-weight: $font-weight-bold;
     border-radius: $radius-full;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
   }
 
   svg {
@@ -74,7 +81,7 @@
   display: flex;
   align-items: center;
   gap: $space-2;
-  padding: $space-3 $space-4;
+  padding: $space-3 $space-5;
   background: var(--surface-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -84,10 +91,12 @@
   font-size: $text-sm;
   font-weight: $font-weight-medium;
   cursor: pointer;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 
+    var(--shadow-lg),
+    0 0 20px rgba(99, 102, 241, 0.15);
 
   .minimized-badge {
-    padding: 2px 6px;
+    padding: 2px 8px;
     background: var(--accent-primary);
     color: white;
     font-size: 10px;
@@ -97,12 +106,12 @@
 }
 
 // ============================================
-// WIDGET PANEL
+// WIDGET PANEL - Premium Design
 // ============================================
 
 .widget-panel {
-  width: 380px;
-  height: 520px;
+  width: 400px;
+  height: 580px;
   max-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
@@ -111,7 +120,10 @@
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border-glass);
   border-radius: $radius-3xl;
-  box-shadow: var(--shadow-2xl);
+  box-shadow: 
+    var(--shadow-2xl),
+    0 0 60px rgba(99, 102, 241, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   overflow: hidden;
 
   @include mobile {
@@ -133,8 +145,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $space-4;
-  background: var(--surface-secondary);
+  padding: $space-4 $space-5;
+  background: linear-gradient(135deg, var(--surface-secondary) 0%, var(--surface-tertiary) 100%);
   border-bottom: 1px solid var(--border-subtle);
 
   .header-left {
@@ -146,18 +158,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       background: var(--brand-gradient);
-      border-radius: $radius-lg;
+      border-radius: $radius-xl;
       color: white;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
 
     .header-info {
       h3 {
-        font-size: $text-sm;
+        font-size: $text-base;
         font-weight: $font-weight-semibold;
         color: var(--text-primary);
+        margin-bottom: 2px;
       }
 
       .status {
@@ -168,14 +182,16 @@
         color: var(--text-tertiary);
 
         .status-dot {
-          width: 6px;
-          height: 6px;
+          width: 8px;
+          height: 8px;
           background: var(--status-success);
           border-radius: 50%;
+          box-shadow: 0 0 8px var(--status-success);
         }
 
         &.thinking .status-dot {
           background: var(--status-warning);
+          box-shadow: 0 0 8px var(--status-warning);
           animation: pulse 1s ease-in-out infinite;
         }
       }
@@ -193,17 +209,18 @@
       justify-content: center;
       width: 32px;
       height: 32px;
-      background: rgba(0, 0, 0, 0.08);
+      background: rgba(0, 0, 0, 0.05);
       border: 1px solid var(--border-default);
       border-radius: $radius-lg;
-      color: var(--text-primary);
+      color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s ease;
 
       &:hover {
         background: var(--accent-primary);
         border-color: var(--accent-primary);
         color: white;
+        transform: scale(1.05);
       }
 
       &:active {
@@ -214,22 +231,44 @@
 }
 
 // ============================================
-// MESSAGES
+// MESSAGES - Independently Scrollable
 // ============================================
 
 .widget-messages {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: $space-4;
   display: flex;
   flex-direction: column;
   gap: $space-3;
-  @include custom-scrollbar(4px);
-
+  min-height: 0; // CRITICAL: Enables flexbox scrolling
+  scroll-behavior: smooth;
+  
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: $radius-full;
+    
+    &:hover {
+      background: var(--accent-primary);
+    }
+  }
+  
+  // Message animations
   .message {
     display: flex;
     gap: $space-2;
     max-width: 85%;
+    animation: messageSlide 0.3s ease-out;
 
     &.user {
       align-self: flex-end;
@@ -250,6 +289,7 @@
       border-radius: $radius-lg;
       color: white;
       flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
     }
 
     .message-bubble {
@@ -257,6 +297,8 @@
       border-radius: $radius-xl;
       font-size: $text-sm;
       line-height: $leading-relaxed;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
 
       p {
         margin: 0;
@@ -267,18 +309,44 @@
         display: inline-flex;
         align-items: center;
         gap: $space-2;
-        margin-top: $space-2;
+        margin-top: $space-3;
         padding: $space-2 $space-3;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.15);
         border-radius: $radius-lg;
         font-size: $text-xs;
         font-weight: $font-weight-medium;
         color: inherit;
         text-decoration: none;
-        transition: all 0.15s ease;
+        transition: all 0.2s ease;
 
         &:hover {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.25);
+          transform: translateX(2px);
+        }
+      }
+
+      // Suggestion chips
+      .message-suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-2;
+        margin-top: $space-3;
+
+        .suggestion-chip {
+          padding: $space-2 $space-3;
+          background: rgba(99, 102, 241, 0.1);
+          border: 1px solid rgba(99, 102, 241, 0.2);
+          border-radius: $radius-full;
+          font-size: $text-xs;
+          color: var(--accent-primary);
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--accent-primary);
+            transform: translateY(-1px);
+          }
         }
       }
     }
@@ -287,12 +355,14 @@
       background: var(--brand-gradient);
       color: white;
       border-bottom-right-radius: $radius-sm;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
 
     &.ai .message-bubble {
       background: var(--surface-secondary);
       color: var(--text-primary);
       border-bottom-left-radius: $radius-sm;
+      border: 1px solid var(--border-subtle);
     }
 
     // Typing indicator
@@ -303,16 +373,66 @@
       padding: $space-3 $space-4;
 
       span {
-        width: 6px;
-        height: 6px;
-        background: var(--text-tertiary);
+        width: 8px;
+        height: 8px;
+        background: var(--accent-primary);
         border-radius: 50%;
-        animation: typingDot 1.4s ease-in-out infinite;
+        animation: typingPulse 1.4s ease-in-out infinite;
 
         &:nth-child(1) { animation-delay: 0s; }
         &:nth-child(2) { animation-delay: 0.15s; }
         &:nth-child(3) { animation-delay: 0.3s; }
       }
+    }
+  }
+}
+
+@keyframes messageSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// QUICK ACTIONS
+// ============================================
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: var(--surface-secondary);
+  border-top: 1px solid var(--border-subtle);
+
+  .quick-action-btn {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-3;
+    background: var(--surface-primary);
+    border: 1px solid var(--border-default);
+    border-radius: $radius-full;
+    font-size: $text-xs;
+    font-weight: $font-weight-medium;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    svg {
+      color: var(--accent-primary);
+    }
+
+    &:hover {
+      background: var(--accent-primary-light);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-1px);
     }
   }
 }
@@ -337,12 +457,12 @@
     border-radius: $radius-xl;
     color: var(--text-primary);
     font-size: $text-sm;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
 
     &:focus {
       outline: none;
-      border-color: var(--input-focus);
-      box-shadow: 0 0 0 3px var(--input-focus-ring);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px var(--accent-primary-light);
     }
 
     &::placeholder {
@@ -365,10 +485,16 @@
     border-radius: $radius-xl;
     color: white;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 
     &:hover:not(:disabled) {
-      box-shadow: var(--shadow-glow);
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.95);
     }
 
     &:disabled {
@@ -388,18 +514,27 @@
     opacity: 0.5;
   }
   100% {
-    transform: scale(1.5);
+    transform: scale(1.6);
     opacity: 0;
   }
 }
 
-@keyframes typingDot {
+@keyframes typingPulse {
   0%, 60%, 100% {
     transform: translateY(0);
     opacity: 0.4;
   }
   30% {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
     opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0.5; 
   }
 }
