@@ -70,12 +70,13 @@ function SearchBar() {
 
         {/* Min Price */}
         <div className="search-field price">
+          <label className="field-label">Min</label>
           <DollarSign size={18} className="field-icon" />
           <input
             type="number"
             name="minPrice"
             min={0}
-            placeholder="Min price"
+            placeholder="Min"
             value={query.minPrice}
             onChange={handleChange}
           />
@@ -86,12 +87,13 @@ function SearchBar() {
 
         {/* Max Price */}
         <div className="search-field price">
+          <label className="field-label">Max</label>
           <DollarSign size={18} className="field-icon" />
           <input
             type="number"
             name="maxPrice"
             min={0}
-            placeholder="Max price"
+            placeholder="Max"
             value={query.maxPrice}
             onChange={handleChange}
           />

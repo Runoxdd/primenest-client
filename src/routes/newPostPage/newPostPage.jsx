@@ -27,8 +27,10 @@ import {
   Loader2,
   AlertCircle,
   ChevronDown,
-  Send
+  Send,
+  Coins
 } from "lucide-react";
+import { getAvailableCurrencies, getCurrencySymbol } from "../../lib/utils";
 
 function NewPostPage() {
   const data = useLoaderData();
@@ -49,6 +51,7 @@ function NewPostPage() {
       postData: {
         title: inputs.title,
         price: parseInt(inputs.price),
+        currency: inputs.currency,
         address: inputs.address,
         city: inputs.city,
         bedroom: parseInt(inputs.bedroom),
@@ -137,15 +140,36 @@ function NewPostPage() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="price">Price ($)</label>
+                  <label htmlFor="currency">Currency</label>
+                  <div className="select-wrapper">
+                    <select name="currency" defaultValue={data?.currency || "USD"} required>
+                      <option value="USD">USD ($)</option>
+                      <option value="NGN">NGN (₦)</option>
+                      <option value="GBP">GBP (£)</option>
+                      <option value="EUR">EUR (€)</option>
+                      <option value="JPY">JPY (¥)</option>
+                      <option value="CNY">CNY (¥)</option>
+                      <option value="INR">INR (₹)</option>
+                      <option value="AED">AED (د.إ)</option>
+                      <option value="SAR">SAR (﷼)</option>
+                      <option value="ZAR">ZAR (R)</option>
+                      <option value="KES">KES (KSh)</option>
+                      <option value="GHS">GHS (GH₵)</option>
+                    </select>
+                    <ChevronDown size={18} className="select-icon" />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="price">Price</label>
                   <div className="input-wrapper">
-                    <DollarSign size={18} className="input-icon" />
+                    <Coins size={18} className="input-icon" />
                     <input
                       id="price"
                       name="price"
                       type="number"
                       defaultValue={data?.price}
-                      placeholder="0"
+                      placeholder="Enter price"
                       required
                     />
                   </div>

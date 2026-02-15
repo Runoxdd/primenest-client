@@ -81,6 +81,7 @@
   gap: $space-2;
   flex: 1;
   padding: $space-3;
+  position: relative;
 
   @include mobile {
     width: 100%;
@@ -92,6 +93,20 @@
   .field-icon {
     color: var(--text-tertiary);
     flex-shrink: 0;
+  }
+
+  .field-label {
+    position: absolute;
+    top: 2px;
+    left: 12px;
+    font-size: 9px;
+    font-weight: $font-weight-semibold;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: transparent;
+    padding: 0 2px;
+    border-radius: 2px;
   }
 
   input {
@@ -125,6 +140,7 @@
   &.price {
     flex: 1;
     max-width: 140px;
+    padding-top: $space-4;
 
     @include mobile {
       max-width: none;

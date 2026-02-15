@@ -6,6 +6,7 @@ import DOMPurify from "dompurify";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
+import { getCurrencySymbol } from "../../lib/utils";
 import { motion } from "framer-motion";
 import { 
   MapPin, 
@@ -75,13 +76,9 @@ function SinglePage() {
     }
   };
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
+  const formatPrice = (price, currency = "USD") => {
+    const symbol = getCurrencySymbol(currency);
+    return `${symbol}${price?.toLocaleString()}`;
   };
 
   return (
@@ -137,7 +134,7 @@ function SinglePage() {
             </div>
 
             <div className="price-section">
-              <span className="price">{formatPrice(post.price)}</span>
+              <span className="price">{formatPrice(post.price, post.currency)}</span>
               {post.type === "rent" && <span className="price-period">/month</span>}
             </div>
           </div>

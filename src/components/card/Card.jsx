@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import apiRequest from "../../lib/apiRequest";
-import { formatPriceCompact } from "../../lib/utils";
+import { formatPriceCompact, getCurrencySymbol } from "../../lib/utils";
 import { motion } from "framer-motion";
 import { 
   Bed, 
@@ -113,7 +113,7 @@ function Card({ item, index = 0 }) {
 
           {/* Price Badge */}
           <div className="price-badge">
-            <span className="price">{formatPriceCompact(item.price)}</span>
+            <span className="price">{getCurrencySymbol(item.currency)}{item.price?.toLocaleString()}</span>
             {item.type === 'rent' && <span className="period">/mo</span>}
           </div>
         </div>
