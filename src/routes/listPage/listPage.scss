@@ -1,6 +1,7 @@
 // ============================================
 // PrimeNest List Page Styles v2.0
 // Modern Split View with Grid/Map Toggle
+// FIXED: Uniform card grid layout
 // ============================================
 
 @import "../../styles/_design-system.scss";
@@ -122,6 +123,7 @@
   flex: 1;
   padding: $space-6;
   padding-top: 0;
+  overflow-x: hidden; // Prevent horizontal scroll
 
   @include md {
     padding: $space-4;
@@ -130,14 +132,14 @@
 
 .properties-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr); // Fixed 3 columns for uniformity
   gap: $space-5;
   width: 100%;
-  min-width: 0; // Fix grid overflow
-  align-items: stretch; // All cards same height in row
+  max-width: 100%; // Prevent overflow
+  box-sizing: border-box;
 
   @include lg {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: $space-4;
   }
 
@@ -151,10 +153,9 @@
     gap: $space-3;
   }
 
-  // Ensure direct children (motion.div) stretch
+  // Ensure direct children (motion.div) stretch to fill grid cell
   > div {
-    display: flex;
-    align-items: stretch;
+    display: contents; // Let card inherit grid cell sizing
   }
 }
 
