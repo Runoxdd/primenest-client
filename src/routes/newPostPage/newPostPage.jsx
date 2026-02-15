@@ -23,7 +23,6 @@ import {
   GraduationCap,
   Bus,
   UtensilsCrossed,
-  ImagePlus,
   Loader2,
   AlertCircle,
   ChevronDown,
@@ -494,11 +493,6 @@ function NewPostPage() {
             }}
             setState={setImages}
           />
-
-          <div className="upload-hint">
-            <ImagePlus size={18} />
-            <span>Click to upload images</span>
-          </div>
         </div>
       </motion.div>
     </div>

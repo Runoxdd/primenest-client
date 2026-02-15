@@ -132,15 +132,15 @@
 
 .properties-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); // Fixed 3 columns for uniformity
-  gap: $space-5;
+  grid-template-columns: repeat(4, 1fr); // 4 columns for smaller, compact cards
+  gap: $space-4;
   width: 100%;
   max-width: 100%; // Prevent overflow
   box-sizing: border-box;
 
   @include lg {
-    grid-template-columns: repeat(2, 1fr);
-    gap: $space-4;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-3;
   }
 
   @include tablet {
@@ -149,8 +149,8 @@
   }
 
   @include mobile {
-    grid-template-columns: 1fr;
-    gap: $space-3;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-2;
   }
 
   // Ensure direct children (motion.div) stretch to fill grid cell
