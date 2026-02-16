@@ -260,26 +260,26 @@
     // Features - Compact
     .card-features {
       display: flex;
-      gap: $space-2;
-      padding: $space-2;
+      gap: $space-3;
+      padding: $space-3;
       background: var(--surface-secondary);
       margin-top: auto;
-      border-radius: $radius-md;
+      border-radius: $radius-lg;
 
       .feature {
         display: flex;
         align-items: center;
-        gap: 4px;
-        padding: 4px $space-2;
+        gap: $space-2;
+        padding: $space-2 $space-3;
         background: var(--surface-primary);
-        border-radius: $radius-sm;
+        border-radius: $radius-md;
         color: var(--text-secondary);
-        font-size: 11px;
+        font-size: $text-xs;
         font-weight: $font-weight-medium;
 
         svg {
-          width: 12px;
-          height: 12px;
+          width: 14px;
+          height: 14px;
           color: var(--accent-primary);
           flex-shrink: 0;
         }
@@ -361,27 +361,36 @@
         transform: translateY(0);
 
         .action-btn {
-          width: 24px;
-          height: 24px;
+          width: 36px;
+          height: 36px;
+          
+          svg {
+            width: 16px;
+            height: 16px;
+          }
         }
       }
     }
 
     .card-content {
-      padding: $space-2;
+      padding: $space-3;
 
       .card-title {
-        font-size: 11px;
+        font-size: $text-sm;
       }
 
       .card-features {
-        gap: 4px;
-        padding: 4px;
-        margin-top: 4px;
+        gap: $space-2;
+        padding: $space-2;
 
         .feature {
-          padding: 2px 4px;
-          font-size: 10px;
+          padding: $space-1 $space-2;
+          font-size: $text-xs;
+
+          svg {
+            width: 12px;
+            height: 12px;
+          }
         }
       }
     }

@@ -209,10 +209,10 @@
       justify-content: center;
       width: 32px;
       height: 32px;
-      background: rgba(0, 0, 0, 0.05);
-      border: 1px solid var(--border-default);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--border-glass);
       border-radius: $radius-lg;
-      color: var(--text-secondary);
+      color: var(--text-primary);
       cursor: pointer;
       transition: all 0.2s ease;
 
@@ -227,6 +227,15 @@
         transform: scale(0.95);
       }
     }
+  }
+}
+
+// Dark mode adjustment for header actions
+[data-theme="dark"] {
+  .widget-header .header-actions button {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
   }
 }
 

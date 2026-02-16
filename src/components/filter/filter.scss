@@ -10,6 +10,14 @@
   background: var(--bg-secondary);
   border-radius: $radius-2xl;
   margin-bottom: $space-4;
+  max-width: 100%;
+  overflow: hidden;
+
+  @include mobile {
+    padding: $space-3 0;
+    border-radius: $radius-xl;
+    margin-bottom: $space-3;
+  }
 
   // ============================================
   // FILTER HEADER
@@ -18,6 +26,11 @@
   .filter-header {
     padding: 0 $space-6;
     margin-bottom: $space-4;
+
+    @include mobile {
+      padding: 0 $space-4;
+      margin-bottom: $space-3;
+    }
 
     .header-content {
       display: flex;
@@ -70,6 +83,10 @@
     margin-bottom: $space-4;
     overflow: hidden;
 
+    @include mobile {
+      padding: 0 $space-4;
+    }
+
     .filter-chip {
       display: inline-flex;
       align-items: center;
@@ -113,15 +130,18 @@
     gap: $space-3;
     padding: 0 $space-6;
     flex-wrap: wrap;
+    max-width: 100%;
 
     @include mobile {
       flex-direction: column;
       padding: 0 $space-4;
+      gap: $space-3;
     }
 
     .filter-item {
       flex: 1;
       min-width: 140px;
+      max-width: 100%;
 
       @include mobile {
         width: 100%;
@@ -142,6 +162,10 @@
       &.location {
         flex: 2;
         min-width: 200px;
+
+        @include mobile {
+          min-width: auto;
+        }
 
         .input-wrapper {
           position: relative;
@@ -165,6 +189,12 @@
             color: var(--text-primary);
             font-size: $text-sm;
             transition: all 0.15s ease;
+            min-width: 0;
+
+            @include mobile {
+              min-height: 48px;
+              font-size: 16px; // Prevents iOS zoom
+            }
 
             &:focus {
               outline: none;
@@ -196,6 +226,12 @@
             cursor: pointer;
             appearance: none;
             transition: all 0.15s ease;
+            min-width: 0;
+
+            @include mobile {
+              min-height: 48px;
+              font-size: 16px; // Prevents iOS zoom
+            }
 
             &:focus {
               outline: none;
