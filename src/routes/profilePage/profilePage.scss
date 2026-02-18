@@ -15,7 +15,7 @@
     grid-template-columns: 280px 1fr;
   }
 
-  @include md {
+  @include mobile {
     grid-template-columns: 1fr;
   }
 }
@@ -33,12 +33,13 @@
   height: calc(100vh - 80px);
   overflow-y: auto;
 
-  @include md {
+  @include mobile {
     position: relative;
     top: 0;
     height: auto;
     border-right: none;
     border-bottom: 1px solid var(--border-light);
+    padding: $space-4;
   }
 
   &::-webkit-scrollbar {
@@ -55,6 +56,10 @@
   display: flex;
   flex-direction: column;
   gap: $space-8;
+  
+  @include mobile {
+    gap: $space-5;
+  }
 }
 
 // User Card
@@ -67,6 +72,10 @@
   background: linear-gradient(135deg, var(--surface-secondary) 0%, var(--surface-tertiary) 100%);
   border-radius: $radius-2xl;
   border: 1px solid var(--border-light);
+  
+  @include mobile {
+    padding: $space-4;
+  }
 }
 
 .user-avatar {
@@ -79,6 +88,13 @@
     border-radius: $radius-xl;
     object-fit: cover;
     border: 3px solid var(--accent-primary);
+  }
+  
+  @include mobile {
+    img {
+      width: 64px;
+      height: 64px;
+    }
   }
 
   .avatar-ring {
@@ -102,18 +118,30 @@
 
 .user-info {
   margin-bottom: $space-5;
+  
+  @include mobile {
+    margin-bottom: $space-4;
+  }
 
   h2 {
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
     color: var(--text-primary);
     margin-bottom: $space-1;
+    
+    @include mobile {
+      font-size: $font-size-lg;
+    }
   }
 
   p {
     font-size: $font-size-sm;
     color: var(--text-tertiary);
     word-break: break-all;
+    
+    @include mobile {
+      font-size: $font-size-xs;
+    }
   }
 }
 
@@ -121,6 +149,11 @@
   display: flex;
   gap: $space-3;
   width: 100%;
+  
+  @include mobile {
+    flex-direction: column;
+    gap: $space-2;
+  }
 
   .action-btn {
     flex: 1;
@@ -135,6 +168,11 @@
     cursor: pointer;
     transition: all 0.2s ease;
     text-decoration: none;
+    
+    @include mobile {
+      padding: $space-3;
+      min-height: 44px; // Touch target
+    }
 
     &.edit {
       background: var(--accent-primary);

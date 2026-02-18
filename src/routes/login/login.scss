@@ -264,7 +264,8 @@
   position: relative;
   overflow: hidden;
 
-  @include lg {
+  // Hide on mobile and tablet (screens smaller than 1024px)
+  @include max-lg {
     display: none;
   }
 

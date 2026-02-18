@@ -115,6 +115,10 @@
   border-top: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
   padding: $space-10 $space-8;
+  
+  @include mobile {
+    padding: $space-8 $space-4;
+  }
 }
 
 .stats-grid {
@@ -128,8 +132,14 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include sm {
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-4;
+  }
+  
+  @include xs {
     grid-template-columns: 1fr;
+    gap: $space-3;
   }
 }
 

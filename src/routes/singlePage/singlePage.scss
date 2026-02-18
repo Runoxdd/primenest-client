@@ -23,9 +23,14 @@
   max-height: 600px;
   background: var(--surface-secondary);
 
-  @include md {
+  @include tablet {
     height: 40vh;
     min-height: 300px;
+  }
+
+  @include mobile {
+    height: 35vh;
+    min-height: 250px;
   }
 }
 
@@ -48,9 +53,14 @@
     gap: $space-6;
   }
 
-  @include md {
+  @include tablet {
     grid-template-columns: 1fr;
     padding: $space-5;
+  }
+
+  @include mobile {
+    padding: $space-4;
+    gap: $space-4;
   }
 }
 
