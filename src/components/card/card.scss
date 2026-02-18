@@ -346,87 +346,117 @@
 @include mobile {
   .card {
     border-radius: $radius-lg;
+    max-width: 100%;
+    margin: 0 auto;
 
     .card-image {
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 16 / 9; // Wider aspect ratio for mobile
 
       .type-badge {
-        font-size: 8px;
-        padding: 2px $space-1;
+        font-size: 10px;
+        padding: 4px 8px;
+        top: $space-3;
+        left: $space-3;
+      }
+
+      .property-icon {
+        width: 28px;
+        height: 28px;
+        top: $space-3;
+        right: $space-3;
+        
+        svg {
+          width: 14px;
+          height: 14px;
+        }
       }
 
       .price-badge {
-        padding: 3px $space-1;
+        padding: 6px 10px;
+        bottom: $space-3;
+        left: $space-3;
 
         .price {
-          font-size: 10px;
+          font-size: 14px;
         }
 
         .period {
-          font-size: 8px;
+          font-size: 10px;
         }
       }
 
       .quick-actions {
         opacity: 1;
         transform: translateY(0);
+        flex-direction: row; // Horizontal on mobile
+        bottom: $space-3;
+        right: $space-3;
 
         .action-btn {
-          width: 32px;
-          height: 32px;
+          width: 36px;
+          height: 36px;
           
           svg {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
           }
         }
       }
     }
 
     .card-content {
-      padding: $space-2;
+      padding: $space-3;
 
       .card-title {
-        font-size: $text-xs;
+        font-size: 15px;
+        margin-bottom: $space-2;
+        height: auto;
+        -webkit-line-clamp: 2; // Allow 2 lines on mobile
       }
 
       .card-location {
-        font-size: 10px;
-        margin-bottom: $space-1;
+        font-size: 13px;
+        margin-bottom: $space-3;
 
         svg {
-          width: 10px;
-          height: 10px;
+          width: 14px;
+          height: 14px;
         }
       }
 
       .card-features {
+        display: flex;
+        flex-wrap: wrap; // Allow wrapping
         gap: $space-2;
-        padding: $space-2;
+        padding: $space-3;
 
         .feature {
-          padding: $space-1 $space-2;
-          font-size: 10px;
+          flex: 1;
+          min-width: 80px; // Minimum width for features
+          padding: $space-2 $space-3;
+          font-size: 13px;
+          justify-content: center;
 
           svg {
-            width: 10px;
-            height: 10px;
+            width: 14px;
+            height: 14px;
           }
         }
       }
 
       .owner-actions {
-        margin-top: $space-1;
-        padding-top: $space-1;
+        margin-top: $space-3;
+        padding-top: $space-3;
+        gap: $space-2;
 
         .owner-btn {
-          padding: 6px $space-1;
-          font-size: 9px;
-          min-height: 32px;
+          padding: $space-3;
+          font-size: 13px;
+          min-height: 44px; // Touch-friendly
 
           svg {
-            width: 10px;
-            height: 10px;
+            width: 14px;
+            height: 14px;
           }
         }
       }
