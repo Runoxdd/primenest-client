@@ -10,6 +10,10 @@
   flex-direction: column;
   min-height: calc(100vh - 80px);
   background: var(--bg-primary);
+
+  @include mobile {
+    min-height: auto;
+  }
 }
 
 // ============================================
@@ -29,8 +33,9 @@
   }
 
   @include mobile {
-    height: 35vh;
-    min-height: 250px;
+    height: 30vh;
+    min-height: 200px;
+    max-height: 250px;
   }
 }
 
@@ -59,7 +64,9 @@
   }
 
   @include mobile {
-    padding: $space-4;
+    display: flex;
+    flex-direction: column;
+    padding: $space-3;
     gap: $space-4;
   }
 }
@@ -72,6 +79,10 @@
   display: flex;
   flex-direction: column;
   gap: $space-8;
+
+  @include mobile {
+    gap: $space-4;
+  }
 }
 
 // Property Header
@@ -79,12 +90,22 @@
   display: flex;
   flex-direction: column;
   gap: $space-5;
+
+  @include mobile {
+    gap: $space-3;
+  }
 }
 
 .header-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @include mobile {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: $space-3;
+  }
 }
 
 .back-button {
@@ -101,6 +122,11 @@
   cursor: pointer;
   transition: all 0.2s ease;
 
+  @include mobile {
+    padding: $space-3 $space-4;
+    min-height: 44px;
+  }
+
   &:hover {
     background: var(--surface-tertiary);
     color: var(--text-primary);
@@ -110,6 +136,11 @@
 .action-buttons {
   display: flex;
   gap: $space-2;
+
+  @include mobile {
+    width: 100%;
+    justify-content: flex-end;
+  }
 
   .action-btn {
     display: flex;
@@ -123,6 +154,11 @@
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.2s ease;
+
+    @include mobile {
+      width: 44px;
+      height: 44px;
+    }
 
     &:hover {
       background: var(--surface-tertiary);
@@ -149,6 +185,11 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: $space-3;
+
+    @include mobile {
+      font-size: 10px;
+      padding: 2px $space-2;
+    }
   }
 
   h1 {
@@ -161,6 +202,11 @@
     @include sm {
       font-size: $font-size-2xl;
     }
+
+    @include mobile {
+      font-size: $font-size-xl;
+      margin-bottom: $space-2;
+    }
   }
 
   .location {
@@ -169,6 +215,10 @@
     gap: $space-2;
     color: var(--text-tertiary);
     font-size: $font-size-base;
+
+    @include mobile {
+      font-size: $font-size-sm;
+    }
 
     svg {
       color: var(--accent-primary);
@@ -189,11 +239,19 @@
     @include sm {
       font-size: $font-size-3xl;
     }
+
+    @include mobile {
+      font-size: $font-size-2xl;
+    }
   }
 
   .price-period {
     font-size: $font-size-lg;
     color: var(--text-tertiary);
+
+    @include mobile {
+      font-size: $font-size-base;
+    }
   }
 }
 
@@ -211,6 +269,13 @@
     grid-template-columns: 1fr;
     gap: $space-3;
   }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $space-2;
+    padding: $space-3;
+    border-radius: $radius-lg;
+  }
 }
 
 .stat {
@@ -218,6 +283,10 @@
   align-items: center;
   gap: $space-3;
   padding: $space-3;
+
+  @include mobile {
+    padding: $space-2;
+  }
 
   svg {
     color: var(--accent-primary);
@@ -233,11 +302,19 @@
   font-size: $font-size-xl;
   font-weight: $font-weight-bold;
   color: var(--text-primary);
+
+  @include mobile {
+    font-size: $font-size-lg;
+  }
 }
 
 .stat-label {
   font-size: $font-size-sm;
   color: var(--text-tertiary);
+
+  @include mobile {
+    font-size: $font-size-xs;
+  }
 }
 
 // Description
@@ -247,6 +324,11 @@
     font-weight: $font-weight-semibold;
     color: var(--text-primary);
     margin-bottom: $space-4;
+
+    @include mobile {
+      font-size: $font-size-lg;
+      margin-bottom: $space-3;
+    }
   }
 }
 
@@ -255,8 +337,17 @@
   color: var(--text-secondary);
   line-height: 1.7;
 
+  @include mobile {
+    font-size: $font-size-sm;
+    line-height: 1.6;
+  }
+
   p {
     margin-bottom: $space-4;
+
+    @include mobile {
+      margin-bottom: $space-3;
+    }
   }
 }
 
@@ -272,6 +363,11 @@
   @include md {
     order: -1;
   }
+
+  @include mobile {
+    order: -1;
+    gap: $space-4;
+  }
 }
 
 // Agent Card
@@ -281,6 +377,11 @@
   border-radius: $radius-2xl;
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-md);
+
+  @include mobile {
+    padding: $space-4;
+    border-radius: $radius-lg;
+  }
 }
 
 .agent-header {
@@ -288,6 +389,11 @@
   align-items: center;
   gap: $space-4;
   margin-bottom: $space-5;
+
+  @include mobile {
+    gap: $space-3;
+    margin-bottom: $space-4;
+  }
 }
 
 .agent-avatar {
@@ -296,6 +402,11 @@
   border-radius: $radius-xl;
   overflow: hidden;
   border: 2px solid var(--accent-primary);
+
+  @include mobile {
+    width: 48px;
+    height: 48px;
+  }
 
   img {
     width: 100%;
@@ -310,6 +421,10 @@
     font-weight: $font-weight-semibold;
     color: var(--text-primary);
     margin-bottom: $space-1;
+
+    @include mobile {
+      font-size: $font-size-base;
+    }
   }
 }
 
@@ -319,6 +434,10 @@
   gap: $space-1;
   font-size: $font-size-xs;
   color: var(--status-success);
+
+  @include mobile {
+    font-size: 10px;
+  }
 }
 
 .contact-button {
@@ -337,6 +456,10 @@
   cursor: pointer;
   transition: all 0.2s ease;
 
+  @include mobile {
+    min-height: 48px;
+  }
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-glow);
@@ -350,6 +473,11 @@
   border-radius: $radius-xl;
   border: 1px solid var(--border-light);
 
+  @include mobile {
+    padding: $space-4;
+    border-radius: $radius-lg;
+  }
+
   h3 {
     font-size: $font-size-lg;
     font-weight: $font-weight-semibold;
@@ -357,6 +485,12 @@
     margin-bottom: $space-4;
     padding-bottom: $space-3;
     border-bottom: 1px solid var(--border-light);
+
+    @include mobile {
+      font-size: $font-size-base;
+      margin-bottom: $space-3;
+      padding-bottom: $space-2;
+    }
   }
 }
 
@@ -365,6 +499,11 @@
   flex-direction: column;
   gap: $space-2;
   padding: $space-3 0;
+
+  @include mobile {
+    padding: $space-2 0;
+    gap: $space-1;
+  }
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--border-light);
@@ -378,6 +517,10 @@
     font-weight: $font-weight-medium;
     color: var(--text-secondary);
 
+    @include mobile {
+      font-size: $font-size-xs;
+    }
+
     svg {
       color: var(--accent-primary);
     }
@@ -387,6 +530,11 @@
     font-size: $font-size-base;
     color: var(--text-primary);
     padding-left: $space-5;
+
+    @include mobile {
+      font-size: $font-size-sm;
+      padding-left: $space-4;
+    }
   }
 }
 
@@ -397,11 +545,21 @@
   border-radius: $radius-xl;
   border: 1px solid var(--border-light);
 
+  @include mobile {
+    padding: $space-4;
+    border-radius: $radius-lg;
+  }
+
   h3 {
     font-size: $font-size-lg;
     font-weight: $font-weight-semibold;
     color: var(--text-primary);
     margin-bottom: $space-4;
+
+    @include mobile {
+      font-size: $font-size-base;
+      margin-bottom: $space-3;
+    }
   }
 }
 
@@ -409,6 +567,10 @@
   display: flex;
   flex-direction: column;
   gap: $space-3;
+
+  @include mobile {
+    gap: $space-2;
+  }
 }
 
 .amenity {
@@ -419,8 +581,18 @@
   background: var(--surface-secondary);
   border-radius: $radius-lg;
 
+  @include mobile {
+    padding: $space-2;
+    gap: $space-2;
+  }
+
   svg {
     color: var(--accent-primary);
+
+    @include mobile {
+      width: 16px;
+      height: 16px;
+    }
   }
 }
 
@@ -433,12 +605,20 @@
 .amenity-label {
   font-size: $font-size-sm;
   color: var(--text-secondary);
+
+  @include mobile {
+    font-size: $font-size-xs;
+  }
 }
 
 .amenity-distance {
   font-size: $font-size-sm;
   font-weight: $font-weight-semibold;
   color: var(--text-primary);
+
+  @include mobile {
+    font-size: $font-size-xs;
+  }
 }
 
 // Map Card
@@ -448,11 +628,21 @@
   border-radius: $radius-xl;
   border: 1px solid var(--border-light);
 
+  @include mobile {
+    padding: $space-4;
+    border-radius: $radius-lg;
+  }
+
   h3 {
     font-size: $font-size-lg;
     font-weight: $font-weight-semibold;
     color: var(--text-primary);
     margin-bottom: $space-4;
+
+    @include mobile {
+      font-size: $font-size-base;
+      margin-bottom: $space-3;
+    }
   }
 }
 
@@ -460,6 +650,10 @@
   height: 200px;
   border-radius: $radius-lg;
   overflow: hidden;
+
+  @include mobile {
+    height: 150px;
+  }
 }
 
 // Mobile Save Button
@@ -481,6 +675,17 @@
 
   @include md {
     display: flex;
+  }
+
+  @include mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-radius: 0;
+    padding: $space-4 $space-4 calc($space-4 + env(safe-area-inset-bottom));
+    min-height: 56px;
   }
 
   &.saved {

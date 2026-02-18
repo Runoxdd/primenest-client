@@ -13,8 +13,8 @@
   overflow: hidden;
   box-shadow: var(--card-shadow);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
-  height: 100%; // Full height of grid cell
-  width: 100%; // Full width of grid cell
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -55,9 +55,9 @@
   .card-image {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 3; // Slightly taller for compact look
+    aspect-ratio: 4 / 3;
     overflow: hidden;
-    flex-shrink: 0; // Don't shrink image
+    flex-shrink: 0;
 
     img {
       width: 100%;
@@ -350,9 +350,20 @@
     .card-image {
       aspect-ratio: 4 / 3;
 
+      .type-badge {
+        font-size: 8px;
+        padding: 2px $space-1;
+      }
+
       .price-badge {
+        padding: 3px $space-1;
+
         .price {
-          font-size: 11px;
+          font-size: 10px;
+        }
+
+        .period {
+          font-size: 8px;
         }
       }
 
@@ -361,22 +372,32 @@
         transform: translateY(0);
 
         .action-btn {
-          width: 36px;
-          height: 36px;
+          width: 32px;
+          height: 32px;
           
           svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
           }
         }
       }
     }
 
     .card-content {
-      padding: $space-3;
+      padding: $space-2;
 
       .card-title {
-        font-size: $text-sm;
+        font-size: $text-xs;
+      }
+
+      .card-location {
+        font-size: 10px;
+        margin-bottom: $space-1;
+
+        svg {
+          width: 10px;
+          height: 10px;
+        }
       }
 
       .card-features {
@@ -385,11 +406,27 @@
 
         .feature {
           padding: $space-1 $space-2;
-          font-size: $text-xs;
+          font-size: 10px;
 
           svg {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+
+      .owner-actions {
+        margin-top: $space-1;
+        padding-top: $space-1;
+
+        .owner-btn {
+          padding: 6px $space-1;
+          font-size: 9px;
+          min-height: 32px;
+
+          svg {
+            width: 10px;
+            height: 10px;
           }
         }
       }
@@ -409,13 +446,13 @@
   max-width: 100%;
 
   @include tablet {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: $space-3;
   }
 
   @include mobile {
-    grid-template-columns: repeat(2, 1fr);
-    gap: $space-2;
+    grid-template-columns: 1fr;
+    gap: $space-3;
   }
 }
 

@@ -20,6 +20,8 @@
   }
 
   @include mobile {
+    display: flex;
+    flex-direction: column;
     min-height: calc(100vh - 56px);
   }
 }
@@ -35,13 +37,19 @@
   padding: $space-8;
 
   @include mobile {
-    padding: $space-6;
+    padding: $space-6 $space-4;
+    align-items: flex-start;
+    padding-top: $space-8;
   }
 }
 
 .auth-form-container {
   width: 100%;
   max-width: 400px;
+
+  @include mobile {
+    max-width: 100%;
+  }
 }
 
 // ============================================
@@ -54,6 +62,11 @@
   gap: $space-3;
   text-decoration: none;
   margin-bottom: $space-8;
+
+  @include mobile {
+    margin-bottom: $space-6;
+    justify-content: center;
+  }
 
   .logo-icon {
     display: flex;
@@ -90,17 +103,30 @@
 .auth-header {
   margin-bottom: $space-8;
 
+  @include mobile {
+    margin-bottom: $space-6;
+    text-align: center;
+  }
+
   h1 {
     font-size: $text-3xl;
     font-weight: $font-weight-bold;
     color: var(--text-primary);
     margin-bottom: $space-2;
+
+    @include mobile {
+      font-size: $text-2xl;
+    }
   }
 
   p {
     font-size: $text-base;
     color: var(--text-secondary);
     line-height: $leading-relaxed;
+
+    @include mobile {
+      font-size: $text-sm;
+    }
   }
 }
 
@@ -112,6 +138,10 @@
   display: flex;
   flex-direction: column;
   gap: $space-5;
+
+  @include mobile {
+    gap: $space-4;
+  }
 }
 
 // Error Message
@@ -161,6 +191,11 @@
       color: var(--text-primary);
       transition: all 0.15s ease;
 
+      @include mobile {
+        padding: $space-4 $space-4 $space-4 $space-12;
+        min-height: 48px;
+      }
+
       &:focus {
         outline: none;
         border-color: var(--input-focus);
@@ -179,6 +214,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-3;
+  }
 
   .checkbox-label {
     display: flex;
@@ -225,6 +266,10 @@
   transition: all 0.2s ease;
   box-shadow: var(--shadow-md);
 
+  @include mobile {
+    min-height: 48px;
+  }
+
   &:hover:not(:disabled) {
     box-shadow: var(--shadow-glow);
   }
@@ -239,6 +284,10 @@
 .auth-switch {
   margin-top: $space-8;
   text-align: center;
+
+  @include mobile {
+    margin-top: $space-6;
+  }
 
   p {
     font-size: $text-sm;

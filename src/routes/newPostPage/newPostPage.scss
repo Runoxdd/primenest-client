@@ -20,6 +20,8 @@
   }
 
   @include mobile {
+    display: flex;
+    flex-direction: column;
     min-height: auto;
   }
 }
@@ -39,6 +41,7 @@
 
   @include mobile {
     padding: $space-4;
+    order: 2;
   }
 }
 
@@ -50,6 +53,10 @@
 .form-header {
   margin-bottom: $space-8;
 
+  @include mobile {
+    margin-bottom: $space-5;
+  }
+
   h1 {
     font-size: $font-size-3xl;
     font-weight: $font-weight-bold;
@@ -60,11 +67,19 @@
     @include sm {
       font-size: $font-size-2xl;
     }
+
+    @include mobile {
+      font-size: $font-size-xl;
+    }
   }
 
   p {
     font-size: $font-size-base;
     color: var(--text-tertiary);
+
+    @include mobile {
+      font-size: $font-size-sm;
+    }
   }
 }
 
@@ -72,6 +87,10 @@
   display: flex;
   flex-direction: column;
   gap: $space-8;
+
+  @include mobile {
+    gap: $space-5;
+  }
 }
 
 // Error Message
@@ -100,6 +119,11 @@
   @include sm {
     padding: $space-5;
   }
+
+  @include mobile {
+    padding: $space-4;
+    gap: $space-4;
+  }
 }
 
 .section-title {
@@ -111,6 +135,11 @@
   color: var(--text-primary);
   padding-bottom: $space-4;
   border-bottom: 1px solid var(--border-light);
+
+  @include mobile {
+    font-size: $font-size-base;
+    padding-bottom: $space-3;
+  }
 
   svg {
     color: var(--accent-primary);
@@ -139,8 +168,18 @@
     }
   }
 
-  @include sm {
+  @include tablet {
     grid-template-columns: 1fr;
+
+    &.two-col,
+    &.three-col {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $space-4;
 
     &.two-col,
     &.three-col {
@@ -188,9 +227,18 @@
     color: var(--text-primary);
     transition: all 0.2s ease;
 
+    @include mobile {
+      padding: $space-4;
+      min-height: 48px;
+    }
+
     &:has(+ .input-icon),
     &:has(.input-icon) {
       padding-left: $space-12;
+
+      @include mobile {
+        padding-left: $space-12;
+      }
     }
 
     &::placeholder {
@@ -231,6 +279,12 @@
     appearance: none;
     transition: all 0.2s ease;
 
+    @include mobile {
+      padding: $space-4;
+      padding-right: $space-12;
+      min-height: 48px;
+    }
+
     &:focus {
       outline: none;
       border-color: var(--accent-primary);
@@ -263,10 +317,18 @@
   font-size: $font-size-base !important;
   min-height: 150px;
 
+  @include mobile {
+    min-height: 120px;
+  }
+
   &.ql-snow {
     .ql-editor {
       min-height: 150px;
       color: var(--text-primary);
+
+      @include mobile {
+        min-height: 120px;
+      }
 
       &.ql-blank::before {
         color: var(--text-muted);
@@ -280,6 +342,15 @@
   border: 1px solid var(--border-light) !important;
   border-radius: $radius-lg $radius-lg 0 0 !important;
   background: var(--surface-tertiary);
+
+  @include mobile {
+    // Simplify toolbar on mobile
+    .ql-formats {
+      &:not(:first-child) {
+        display: none;
+      }
+    }
+  }
 }
 
 .ql-snow .ql-stroke {
@@ -310,6 +381,12 @@
   font-weight: $font-weight-semibold;
   cursor: pointer;
   transition: all 0.2s ease;
+
+  @include mobile {
+    min-height: 48px;
+    position: sticky;
+    bottom: 0;
+  }
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
@@ -354,7 +431,13 @@
   }
 
   @include mobile {
+    position: relative;
+    top: 0;
+    height: auto;
     padding: $space-4;
+    border-left: none;
+    border-bottom: 1px solid var(--border-light);
+    order: 1;
   }
 }
 
@@ -362,6 +445,10 @@
   display: flex;
   flex-direction: column;
   gap: $space-5;
+
+  @include mobile {
+    gap: $space-4;
+  }
 }
 
 .upload-header {
@@ -370,11 +457,19 @@
     font-weight: $font-weight-semibold;
     color: var(--text-primary);
     margin-bottom: $space-1;
+
+    @include mobile {
+      font-size: $font-size-lg;
+    }
   }
 
   p {
     font-size: $font-size-sm;
     color: var(--text-tertiary);
+
+    @include mobile {
+      font-size: $font-size-xs;
+    }
   }
 }
 
@@ -382,6 +477,11 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: $space-3;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-2;
+  }
 }
 
 .image-preview {
@@ -414,6 +514,11 @@
     cursor: pointer;
     transition: background 0.2s ease;
 
+    @include mobile {
+      width: 28px;
+      height: 28px;
+    }
+
     &:hover {
       background: var(--status-error);
     }
@@ -433,6 +538,11 @@
   font-size: $font-size-sm;
   cursor: pointer;
   transition: all 0.2s ease;
+
+  @include mobile {
+    padding: $space-5;
+    min-height: 80px;
+  }
 
   &:hover {
     border-color: var(--accent-primary);

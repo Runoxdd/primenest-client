@@ -15,8 +15,14 @@
     grid-template-columns: 280px 1fr;
   }
 
-  @include mobile {
+  @include tablet {
     grid-template-columns: 1fr;
+  }
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
   }
 }
 
@@ -32,6 +38,14 @@
   top: 80px;
   height: calc(100vh - 80px);
   overflow-y: auto;
+
+  @include tablet {
+    position: relative;
+    top: 0;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+  }
 
   @include mobile {
     position: relative;
@@ -57,8 +71,12 @@
   flex-direction: column;
   gap: $space-8;
   
-  @include mobile {
+  @include tablet {
     gap: $space-5;
+  }
+  
+  @include mobile {
+    gap: $space-4;
   }
 }
 
@@ -73,8 +91,13 @@
   border-radius: $radius-2xl;
   border: 1px solid var(--border-light);
   
+  @include tablet {
+    padding: $space-5;
+  }
+  
   @include mobile {
     padding: $space-4;
+    border-radius: $radius-lg;
   }
 }
 
@@ -171,7 +194,8 @@
     
     @include mobile {
       padding: $space-3;
-      min-height: 44px; // Touch target
+      min-height: 44px;
+      font-size: $font-size-xs;
     }
 
     &.edit {
@@ -220,6 +244,13 @@
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: left;
+  text-decoration: none;
+
+  @include mobile {
+    padding: $space-3;
+    min-height: 48px;
+    font-size: $font-size-sm;
+  }
 
   .chevron {
     margin-left: auto;
@@ -264,6 +295,12 @@
   transition: all 0.2s ease;
   text-decoration: none;
 
+  @include mobile {
+    padding: $space-3;
+    min-height: 48px;
+    font-size: $font-size-sm;
+  }
+
   &.primary {
     background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     color: white;
@@ -284,8 +321,12 @@
   padding: $space-8;
   overflow-y: auto;
 
-  @include md {
+  @include tablet {
     padding: $space-5;
+  }
+
+  @include mobile {
+    padding: $space-4;
   }
 }
 
@@ -305,6 +346,11 @@
     flex-direction: column;
     align-items: stretch;
   }
+
+  @include mobile {
+    margin-bottom: $space-5;
+    gap: $space-2;
+  }
 }
 
 .header-content {
@@ -318,11 +364,19 @@
     @include sm {
       font-size: $font-size-2xl;
     }
+
+    @include mobile {
+      font-size: $font-size-xl;
+    }
   }
 
   p {
     font-size: $font-size-base;
     color: var(--text-tertiary);
+
+    @include mobile {
+      font-size: $font-size-sm;
+    }
   }
 }
 
@@ -339,6 +393,11 @@
   text-decoration: none;
   transition: all 0.2s ease;
 
+  @include mobile {
+    padding: $space-3 $space-4;
+    min-height: 44px;
+  }
+
   &:hover {
     background: var(--accent-secondary);
     transform: translateY(-1px);
@@ -353,8 +412,18 @@
   padding: $space-6;
   min-height: 500px;
 
+  @include mobile {
+    padding: $space-4;
+    border-radius: $radius-lg;
+    min-height: auto;
+  }
+
   .section-header {
     margin-bottom: $space-6;
+
+    @include mobile {
+      margin-bottom: $space-4;
+    }
   }
 }
 
@@ -368,9 +437,19 @@
   text-align: center;
   color: var(--text-tertiary);
 
+  @include mobile {
+    padding: $space-8;
+  }
+
   svg {
     margin-bottom: $space-6;
     opacity: 0.5;
+
+    @include mobile {
+      margin-bottom: $space-4;
+      width: 32px;
+      height: 32px;
+    }
   }
 
   h3 {
@@ -378,12 +457,21 @@
     font-weight: $font-weight-semibold;
     color: var(--text-primary);
     margin-bottom: $space-2;
+
+    @include mobile {
+      font-size: $font-size-lg;
+    }
   }
 
   p {
     font-size: $text-base;
     max-width: 400px;
     margin-bottom: $space-6;
+
+    @include mobile {
+      font-size: $font-size-sm;
+      margin-bottom: $space-4;
+    }
   }
 
   .redirect-btn {
@@ -398,6 +486,11 @@
     font-weight: $font-weight-semibold;
     text-decoration: none;
     transition: all 0.2s ease;
+
+    @include mobile {
+      padding: $space-3 $space-4;
+      min-height: 44px;
+    }
 
     &:hover {
       transform: translateY(-2px);
@@ -419,10 +512,19 @@
   color: var(--text-tertiary);
   text-align: center;
 
+  @include mobile {
+    padding: $space-8;
+  }
+
   .animate-spin {
     animation: spin 1s linear infinite;
     color: var(--accent-primary);
     margin-bottom: $space-4;
+
+    @include mobile {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   p {
@@ -443,6 +545,10 @@
   padding: $space-16;
   text-align: center;
 
+  @include mobile {
+    padding: $space-8;
+  }
+
   .empty-icon {
     width: 96px;
     height: 96px;
@@ -453,6 +559,17 @@
     border-radius: $radius-2xl;
     margin-bottom: $space-6;
     color: var(--text-tertiary);
+
+    @include mobile {
+      width: 72px;
+      height: 72px;
+      margin-bottom: $space-4;
+
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+    }
   }
 
   h3 {
@@ -460,6 +577,10 @@
     font-weight: $font-weight-semibold;
     color: var(--text-primary);
     margin-bottom: $space-2;
+
+    @include mobile {
+      font-size: $font-size-lg;
+    }
   }
 
   p {
@@ -467,6 +588,11 @@
     color: var(--text-tertiary);
     max-width: 320px;
     margin-bottom: $space-6;
+
+    @include mobile {
+      font-size: $font-size-sm;
+      margin-bottom: $space-4;
+    }
   }
 
   .empty-action {
@@ -481,6 +607,11 @@
     font-weight: $font-weight-semibold;
     text-decoration: none;
     transition: all 0.2s ease;
+
+    @include mobile {
+      padding: $space-3 $space-4;
+      min-height: 44px;
+    }
 
     &:hover {
       background: var(--accent-secondary);
@@ -498,45 +629,7 @@
   text-align: center;
   color: var(--status-error);
 
-  h3 {
-    font-size: $font-size-xl;
-    font-weight: $font-weight-semibold;
-    color: var(--text-primary);
-    margin-top: $space-4;
-    margin-bottom: $space-2;
-  }
-
-  p {
-    font-size: $font-size-base;
-    color: var(--text-tertiary);
-  }
-}
-
-// ============================================
-// Mobile Chat FAB
-// ============================================
-
-.mobile-chat-fab {
-  display: none;
-  position: fixed;
-  bottom: $space-6;
-  right: $space-6;
-  align-items: center;
-  gap: $space-2;
-  padding: $space-4 $space-5;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  color: white;
-  border-radius: $radius-full;
-  box-shadow: var(--shadow-glow);
-  cursor: pointer;
-  z-index: 100;
-
-  @include md {
-    display: flex;
-  }
-
-  .fab-label {
-    font-size: $font-size-sm;
-    font-weight: $font-weight-semibold;
+  @include mobile {
+    padding: $space-8;
   }
 }
