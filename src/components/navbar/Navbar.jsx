@@ -209,15 +209,16 @@ function Navbar() {
           )}
 
           {/* Mobile Menu Toggle */}
-          <motion.button
-            className="menu-toggle"
-            onClick={() => setOpen(!open)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Toggle menu"
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </motion.button>
+        <motion.button
+  className="menu-toggle"
+  onClick={() => setOpen(!open)}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.9 }} // Slightly more dramatic tap for feedback
+  aria-label="Toggle menu"
+>
+  {/* Increased size to 28 for better visibility */}
+  {open ? <X size={28} /> : <Menu size={28} />}
+</motion.button>
         </div>
 
         {/* Mobile Menu Overlay */}

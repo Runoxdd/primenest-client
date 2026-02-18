@@ -376,27 +376,33 @@
     // MOBILE MENU TOGGLE
     // ============================================
 
-    .menu-toggle {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background: transparent;
-      border: none;
-      color: var(--text-primary);
-      cursor: pointer;
-      border-radius: $radius-lg;
-      transition: all 0.15s ease;
+   .menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  
+  // Increased from 40px to 48px for a better thumb-target
+  width: 48px; 
+  height: 48px; 
+  
+  background: var(--surface-light); // Give it a slight background so it looks like a button
+  border: 1px solid var(--border-color); // Optional: adds definition
+  color: var(--text-primary);
+  cursor: pointer;
+  border-radius: $radius-lg; 
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
-      &:hover {
-        background: var(--surface-hover);
-      }
+  &:hover {
+    background: var(--surface-hover);
+    color: var(--accent-color); // Make it change color on hover
+  }
 
-      @include mobile {
-        display: flex;
-      }
-    }
+  @include mobile {
+    display: flex;
+    // Position it slightly away from the screen edge
+    margin-right: 8px; 
+  }
+}
   }
 
   // ============================================

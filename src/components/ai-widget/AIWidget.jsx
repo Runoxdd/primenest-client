@@ -231,32 +231,17 @@ function AIWidget() {
                   </span>
                 </div>
               </div>
-              <div className="header-actions">
-                <motion.button
-                  onClick={handleNewChat}
-                  title="New Chat"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Plus size={16} />
-                </motion.button>
-                <motion.button
-                  onClick={minimizeWidget}
-                  title="Minimize"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Minus size={16} />
-                </motion.button>
-                <motion.button
-                  onClick={closeWidget}
-                  title="Close"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <X size={16} />
-                </motion.button>
-              </div>
+             <div className="header-actions">
+  <motion.button onClick={handleNewChat} title="New Chat" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+    <Plus size={20} /> {/* Increased from 16 */}
+  </motion.button>
+  <motion.button onClick={minimizeWidget} title="Minimize" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+    <Minus size={20} /> {/* Increased from 16 */}
+  </motion.button>
+  <motion.button onClick={closeWidget} title="Close" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}> 
+    <X size={20} /> {/* Increased from 16 */}
+  </motion.button>
+</div>
             </div>
 
             {/* Messages Container - Independently Scrollable */}
