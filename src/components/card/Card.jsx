@@ -98,7 +98,7 @@ function Card({ item, index = 0 }) {
               whileTap={{ scale: 0.9 }}
               aria-label="Save property"
             >
-              <Heart size={16} />
+              <Heart size={20} />
             </motion.button>
             <motion.button 
               className="action-btn chat"
@@ -107,7 +107,7 @@ function Card({ item, index = 0 }) {
               whileTap={{ scale: 0.9 }}
               aria-label="Message about property"
             >
-              <MessageCircle size={16} />
+              <MessageCircle size={20} />
             </motion.button>
           </div>
 

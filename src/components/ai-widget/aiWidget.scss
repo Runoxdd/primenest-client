@@ -201,62 +201,66 @@
   .header-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 
     button {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       border: none;
+      position: relative;
       
       @include mobile {
-        width: 44px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
       }
 
-      // Ensure SVG icons inherit color and are visible
+      // Ensure SVG icons inherit color and are visible - BIGGER ICONS
       svg {
-        width: 20px;
-        height: 20px;
-        stroke: currentColor;
-        stroke-width: 2.5;
-        fill: none;
+        width: 28px !important;
+        height: 28px !important;
+        min-width: 28px;
+        min-height: 28px;
+        stroke: currentColor !important;
+        stroke-width: 2.5 !important;
+        fill: none !important;
+        display: block !important;
       }
 
       // New Chat - Green with white plus icon
       &:nth-child(1) {
-        background: #10B981;
-        color: white;
+        background: #10B981 !important;
+        color: white !important;
         
         &:hover {
-          background: #059669;
+          background: #059669 !important;
           transform: scale(1.1);
         }
       }
 
       // Minimize - Amber with white minus icon
       &:nth-child(2) {
-        background: #F59E0B;
-        color: white;
+        background: #F59E0B !important;
+        color: white !important;
         
         &:hover {
-          background: #D97706;
+          background: #D97706 !important;
           transform: scale(1.1);
         }
       }
 
       // Close - Red with white X icon
       &:nth-child(3) {
-        background: #EF4444;
-        color: white;
+        background: #EF4444 !important;
+        color: white !important;
         
         &:hover {
-          background: #DC2626;
+          background: #DC2626 !important;
           transform: scale(1.1);
         }
       }

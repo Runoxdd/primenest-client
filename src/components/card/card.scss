@@ -130,16 +130,16 @@
       }
     }
 
-    // Quick Actions - Smaller
+    // Quick Actions - Always visible, bigger buttons
     .quick-actions {
       position: absolute;
-      bottom: $space-2;
-      right: $space-2;
+      bottom: $space-3;
+      right: $space-3;
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      opacity: 0;
-      transform: translateY(6px);
+      gap: 8px;
+      opacity: 1;
+      transform: translateY(0);
       transition: all 0.3s ease;
       z-index: 2;
 
@@ -147,36 +147,41 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 28px;
-        height: 28px;
-        background: var(--surface-glass);
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
-        border: 1px solid var(--border-glass);
-        border-radius: $radius-md;
-        color: var(--text-primary);
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-radius: $radius-lg;
+        color: #333;
         cursor: pointer;
         transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
         svg {
-          width: 14px;
-          height: 14px;
+          width: 20px;
+          height: 20px;
+          stroke: currentColor;
+          stroke-width: 2;
+          fill: none;
         }
 
         &:hover {
-          background: var(--accent-primary);
-          border-color: var(--accent-primary);
-          color: white;
+          transform: scale(1.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         &.save:hover {
-          background: var(--status-error);
-          border-color: var(--status-error);
+          background: #EF4444;
+          border-color: #EF4444;
+          color: white;
         }
 
         &.chat:hover {
-          background: var(--status-info);
-          border-color: var(--status-info);
+          background: #3B82F6;
+          border-color: #3B82F6;
+          color: white;
         }
       }
     }
@@ -398,16 +403,17 @@
         opacity: 1;
         transform: translateY(0);
         flex-direction: row;
-        bottom: $space-2;
-        right: $space-2;
+        bottom: $space-3;
+        right: $space-3;
+        gap: 8px;
 
         .action-btn {
-          width: 36px;
-          height: 36px;
+          width: 44px;
+          height: 44px;
           
           svg {
-            width: 16px;
-            height: 16px;
+            width: 22px;
+            height: 22px;
           }
         }
       }
