@@ -10,9 +10,13 @@
   flex-direction: column;
   min-height: calc(100vh - 80px);
   background: var(--bg-primary);
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 
   @include mobile {
     min-height: auto;
+    overflow-x: hidden;
   }
 }
 
@@ -51,6 +55,7 @@
   margin: 0 auto;
   padding: $space-8;
   width: 100%;
+  box-sizing: border-box;
 
   @include lg {
     grid-template-columns: 1fr 360px;
@@ -68,6 +73,9 @@
     flex-direction: column;
     padding: $space-3;
     gap: $space-4;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 }
 
@@ -79,9 +87,12 @@
   display: flex;
   flex-direction: column;
   gap: $space-8;
+  width: 100%;
+  box-sizing: border-box;
 
   @include mobile {
     gap: $space-4;
+    width: 100%;
   }
 }
 
@@ -359,6 +370,8 @@
   display: flex;
   flex-direction: column;
   gap: $space-5;
+  width: 100%;
+  box-sizing: border-box;
 
   @include md {
     order: -1;
@@ -367,6 +380,8 @@
   @include mobile {
     order: -1;
     gap: $space-4;
+    width: 100%;
+    padding-bottom: 80px; // Account for fixed save button
   }
 }
 

@@ -219,6 +219,15 @@
         height: 44px;
       }
 
+      // Ensure SVG icons inherit color and are visible
+      svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        fill: none;
+      }
+
       // New Chat - Green with white plus icon
       &:nth-child(1) {
         background: #10B981;

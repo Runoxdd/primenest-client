@@ -346,24 +346,33 @@
 @include mobile {
   .card {
     border-radius: $radius-lg;
-    max-width: 100%;
+    width: 100%;
+    max-width: calc(100vw - 24px);
+    min-width: 0;
     margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    .card-link {
+      width: 100%;
+    }
 
     .card-image {
-      aspect-ratio: 16 / 9; // Wider aspect ratio for mobile
+      aspect-ratio: 16 / 9;
+      width: 100%;
 
       .type-badge {
         font-size: 10px;
         padding: 4px 8px;
-        top: $space-3;
-        left: $space-3;
+        top: $space-2;
+        left: $space-2;
       }
 
       .property-icon {
         width: 28px;
         height: 28px;
-        top: $space-3;
-        right: $space-3;
+        top: $space-2;
+        right: $space-2;
         
         svg {
           width: 14px;
@@ -373,8 +382,8 @@
 
       .price-badge {
         padding: 6px 10px;
-        bottom: $space-3;
-        left: $space-3;
+        bottom: $space-2;
+        left: $space-2;
 
         .price {
           font-size: 14px;
@@ -388,9 +397,9 @@
       .quick-actions {
         opacity: 1;
         transform: translateY(0);
-        flex-direction: row; // Horizontal on mobile
-        bottom: $space-3;
-        right: $space-3;
+        flex-direction: row;
+        bottom: $space-2;
+        right: $space-2;
 
         .action-btn {
           width: 36px;
@@ -406,36 +415,52 @@
 
     .card-content {
       padding: $space-3;
+      width: 100%;
+      box-sizing: border-box;
 
       .card-title {
         font-size: 15px;
         margin-bottom: $space-2;
         height: auto;
-        -webkit-line-clamp: 2; // Allow 2 lines on mobile
+        -webkit-line-clamp: 2;
+        white-space: normal;
+        overflow: hidden;
       }
 
       .card-location {
         font-size: 13px;
         margin-bottom: $space-3;
+        width: 100%;
+        
+        span {
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
 
         svg {
           width: 14px;
           height: 14px;
+          flex-shrink: 0;
         }
       }
 
       .card-features {
         display: flex;
-        flex-wrap: wrap; // Allow wrapping
+        flex-wrap: wrap;
         gap: $space-2;
         padding: $space-3;
+        width: 100%;
+        box-sizing: border-box;
 
         .feature {
-          flex: 1;
-          min-width: 80px; // Minimum width for features
+          flex: 1 1 calc(50% - 8px);
+          min-width: 0;
           padding: $space-2 $space-3;
           font-size: 13px;
           justify-content: center;
+          box-sizing: border-box;
 
           svg {
             width: 14px;
@@ -448,11 +473,14 @@
         margin-top: $space-3;
         padding-top: $space-3;
         gap: $space-2;
+        width: 100%;
+        box-sizing: border-box;
 
         .owner-btn {
           padding: $space-3;
           font-size: 13px;
-          min-height: 44px; // Touch-friendly
+          min-height: 44px;
+          flex: 1;
 
           svg {
             width: 14px;
