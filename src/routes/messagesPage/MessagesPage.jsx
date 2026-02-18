@@ -9,9 +9,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   MessageCircle,
   Send,
-  Phone,
-  Video,
-  MoreVertical,
   CheckCheck,
   Search,
   ArrowLeft,
@@ -238,7 +235,7 @@ function MessagesPage() {
                         onClick={() => setIsMobileListOpen(true)}
                         aria-label="Back to conversations"
                       >
-                        <ArrowLeft size={20} />
+                        <ArrowLeft size={27} />
                       </button>
                       <div className="chat-user">
                         <img
@@ -255,17 +252,6 @@ function MessagesPage() {
                             Online
                           </span>
                         </div>
-                      </div>
-                      <div className="chat-actions">
-                        <button className="action-btn" aria-label="Voice call">
-                          <Phone size={18} />
-                        </button>
-                        <button className="action-btn" aria-label="Video call">
-                          <Video size={18} />
-                        </button>
-                        <button className="action-btn" aria-label="More options">
-                          <MoreVertical size={18} />
-                        </button>
                       </div>
                     </div>
 
