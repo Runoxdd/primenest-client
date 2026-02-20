@@ -12,7 +12,6 @@ import {
   MapPin, 
   Heart, 
   MessageSquare, 
-  Share2,
   Bed, 
   Bath, 
   Maximize,
@@ -109,19 +108,6 @@ function SinglePage() {
                 <ArrowLeft size={18} />
                 <span>Back</span>
               </button>
-              <div className="action-buttons">
-                <button className="action-btn share">
-                  <Share2 size={18} />
-                </button>
-                <motion.button 
-                  className={`action-btn save ${saved ? "saved" : ""}`}
-                  onClick={handleSave}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Heart size={18} fill={saved ? "currentColor" : "none"} />
-                </motion.button>
-              </div>
             </div>
 
             <div className="property-title-section">

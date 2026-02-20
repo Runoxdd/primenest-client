@@ -1,6 +1,6 @@
 import "./card.scss";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import apiRequest from "../../lib/apiRequest";
@@ -30,6 +30,9 @@ const propertyIcons = {
 function Card({ item, index = 0 }) {
   const { currentUser } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
+  const navigate = useNavigate();
+  const [saved, setSaved] = useState(item.isSaved || false);
+  const [isSaving, setIsSaving] = useState(false);
   const isOwner = currentUser && currentUser.id === item.userId;
 
   const PropertyIcon = propertyIcons[item.property] || Building2;
@@ -49,16 +52,52 @@ function Card({ item, index = 0 }) {
     }
   };
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // Add save logic here
+
+    if (!currentUser) {
+      navigate("/login");
+      return;
+    }
+
+    setIsSaving(true);
+    const previousSaved = saved;
+    setSaved(!saved);
+
+    try {
+      await apiRequest.post("/users/save", { postId: item.id });
+    } catch (err) {
+      console.log(err);
+      setSaved(previousSaved); // Revert on error
+      alert("Failed to save property. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
-  const handleChat = (e) => {
+  const handleChat = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // Add chat logic here
+
+    if (!currentUser) {
+      navigate("/login");
+      return;
+    }
+
+    if (currentUser.id === item.userId) {
+      alert("This is your listing! You cannot start a chat with yourself.");
+      return;
+    }
+
+    try {
+      await apiRequest.post("/chats", { receiverId: item.userId });
+      navigate("/messages");
+    } catch (err) {
+      console.log(err);
+      // Chat might already exist, navigate anyway
+      navigate("/messages");
+    }
   };
 
   return (
@@ -89,25 +128,28 @@ function Card({ item, index = 0 }) {
             <PropertyIcon size={14} />
           </div>
 
-          {/* Quick Actions */}
+          {/* Quick Actions - Redesigned with Labels */}
           <div className="quick-actions">
             <motion.button 
-              className="action-btn save"
+              className={`action-btn save ${saved ? 'saved' : ''}`}
               onClick={handleSave}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label="Save property"
+              disabled={isSaving}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={saved ? "Remove from saved" : "Save property"}
             >
-              <Heart size={20} />
+              <Heart size={16} fill={saved ? "currentColor" : "none"} />
+              <span className="btn-label">{saved ? 'Saved' : 'Save'}</span>
             </motion.button>
             <motion.button 
               className="action-btn chat"
               onClick={handleChat}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               aria-label="Message about property"
             >
-              <MessageCircle size={20} />
+              <MessageCircle size={16} />
+              <span className="btn-label">Chat</span>
             </motion.button>
           </div>
 

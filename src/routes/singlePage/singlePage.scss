@@ -37,9 +37,9 @@
   }
 
   @include mobile {
-    height: 30vh;
-    min-height: 200px;
-    max-height: 250px;
+    height: 35vh;
+    min-height: 220px;
+    max-height: 300px;
   }
 }
 
@@ -110,12 +110,10 @@
 .header-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   @include mobile {
-    flex-direction: column-reverse;
     align-items: flex-start;
-    gap: $space-3;
   }
 }
 
@@ -141,46 +139,6 @@
   &:hover {
     background: var(--surface-tertiary);
     color: var(--text-primary);
-  }
-}
-
-.action-buttons {
-  display: flex;
-  gap: $space-2;
-
-  @include mobile {
-    width: 100%;
-    justify-content: flex-end;
-  }
-
-  .action-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: var(--surface-secondary);
-    border: 1px solid var(--border-light);
-    border-radius: $radius-lg;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    @include mobile {
-      width: 44px;
-      height: 44px;
-    }
-
-    &:hover {
-      background: var(--surface-tertiary);
-      color: var(--text-primary);
-    }
-
-    &.save.saved {
-      background: var(--status-error);
-      border-color: var(--status-error);
-      color: white;
-    }
   }
 }
 
