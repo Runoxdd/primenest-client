@@ -209,6 +209,61 @@
   100% { background-position: 0% 50%; }
 }
 
+// ============================================
+// RAINBOW GRADIENT ANIMATIONS - AI Feature
+// ============================================
+
+// Rainbow gradient shift - smooth cycling through colors
+@keyframes rainbowShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// Rainbow glow pulse - glowing effect with rainbow colors
+@keyframes rainbowGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(255, 107, 107, 0.4),
+      0 0 40px rgba(255, 169, 77, 0.2);
+  }
+  25% {
+    box-shadow: 
+      0 0 20px rgba(255, 217, 61, 0.4),
+      0 0 40px rgba(107, 203, 119, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 0 20px rgba(77, 150, 255, 0.4),
+      0 0 40px rgba(155, 89, 182, 0.2);
+  }
+  75% {
+    box-shadow: 
+      0 0 20px rgba(255, 107, 107, 0.4),
+      0 0 40px rgba(255, 169, 77, 0.2);
+  }
+}
+
+// Rainbow border animation
+@keyframes rainbowBorder {
+  0%, 100% { border-color: #FF6B6B; }
+  16% { border-color: #FFA94D; }
+  32% { border-color: #FFD93D; }
+  48% { border-color: #6BCB77; }
+  64% { border-color: #4D96FF; }
+  80% { border-color: #9B59B6; }
+}
+
+// Rainbow text gradient
+@keyframes rainbowText {
+  0%, 100% { 
+    background-position: 0% 50%;
+  }
+  50% { 
+    background-position: 100% 50%;
+  }
+}
+
 // Ripple (for button clicks)
 @keyframes ripple {
   0% {
@@ -221,13 +276,13 @@
   }
 }
 
-// Glow pulse
+// Glow pulse - Updated with PrimeNest Elite peach accent
 @keyframes glowPulse {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 0 8px rgba(249, 177, 122, 0.3);
   }
   50% {
-    box-shadow: 0 0 24px rgba(99, 102, 241, 0.5);
+    box-shadow: 0 0 24px rgba(249, 177, 122, 0.5);
   }
 }
 
@@ -559,8 +614,103 @@
 .modal-content-enter-active {
   opacity: 1;
   transform: scale(1) translateY(0);
-  transition: opacity 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), 
+  transition: opacity 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
               transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+// ============================================
+// RAINBOW GRADIENT UTILITY CLASSES - AI Feature
+// ============================================
+
+// Rainbow gradient background with animation
+.rainbow-gradient-animated {
+  background: var(--rainbow-gradient);
+  background-size: 200% 200%;
+  animation: rainbowShift 3s ease infinite;
+}
+
+// Rainbow gradient with glow effect
+.rainbow-gradient-glow {
+  background: var(--rainbow-gradient);
+  background-size: 200% 200%;
+  animation: rainbowShift 3s ease infinite, rainbowGlow 3s ease infinite;
+}
+
+// Rainbow border animation
+.rainbow-border-animated {
+  border: 2px solid;
+  animation: rainbowBorder 3s linear infinite;
+}
+
+// Rainbow text gradient
+.rainbow-text-animated {
+  background: var(--rainbow-gradient);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbowText 3s ease infinite;
+}
+
+// AI Widget specific rainbow button
+.ai-rainbow-btn {
+  position: relative;
+  background: var(--rainbow-gradient);
+  background-size: 200% 200%;
+  animation: rainbowShift 3s ease infinite;
+  color: white;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+  
+  &:hover::before {
+    transform: translateX(100%);
+  }
+  
+  &:hover {
+    animation: rainbowShift 1.5s ease infinite, rainbowGlow 1.5s ease infinite;
+    transform: scale(1.05);
+  }
+}
+
+// AI Widget trigger button with rainbow pulse
+.ai-trigger-rainbow {
+  position: relative;
+  background: var(--rainbow-gradient);
+  background-size: 200% 200%;
+  animation: rainbowShift 3s ease infinite;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--rainbow-gradient);
+    background-size: 200% 200%;
+    animation: rainbowShift 3s ease infinite;
+    opacity: 0;
+    z-index: -1;
+    filter: blur(15px);
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover::after {
+    opacity: 0.6;
+  }
 }
 
 .modal-content-exit {

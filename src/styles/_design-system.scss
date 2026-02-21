@@ -1,68 +1,113 @@
 // ============================================
-// PrimeNest Design System v2.0
-// Modern Minimalist Design with Premium Aesthetics
-// Inspired by Hombox Architecture & Premium SaaS Platforms
+// PrimeNest Elite Design System v3.0
+// Premium Midnight/Slate/Peach Color Palette
+// Sophisticated Dark-First Design with Light Mode Support
 // ============================================
 
 // ============================================
-// COLOR PALETTE
+// COLOR PALETTE - PrimeNest Elite
 // ============================================
 
-// Primary Neutrals - The Foundation
-$gray-950: #0A0A0B;      // Near black - backgrounds, text
-$gray-900: #111113;      // Dark surfaces
-$gray-850: #161618;      // Elevated dark surfaces
-$gray-800: #1C1C1F;      // Card backgrounds (dark mode)
-$gray-700: #27272A;      // Borders, dividers
-$gray-600: #3F3F46;      // Muted text
-$gray-500: #52525B;      // Secondary text
-$gray-400: #71717A;      // Tertiary text
-$gray-300: #A1A1AA;      // Placeholders
-$gray-200: #D4D4D8;      // Disabled states
-$gray-100: #E4E4E7;      // Light borders
-$gray-75:  #F4F4F5;      // Light secondary background
-$gray-50:  #FAFAFA;      // Light backgrounds
-$white:    #FFFFFF;      // Pure white
+// ============================================
+// CORE BRAND COLORS - PrimeNest Elite
+// ============================================
 
-// Accent Colors - Sophisticated & Intentional
-$accent-50:  #EEF2FF;
-$accent-100: #E0E7FF;
-$accent-200: #C7D2FE;
-$accent-300: #A5B4FC;
-$accent-400: #818CF8;
-$accent-500: #6366F1;     // Indigo - primary actions
-$accent-600: #4F46E5;     // Hover state
-$accent-700: #4338CA;
-$accent-800: #3730A3;
-$accent-900: #312E81;
+// Primary Brand Colors
+$bg-midnight: #2D3250;      // Primary Background - Deep navy blue
+$surface-slate: #424769;    // Card/Widget Surfaces - Muted blue-gray
+$border-muted: #676F9D;     // Borders and Dividers - Soft purple-blue
+$accent-peach: #F9B17A;     // Action Buttons, Links, Highlights - Warm peach
+$text-pure: #FFFFFF;        // Primary Text - Pure white
 
-// Secondary Accent - Violet
-$violet-50:  #F5F3FF;
-$violet-100: #EDE9FE;
-$violet-200: #DDD6FE;
-$violet-300: #C4B5FD;
-$violet-400: #A78BFA;
-$violet-500: #8B5CF6;
-$violet-600: #7C3AED;
+// Accent Variations
+$accent-peach-light: #FFD4A8;     // Lighter peach for hover states
+$accent-peach-dark: #E89A5A;      // Darker peach for active states
+$accent-peach-bg: rgba(249, 177, 122, 0.1);  // Subtle background
 
-// Tertiary Accent - Emerald (for success states)
+// ============================================
+// EXTENDED PALETTE
+// ============================================
+
+// Dark Theme Neutrals
+$dark-950: #1A1D2E;       // Deepest background
+$dark-900: #232738;       // Primary dark surface
+$dark-850: #2A2F42;       // Elevated dark surface
+$dark-800: #2D3250;       // Midnight - card backgrounds
+$dark-700: #424769;       // Slate - secondary surfaces
+$dark-600: #676F9D;       // Muted - borders
+$dark-500: #8B92B8;       // Tertiary text dark mode
+$dark-400: #B8BFCC;       // Secondary text dark mode
+
+// Light Theme Neutrals
+$light-50: #F8F9FC;       // Very light blue-gray
+$light-100: #EEF1F6;      // Light gray-blue
+$light-200: #E2E6EE;      // Light borders
+$light-300: #C8CED9;      // Muted text light mode
+$light-400: #9BA3B5;      // Tertiary text light mode
+$light-500: #6B7280;      // Secondary text light mode
+$light-900: #1A1D2E;      // Dark text on light
+
+// Legacy Gray Scale (for backward compatibility)
+$gray-950: #1A1D2E;       // Near black - backgrounds, text
+$gray-900: #232738;       // Dark surfaces
+$gray-850: #2A2F42;       // Elevated dark surfaces
+$gray-800: #2D3250;       // Card backgrounds (dark mode)
+$gray-700: #424769;       // Borders, dividers
+$gray-600: #676F9D;       // Muted text
+$gray-500: #8B92B8;       // Secondary text
+$gray-400: #B8BFCC;       // Tertiary text
+$gray-300: #C8CED9;       // Placeholders
+$gray-200: #E2E6EE;       // Disabled states
+$gray-100: #EEF1F6;       // Light borders
+$gray-75:  #F4F5F8;       // Light secondary background
+$gray-50:  #F8F9FC;       // Light backgrounds
+$white:    #FFFFFF;       // Pure white
+
+// ============================================
+// RAINBOW GRADIENT - AI Feature Highlight
+// ============================================
+
+$rainbow-red: #FF6B6B;
+$rainbow-orange: #FFA94D;
+$rainbow-yellow: #FFD93D;
+$rainbow-green: #6BCB77;
+$rainbow-blue: #4D96FF;
+$rainbow-purple: #9B59B6;
+
+$rainbow-gradient: linear-gradient(
+  90deg,
+  $rainbow-red 0%,
+  $rainbow-orange 16%,
+  $rainbow-yellow 32%,
+  $rainbow-green 48%,
+  $rainbow-blue 64%,
+  $rainbow-purple 80%,
+  $rainbow-red 100%
+);
+
+// ============================================
+// SEMANTIC COLORS
+// ============================================
+
+// Success - Emerald
 $emerald-400: #34D399;
 $emerald-500: #10B981;
 $emerald-600: #059669;
-
-// Semantic Colors
 $success-light: #D1FAE5;
 $success: #10B981;
 $success-dark: #065F46;
 
+// Warning - Amber
 $warning-light: #FEF3C7;
 $warning: #F59E0B;
 $warning-dark: #B45309;
 
+// Error - Red
 $error-light: #FEE2E2;
 $error: #EF4444;
 $error-dark: #B91C1C;
 
+// Info - Blue
 $info-light: #DBEAFE;
 $info: #3B82F6;
 $info-dark: #1D4ED8;
@@ -72,76 +117,76 @@ $info-dark: #1D4ED8;
 // ============================================
 
 :root, [data-theme="light"] {
-  // Background Colors
-  --bg-primary: #{$gray-50};
-  --bg-secondary: #{$gray-75};
-  --bg-tertiary: #{$gray-100};
+  // Background Colors - Light mode with subtle blue undertones
+  --bg-primary: #{$light-50};
+  --bg-secondary: #{$light-100};
+  --bg-tertiary: #{$light-200};
   --bg-elevated: #{$white};
-  --bg-overlay: rgba(0, 0, 0, 0.5);
-  --bg-glass: rgba(255, 255, 255, 0.8);
+  --bg-overlay: rgba(26, 29, 46, 0.5);
+  --bg-glass: rgba(255, 255, 255, 0.85);
   
   // Surface Colors
   --surface-primary: #{$white};
-  --surface-secondary: #{$gray-75};
-  --surface-tertiary: #{$gray-100};
-  --surface-hover: rgba(99, 102, 241, 0.08);
-  --surface-active: rgba(99, 102, 241, 0.12);
+  --surface-secondary: #{$light-100};
+  --surface-tertiary: #{$light-200};
+  --surface-hover: rgba(249, 177, 122, 0.08);
+  --surface-active: rgba(249, 177, 122, 0.12);
   --surface-glass: rgba(255, 255, 255, 0.9);
   
   // Text Colors
-  --text-primary: #{$gray-950};
-  --text-secondary: #{$gray-600};
-  --text-tertiary: #{$gray-400};
-  --text-muted: #{$gray-300};
+  --text-primary: #{$light-900};
+  --text-secondary: #{$light-500};
+  --text-tertiary: #{$light-400};
+  --text-muted: #{$light-300};
   --text-inverse: #{$white};
   
-  // Accent Colors
-  --accent-primary: #{$accent-500};
-  --accent-primary-hover: #{$accent-600};
-  --accent-primary-light: #{$accent-100};
-  --accent-secondary: #{$violet-500};
+  // Accent Colors - Peach as primary accent
+  --accent-primary: #{$accent-peach};
+  --accent-primary-hover: #{$accent-peach-dark};
+  --accent-primary-light: #{$accent-peach-bg};
+  --accent-secondary: #{$accent-peach-light};
   --accent-tertiary: #{$emerald-500};
   
-  // Brand Colors
-  --brand-primary: #{$accent-500};
-  --brand-secondary: #{$violet-500};
-  --brand-gradient: linear-gradient(135deg, #{$accent-500} 0%, #{$violet-500} 100%);
-  --brand-gradient-subtle: linear-gradient(135deg, #{$accent-100} 0%, #{$violet-100} 100%);
+  // Brand Colors - PrimeNest Elite
+  --brand-primary: #{$accent-peach};
+  --brand-secondary: #{$bg-midnight};
+  --brand-gradient: linear-gradient(135deg, #{$accent-peach} 0%, #{$accent-peach-dark} 100%);
+  --brand-gradient-subtle: linear-gradient(135deg, rgba(249, 177, 122, 0.15) 0%, rgba(232, 154, 90, 0.15) 100%);
   
   // Border Colors
-  --border-subtle: rgba(0, 0, 0, 0.04);
-  --border-default: rgba(0, 0, 0, 0.08);
-  --border-emphasis: rgba(0, 0, 0, 0.12);
-  --border-strong: rgba(0, 0, 0, 0.2);
-  --border-accent: #{$accent-500};
-  --border-glass: rgba(255, 255, 255, 0.2);
+  --border-subtle: rgba(103, 111, 157, 0.1);
+  --border-default: rgba(103, 111, 157, 0.15);
+  --border-emphasis: rgba(103, 111, 157, 0.25);
+  --border-strong: rgba(103, 111, 157, 0.35);
+  --border-accent: #{$accent-peach};
+  --border-glass: rgba(255, 255, 255, 0.3);
   
-  // Shadow Colors
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06);
-  --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.12), 0 12px 24px rgba(0, 0, 0, 0.08);
-  --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.25);
-  --shadow-glow-lg: 0 0 60px rgba(99, 102, 241, 0.35);
+  // Shadow Colors - Warm undertones
+  --shadow-xs: 0 1px 2px rgba(26, 29, 46, 0.04);
+  --shadow-sm: 0 2px 4px rgba(26, 29, 46, 0.04), 0 1px 2px rgba(26, 29, 46, 0.06);
+  --shadow-md: 0 4px 12px rgba(26, 29, 46, 0.06), 0 2px 4px rgba(26, 29, 46, 0.04);
+  --shadow-lg: 0 8px 24px rgba(26, 29, 46, 0.08), 0 4px 8px rgba(26, 29, 46, 0.04);
+  --shadow-xl: 0 16px 48px rgba(26, 29, 46, 0.1), 0 8px 16px rgba(26, 29, 46, 0.06);
+  --shadow-2xl: 0 24px 64px rgba(26, 29, 46, 0.12), 0 12px 24px rgba(26, 29, 46, 0.08);
+  --shadow-glow: 0 0 40px rgba(249, 177, 122, 0.3);
+  --shadow-glow-lg: 0 0 60px rgba(249, 177, 122, 0.4);
   
   // Input Colors
   --input-bg: #{$white};
-  --input-border: #{$gray-200};
-  --input-border-hover: #{$gray-300};
-  --input-focus: #{$accent-500};
-  --input-focus-ring: rgba(99, 102, 241, 0.2);
-  --input-placeholder: #{$gray-300};
+  --input-border: #{$light-200};
+  --input-border-hover: #{$light-300};
+  --input-focus: #{$accent-peach};
+  --input-focus-ring: rgba(249, 177, 122, 0.25);
+  --input-placeholder: #{$light-300};
   
   // Button Colors
-  --btn-primary-bg: #{$accent-500};
-  --btn-primary-hover: #{$accent-600};
-  --btn-primary-text: #{$white};
-  --btn-secondary-bg: #{$gray-100};
-  --btn-secondary-hover: #{$gray-200};
-  --btn-secondary-text: #{$gray-950};
-  --btn-ghost-hover: rgba(99, 102, 241, 0.08);
+  --btn-primary-bg: #{$accent-peach};
+  --btn-primary-hover: #{$accent-peach-dark};
+  --btn-primary-text: #{$light-900};
+  --btn-secondary-bg: #{$light-100};
+  --btn-secondary-hover: #{$light-200};
+  --btn-secondary-text: #{$light-900};
+  --btn-ghost-hover: rgba(249, 177, 122, 0.1);
   
   // Status Colors
   --status-success: #{$success};
@@ -154,109 +199,112 @@ $info-dark: #1D4ED8;
   --status-info-bg: #{$info-light};
   
   // Chat Colors
-  --chat-bg: #{$gray-75};
-  --chat-bubble-user: #{$accent-500};
-  --chat-bubble-user-text: #{$white};
+  --chat-bg: #{$light-100};
+  --chat-bubble-user: #{$accent-peach};
+  --chat-bubble-user-text: #{$light-900};
   --chat-bubble-other: #{$white};
-  --chat-bubble-other-text: #{$gray-950};
-  --chat-bubble-ai: linear-gradient(135deg, #{$accent-500} 0%, #{$violet-500} 100%);
+  --chat-bubble-other-text: #{$light-900};
+  --chat-bubble-ai: linear-gradient(135deg, #{$accent-peach} 0%, #{$accent-peach-dark} 100%);
   
   // Navbar
-  --navbar-bg: rgba(250, 250, 250, 0.85);
-  --navbar-border: rgba(0, 0, 0, 0.04);
+  --navbar-bg: rgba(248, 249, 252, 0.9);
+  --navbar-border: rgba(103, 111, 157, 0.1);
   
   // Card
   --card-bg: #{$white};
-  --card-border: rgba(0, 0, 0, 0.06);
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --card-hover-shadow: 0 12px 32px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.04);
+  --card-border: rgba(103, 111, 157, 0.12);
+  --card-shadow: 0 2px 8px rgba(26, 29, 46, 0.04), 0 1px 2px rgba(26, 29, 46, 0.06);
+  --card-hover-shadow: 0 12px 32px rgba(26, 29, 46, 0.1), 0 4px 8px rgba(26, 29, 46, 0.04);
   
   // Price Badge
-  --price-badge-bg: #{$gray-950};
+  --price-badge-bg: #{$bg-midnight};
   --price-badge-text: #{$white};
   
   // Special Effects
   --glass-blur: 20px;
-  --gradient-mesh: radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-                   radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.06) 0px, transparent 50%),
-                   radial-gradient(at 0% 50%, rgba(99, 102, 241, 0.04) 0px, transparent 50%);
+  --gradient-mesh: radial-gradient(at 40% 20%, rgba(249, 177, 122, 0.08) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, rgba(45, 50, 80, 0.06) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, rgba(249, 177, 122, 0.04) 0px, transparent 50%);
+  
+  // Rainbow Gradient for AI Features
+  --rainbow-gradient: #{$rainbow-gradient};
 }
 
 // ============================================
-// DARK THEME
+// DARK THEME (PrimeNest Elite - Primary Theme)
 // ============================================
 
 [data-theme="dark"] {
-  // Background Colors
-  --bg-primary: #{$gray-950};
-  --bg-secondary: #{$gray-900};
-  --bg-tertiary: #{$gray-800};
-  --bg-elevated: #{$gray-850};
-  --bg-overlay: rgba(0, 0, 0, 0.7);
-  --bg-glass: rgba(17, 17, 19, 0.85);
+  // Background Colors - Midnight palette
+  --bg-primary: #{$dark-950};
+  --bg-secondary: #{$dark-900};
+  --bg-tertiary: #{$dark-850};
+  --bg-elevated: #{$bg-midnight};
+  --bg-overlay: rgba(26, 29, 46, 0.85);
+  --bg-glass: rgba(45, 50, 80, 0.85);
   
   // Surface Colors
-  --surface-primary: #{$gray-900};
-  --surface-secondary: #{$gray-800};
-  --surface-tertiary: #{$gray-700};
-  --surface-hover: rgba(99, 102, 241, 0.12);
-  --surface-active: rgba(99, 102, 241, 0.18);
-  --surface-glass: rgba(28, 28, 31, 0.9);
+  --surface-primary: #{$dark-900};
+  --surface-secondary: #{$surface-slate};
+  --surface-tertiary: #{$dark-850};
+  --surface-hover: rgba(249, 177, 122, 0.1);
+  --surface-active: rgba(249, 177, 122, 0.15);
+  --surface-glass: rgba(45, 50, 80, 0.9);
   
   // Text Colors
-  --text-primary: #{$gray-50};
-  --text-secondary: #{$gray-200};
-  --text-tertiary: #{$gray-400};
-  --text-muted: #{$gray-500};
-  --text-inverse: #{$gray-950};
+  --text-primary: #{$text-pure};
+  --text-secondary: #{$dark-400};
+  --text-tertiary: #{$dark-500};
+  --text-muted: #{$dark-500};
+  --text-inverse: #{$dark-950};
   
-  // Accent Colors
-  --accent-primary: #{$accent-400};
-  --accent-primary-hover: #{$accent-300};
-  --accent-primary-light: rgba(99, 102, 241, 0.15);
-  --accent-secondary: #{$violet-400};
+  // Accent Colors - Peach pops against dark
+  --accent-primary: #{$accent-peach};
+  --accent-primary-hover: #{$accent-peach-light};
+  --accent-primary-light: rgba(249, 177, 122, 0.15);
+  --accent-secondary: #{$accent-peach-light};
   --accent-tertiary: #{$emerald-400};
   
-  // Brand Colors
-  --brand-primary: #{$accent-400};
-  --brand-secondary: #{$violet-400};
-  --brand-gradient: linear-gradient(135deg, #{$accent-400} 0%, #{$violet-400} 100%);
-  --brand-gradient-subtle: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+  // Brand Colors - PrimeNest Elite
+  --brand-primary: #{$accent-peach};
+  --brand-secondary: #{$bg-midnight};
+  --brand-gradient: linear-gradient(135deg, #{$accent-peach} 0%, #{$accent-peach-light} 100%);
+  --brand-gradient-subtle: linear-gradient(135deg, rgba(249, 177, 122, 0.2) 0%, rgba(255, 212, 168, 0.2) 100%);
   
-  // Border Colors
-  --border-subtle: rgba(255, 255, 255, 0.04);
-  --border-default: rgba(255, 255, 255, 0.08);
-  --border-emphasis: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.2);
-  --border-accent: #{$accent-400};
-  --border-glass: rgba(255, 255, 255, 0.1);
+  // Border Colors - Muted blue-gray
+  --border-subtle: rgba(103, 111, 157, 0.15);
+  --border-default: rgba(103, 111, 157, 0.25);
+  --border-emphasis: rgba(103, 111, 157, 0.35);
+  --border-strong: rgba(103, 111, 157, 0.5);
+  --border-accent: #{$accent-peach};
+  --border-glass: rgba(103, 111, 157, 0.2);
   
-  // Shadow Colors
+  // Shadow Colors - Deep and rich
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
   --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.4);
   --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.6), 0 12px 24px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.3);
-  --shadow-glow-lg: 0 0 60px rgba(99, 102, 241, 0.4);
+  --shadow-glow: 0 0 40px rgba(249, 177, 122, 0.35);
+  --shadow-glow-lg: 0 0 60px rgba(249, 177, 122, 0.45);
   
   // Input Colors
-  --input-bg: #{$gray-800};
-  --input-border: #{$gray-700};
-  --input-border-hover: #{$gray-600};
-  --input-focus: #{$accent-400};
-  --input-focus-ring: rgba(99, 102, 241, 0.25);
-  --input-placeholder: #{$gray-500};
+  --input-bg: #{$surface-slate};
+  --input-border: #{$border-muted};
+  --input-border-hover: #{$dark-500};
+  --input-focus: #{$accent-peach};
+  --input-focus-ring: rgba(249, 177, 122, 0.25);
+  --input-placeholder: #{$dark-500};
   
   // Button Colors
-  --btn-primary-bg: #{$accent-500};
-  --btn-primary-hover: #{$accent-400};
-  --btn-primary-text: #{$white};
-  --btn-secondary-bg: #{$gray-800};
-  --btn-secondary-hover: #{$gray-700};
-  --btn-secondary-text: #{$gray-50};
-  --btn-ghost-hover: rgba(99, 102, 241, 0.12);
+  --btn-primary-bg: #{$accent-peach};
+  --btn-primary-hover: #{$accent-peach-light};
+  --btn-primary-text: #{$dark-950};
+  --btn-secondary-bg: #{$surface-slate};
+  --btn-secondary-hover: #{$dark-850};
+  --btn-secondary-text: #{$text-pure};
+  --btn-ghost-hover: rgba(249, 177, 122, 0.1);
   
   // Status Colors
   --status-success: #{$emerald-400};
@@ -269,32 +317,35 @@ $info-dark: #1D4ED8;
   --status-info-bg: rgba(59, 130, 246, 0.15);
   
   // Chat Colors
-  --chat-bg: #{$gray-900};
-  --chat-bubble-user: #{$accent-500};
-  --chat-bubble-user-text: #{$white};
-  --chat-bubble-other: #{$gray-800};
-  --chat-bubble-other-text: #{$gray-50};
-  --chat-bubble-ai: linear-gradient(135deg, #{$accent-500} 0%, #{$violet-500} 100%);
+  --chat-bg: #{$dark-900};
+  --chat-bubble-user: #{$accent-peach};
+  --chat-bubble-user-text: #{$dark-950};
+  --chat-bubble-other: #{$surface-slate};
+  --chat-bubble-other-text: #{$text-pure};
+  --chat-bubble-ai: linear-gradient(135deg, #{$accent-peach} 0%, #{$accent-peach-light} 100%);
   
   // Navbar
-  --navbar-bg: rgba(10, 10, 11, 0.85);
-  --navbar-border: rgba(255, 255, 255, 0.04);
+  --navbar-bg: rgba(26, 29, 46, 0.9);
+  --navbar-border: rgba(103, 111, 157, 0.15);
   
   // Card
-  --card-bg: #{$gray-900};
-  --card-border: rgba(255, 255, 255, 0.06);
+  --card-bg: #{$surface-slate};
+  --card-border: rgba(103, 111, 157, 0.25);
   --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
   --card-hover-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
   
   // Price Badge
-  --price-badge-bg: #{$white};
-  --price-badge-text: #{$gray-950};
+  --price-badge-bg: #{$accent-peach};
+  --price-badge-text: #{$dark-950};
   
   // Special Effects
   --glass-blur: 20px;
-  --gradient-mesh: radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
-                   radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
-                   radial-gradient(at 0% 50%, rgba(99, 102, 241, 0.06) 0px, transparent 50%);
+  --gradient-mesh: radial-gradient(at 40% 20%, rgba(249, 177, 122, 0.12) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, rgba(45, 50, 80, 0.15) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, rgba(249, 177, 122, 0.08) 0px, transparent 50%);
+  
+  // Rainbow Gradient for AI Features
+  --rainbow-gradient: #{$rainbow-gradient};
 }
 
 // ============================================

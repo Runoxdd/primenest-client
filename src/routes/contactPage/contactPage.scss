@@ -329,7 +329,7 @@
       outline: none;
       border-color: var(--accent-primary);
       background: var(--surface-primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      box-shadow: 0 0 0 3px var(--accent-primary-light);
 
       & ~ .input-icon {
         color: var(--accent-primary);
@@ -364,7 +364,7 @@
       outline: none;
       border-color: var(--accent-primary);
       background: var(--surface-primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      box-shadow: 0 0 0 3px var(--accent-primary-light);
     }
 
     option {
@@ -408,7 +408,7 @@ textarea {
     outline: none;
     border-color: var(--accent-primary);
     background: var(--surface-primary);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 0 3px var(--accent-primary-light);
   }
 }
 

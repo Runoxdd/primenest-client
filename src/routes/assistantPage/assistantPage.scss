@@ -110,7 +110,7 @@
 .visual-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(249, 177, 122, 0.2) 0%, transparent 70%);
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
@@ -373,7 +373,7 @@
   gap: $space-2;
   margin-top: $space-3;
   padding: $space-2 $space-3;
-  background: rgba(99, 102, 241, 0.1);
+  background: var(--accent-primary-light);
   border-radius: $radius-md;
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
@@ -382,7 +382,8 @@
   transition: all 0.2s ease;
 
   &:hover {
-    background: rgba(99, 102, 241, 0.2);
+    background: var(--accent-primary);
+    color: var(--text-inverse);
   }
 }
 
@@ -436,7 +437,7 @@
     &:focus {
       outline: none;
       border-color: var(--accent-primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      box-shadow: 0 0 0 3px var(--accent-primary-light);
     }
 
     &:disabled {

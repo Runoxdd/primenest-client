@@ -1,7 +1,7 @@
 // ============================================
-// PrimeNest AI Widget Styles v2.0
+// PrimeNest Elite AI Widget Styles v3.0
 // Premium SaaS Glassmorphism Panel
-// Flagship Feature - Pride and Joy
+// Flagship Feature - Rainbow Gradient AI
 // ============================================
 
 @import "../../styles/_design-system.scss";
@@ -19,7 +19,7 @@
 }
 
 // ============================================
-// TRIGGER BUTTON
+// TRIGGER BUTTON - Rainbow Gradient
 // ============================================
 
 .widget-trigger {
@@ -29,29 +29,30 @@
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: var(--brand-gradient);
+  background: var(--rainbow-gradient);
+  background-size: 200% 200%;
+  animation: rainbowShift 3s ease infinite;
   border: none;
   border-radius: $radius-full;
   color: white;
   cursor: pointer;
   box-shadow: 
     var(--shadow-lg),
-    0 0 30px rgba(99, 102, 241, 0.3);
+    0 0 30px rgba(255, 107, 107, 0.3);
   transition: all 0.3s ease;
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 
-      var(--shadow-xl),
-      0 0 40px rgba(99, 102, 241, 0.4);
+    animation: rainbowShift 1.5s ease infinite, rainbowGlow 1.5s ease infinite;
   }
 
   .trigger-pulse {
     position: absolute;
     inset: 0;
     border-radius: $radius-full;
-    background: var(--brand-gradient);
-    animation: pulseRing 2s ease-out infinite;
+    background: var(--rainbow-gradient);
+    background-size: 200% 200%;
+    animation: pulseRing 2s ease-out infinite, rainbowShift 3s ease infinite;
   }
 
   .trigger-label {
@@ -93,11 +94,13 @@
   cursor: pointer;
   box-shadow: 
     var(--shadow-lg),
-    0 0 20px rgba(99, 102, 241, 0.15);
+    0 0 20px rgba(249, 177, 122, 0.15);
 
   .minimized-badge {
     padding: 2px 8px;
-    background: var(--accent-primary);
+    background: var(--rainbow-gradient);
+    background-size: 200% 200%;
+    animation: rainbowShift 3s ease infinite;
     color: white;
     font-size: 10px;
     font-weight: $font-weight-bold;
@@ -122,7 +125,7 @@
   border-radius: $radius-3xl;
   box-shadow: 
     var(--shadow-2xl),
-    0 0 60px rgba(99, 102, 241, 0.1),
+    0 0 60px rgba(249, 177, 122, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   overflow: hidden;
 
@@ -138,7 +141,7 @@
 }
 
 // ============================================
-// HEADER
+// HEADER - Midnight Background
 // ============================================
 
 .widget-header {
@@ -146,7 +149,7 @@
   align-items: center;
   justify-content: space-between;
   padding: $space-4 $space-5;
-  background: linear-gradient(135deg, var(--surface-secondary) 0%, var(--surface-tertiary) 100%);
+  background: var(--bg-primary);
   border-bottom: 1px solid var(--border-subtle);
 
   .header-left {
@@ -160,10 +163,12 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: var(--brand-gradient);
+      background: var(--rainbow-gradient);
+      background-size: 200% 200%;
+      animation: rainbowShift 3s ease infinite;
       border-radius: $radius-xl;
       color: white;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
     }
 
     .header-info {
@@ -232,35 +237,35 @@
         display: block !important;
       }
 
-      // New Chat - Green with white plus icon
+      // New Chat - Peach accent with white plus icon
       &:nth-child(1) {
-        background: #10B981 !important;
+        background: var(--accent-primary) !important;
         color: white !important;
         
         &:hover {
-          background: #059669 !important;
+          background: var(--accent-primary-hover) !important;
           transform: scale(1.1);
         }
       }
 
-      // Minimize - Amber with white minus icon
+      // Minimize - Slate with white minus icon
       &:nth-child(2) {
-        background: #F59E0B !important;
-        color: white !important;
+        background: var(--surface-secondary) !important;
+        color: var(--text-primary) !important;
         
         &:hover {
-          background: #D97706 !important;
+          background: var(--surface-tertiary) !important;
           transform: scale(1.1);
         }
       }
 
       // Close - Red with white X icon
       &:nth-child(3) {
-        background: #EF4444 !important;
+        background: var(--status-error) !important;
         color: white !important;
         
         &:hover {
-          background: #DC2626 !important;
+          background: var(--error-dark) !important;
           transform: scale(1.1);
         }
       }
@@ -325,11 +330,13 @@
       justify-content: center;
       width: 28px;
       height: 28px;
-      background: var(--brand-gradient);
+      background: var(--rainbow-gradient);
+      background-size: 200% 200%;
+      animation: rainbowShift 3s ease infinite;
       border-radius: $radius-lg;
       color: white;
       flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
     }
 
     .message-bubble {
@@ -374,8 +381,8 @@
 
         .suggestion-chip {
           padding: $space-2 $space-3;
-          background: rgba(99, 102, 241, 0.1);
-          border: 1px solid rgba(99, 102, 241, 0.2);
+          background: var(--accent-primary-light);
+          border: 1px solid var(--accent-primary);
           border-radius: $radius-full;
           font-size: $text-xs;
           color: var(--accent-primary);
@@ -383,8 +390,8 @@
           transition: all 0.2s ease;
 
           &:hover {
-            background: rgba(99, 102, 241, 0.2);
-            border-color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: var(--text-inverse);
             transform: translateY(-1px);
           }
         }
@@ -392,10 +399,10 @@
     }
 
     &.user .message-bubble {
-      background: var(--brand-gradient);
-      color: white;
+      background: var(--accent-primary);
+      color: var(--text-inverse);
       border-bottom-right-radius: $radius-sm;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 4px 12px rgba(249, 177, 122, 0.3);
     }
 
     &.ai .message-bubble {
@@ -520,17 +527,19 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    background: var(--brand-gradient);
+    background: var(--rainbow-gradient);
+    background-size: 200% 200%;
+    animation: rainbowShift 3s ease infinite;
     border: none;
     border-radius: $radius-xl;
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
 
     &:hover:not(:disabled) {
       transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+      animation: rainbowShift 1.5s ease infinite, rainbowGlow 1.5s ease infinite;
     }
 
     &:active:not(:disabled) {
