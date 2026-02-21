@@ -349,6 +349,8 @@
 
     .message-content {
       background: var(--surface-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
       border-radius: $radius-sm $radius-xl $radius-xl $radius-xl;
     }
   }
