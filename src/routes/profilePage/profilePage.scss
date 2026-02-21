@@ -180,6 +180,7 @@
 
   .action-btn {
     flex: 1;
+    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -191,11 +192,18 @@
     cursor: pointer;
     transition: all 0.2s ease;
     text-decoration: none;
+    overflow: hidden;
     
     @include mobile {
       padding: $space-3;
       min-height: 44px;
       font-size: $font-size-xs;
+    }
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &.edit {

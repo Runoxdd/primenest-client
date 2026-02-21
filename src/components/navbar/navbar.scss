@@ -18,6 +18,7 @@
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--navbar-border);
   transition: all 0.2s ease;
+  will-change: transform;
 
   &.scrolled {
     height: 56px;

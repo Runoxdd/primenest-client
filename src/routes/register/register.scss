@@ -13,6 +13,7 @@
   // Reverse the order for register (image on left, form on right)
   .auth-image-section {
     order: 1;
+    z-index: 1;
 
     @include lg {
       order: 0;
@@ -21,6 +22,8 @@
 
   .auth-form-section {
     order: 2;
+    z-index: 2;
+    background: var(--bg-primary);
 
     @include lg {
       order: 1;

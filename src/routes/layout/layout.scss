@@ -28,8 +28,7 @@
 }
 
 .layout-navbar {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: $z-index-sticky;
   flex-shrink: 0;
 }
