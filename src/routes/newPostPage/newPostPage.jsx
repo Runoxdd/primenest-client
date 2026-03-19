@@ -141,9 +141,9 @@ function NewPostPage() {
                 <div className="form-group">
                   <label htmlFor="currency">Currency</label>
                   <div className="select-wrapper">
-                    <select name="currency" defaultValue={data?.currency || "USD"} required>
-                      <option value="USD">USD ($)</option>
+                    <select name="currency" defaultValue={data?.currency || "NGN"} required>
                       <option value="NGN">NGN (₦)</option>
+                      <option value="USD">USD ($)</option>
                       <option value="GBP">GBP (£)</option>
                       <option value="EUR">EUR (€)</option>
                       <option value="JPY">JPY (¥)</option>

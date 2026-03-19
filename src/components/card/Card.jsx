@@ -163,7 +163,12 @@ function Card({ item, index = 0 }) {
         {/* Content */}
         <div className="card-content">
           {/* Title */}
-          <h3 className="card-title">{item.title}</h3>
+          <div className="card-title-row">
+            <h3 className="card-title">{item.title}</h3>
+            {item.status === "delisted" && (
+              <span className="delisted-indicator">Delisted</span>
+            )}
+          </div>
 
           {/* Location */}
           <div className="card-location">

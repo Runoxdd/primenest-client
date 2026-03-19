@@ -39,4 +39,24 @@ function RequireAuth() {
   );
 }
 
-export { Layout, RequireAuth };
+function RequireAdmin() {
+  const { currentUser } = useContext(AuthContext);
+
+  if (!currentUser || !currentUser.isAdmin) {
+    return <Navigate to="/login" />;
+  }
+
+  return (
+    <div className="layout">
+      <div className="layout-navbar">
+        <Navbar />
+      </div>
+      <main className="layout-content">
+        <Outlet />
+      </main>
+      <AIWidget />
+    </div>
+  );
+}
+
+export { Layout, RequireAuth, RequireAdmin };

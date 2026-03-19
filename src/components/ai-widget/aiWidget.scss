@@ -19,7 +19,7 @@
 }
 
 // ============================================
-// TRIGGER BUTTON - Rainbow Gradient
+// TRIGGER BUTTON - Brand Gradient
 // ============================================
 
 .widget-trigger {
@@ -29,30 +29,27 @@
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: var(--rainbow-gradient);
-  background-size: 200% 200%;
-  animation: rainbowShift 3s ease infinite;
+  background: var(--brand-gradient);
   border: none;
   border-radius: $radius-full;
   color: white;
   cursor: pointer;
   box-shadow: 
     var(--shadow-lg),
-    0 0 30px rgba(255, 107, 107, 0.3);
+    0 0 24px var(--accent-primary-light);
   transition: all 0.3s ease;
 
   &:hover {
     transform: scale(1.05);
-    animation: rainbowShift 1.5s ease infinite, rainbowGlow 1.5s ease infinite;
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
   }
 
   .trigger-pulse {
     position: absolute;
     inset: 0;
     border-radius: $radius-full;
-    background: var(--rainbow-gradient);
-    background-size: 200% 200%;
-    animation: pulseRing 2s ease-out infinite, rainbowShift 3s ease infinite;
+    background: var(--brand-gradient);
+    animation: pulseRing 2s ease-out infinite;
   }
 
   .trigger-label {
@@ -98,9 +95,7 @@
 
   .minimized-badge {
     padding: 2px 8px;
-    background: var(--rainbow-gradient);
-    background-size: 200% 200%;
-    animation: rainbowShift 3s ease infinite;
+    background: var(--brand-gradient);
     color: white;
     font-size: 10px;
     font-weight: $font-weight-bold;
@@ -163,12 +158,10 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: var(--rainbow-gradient);
-      background-size: 200% 200%;
-      animation: rainbowShift 3s ease infinite;
+      background: var(--brand-gradient);
       border-radius: $radius-xl;
       color: white;
-      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+      box-shadow: 0 4px 12px var(--accent-primary-light);
     }
 
     .header-info {
@@ -330,13 +323,11 @@
       justify-content: center;
       width: 28px;
       height: 28px;
-      background: var(--rainbow-gradient);
-      background-size: 200% 200%;
-      animation: rainbowShift 3s ease infinite;
+      background: var(--brand-gradient);
       border-radius: $radius-lg;
       color: white;
       flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+      box-shadow: 0 2px 8px var(--accent-primary-light);
     }
 
     .message-bubble {
@@ -527,19 +518,17 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    background: var(--rainbow-gradient);
-    background-size: 200% 200%;
-    animation: rainbowShift 3s ease infinite;
+    background: var(--brand-gradient);
     border: none;
     border-radius: $radius-xl;
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    box-shadow: 0 4px 12px var(--accent-primary-light);
 
     &:hover:not(:disabled) {
       transform: scale(1.05);
-      animation: rainbowShift 1.5s ease infinite, rainbowGlow 1.5s ease infinite;
+      box-shadow: var(--shadow-glow);
     }
 
     &:active:not(:disabled) {

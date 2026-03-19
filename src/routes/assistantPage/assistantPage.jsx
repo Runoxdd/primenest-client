@@ -239,7 +239,7 @@ function AssistantPage() {
               </motion.button>
             </div>
             <p className="input-hint">
-              Try: "Find apartments in Lagos under $500k" or "What's the market trend in London?"
+              Try: "Find apartments in Lagos under ₦50M" or "What's the market trend in Abuja?"
             </p>
           </div>
         </div>

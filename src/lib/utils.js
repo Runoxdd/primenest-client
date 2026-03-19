@@ -95,8 +95,8 @@ export const detectUserCurrency = () => {
     // Timezone detection failed
   }
 
-  // Default to USD
-  return 'USD';
+  // Default to NGN
+  return 'NGN';
 };
 
 /**
@@ -175,7 +175,7 @@ export const getAvailableCurrencies = () => {
  * @returns {string} Currency symbol
  */
 export const getCurrencySymbol = (currencyCode) => {
-  return CURRENCIES[currencyCode]?.symbol || '$';
+  return CURRENCIES[currencyCode]?.symbol || '₦';
 };
 
 // ============================================

@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { Bed, Bath } from "lucide-react";
 
 function Pin({ item }) {
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-US', {
+  const formatPrice = (price, currency) => {
+    const curr = currency || 'NGN';
+    return new Intl.NumberFormat('en-NG', {
       style: 'currency',
-      currency: 'USD',
+      currency: curr,
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price);
@@ -36,7 +37,7 @@ function Pin({ item }) {
               </div>
             </div>
             <div className="popup-price">
-              {formatPrice(item.price)}
+              {formatPrice(item.price, item.currency)}
               {item.type === "rent" && <span className="price-period">/mo</span>}
             </div>
           </div>

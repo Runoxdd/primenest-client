@@ -248,17 +248,37 @@
     box-sizing: border-box;
 
     // Title - Single line for compact
-    .card-title {
-      font-size: $text-sm;
-      font-weight: $font-weight-semibold;
-      color: var(--text-primary);
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
       margin-bottom: 4px;
-      line-height: $leading-tight;
-      height: 1.25em;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+
+      .card-title {
+        font-size: $text-sm;
+        font-weight: $font-weight-semibold;
+        color: var(--text-primary);
+        line-height: $leading-tight;
+        height: 1.25em;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        flex: 1;
+      }
+
+      .delisted-indicator {
+        background: #fee2e2;
+        color: #991b1b;
+        font-size: 9px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
     }
 
     // Location - Compact
@@ -450,6 +470,7 @@
         margin-bottom: $space-2;
         height: auto;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
         white-space: normal;
         overflow: hidden;
       }

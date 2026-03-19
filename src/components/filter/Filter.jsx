@@ -28,7 +28,7 @@ const propertyIcons = {
 function PriceRangeSlider({ min, max, onChange, currency }) {
   const [values, setValues] = useState([min, max]);
   const MIN_PRICE = 0;
-  const MAX_PRICE = 10000000;
+  const MAX_PRICE = 500000000; // 500M Naira
 
   useEffect(() => {
     setValues([min, max]);
@@ -53,10 +53,10 @@ function PriceRangeSlider({ min, max, onChange, currency }) {
   };
 
   const presets = [
-    { label: `Under ${formatValue(500000)}`, min: 0, max: 500000 },
-    { label: `${formatValue(500000)} - ${formatValue(1000000)}`, min: 500000, max: 1000000 },
-    { label: `${formatValue(1000000)} - ${formatValue(5000000)}`, min: 1000000, max: 5000000 },
-    { label: `${formatValue(5000000)}+`, min: 5000000, max: 10000000 },
+    { label: `Under ${formatValue(10000000)}`, min: 0, max: 10000000 },
+    { label: `${formatValue(10000000)} - ${formatValue(50000000)}`, min: 10000000, max: 50000000 },
+    { label: `${formatValue(50000000)} - ${formatValue(100000000)}`, min: 50000000, max: 100000000 },
+    { label: `${formatValue(100000000)}+`, min: 100000000, max: 500000000 },
   ];
 
   return (
@@ -151,7 +151,7 @@ function Filter() {
     city: searchParams.get("city") || "",
     property: searchParams.get("property") || "",
     minPrice: parseInt(searchParams.get("minPrice")) || 0,
-    maxPrice: parseInt(searchParams.get("maxPrice")) || 10000000,
+    maxPrice: parseInt(searchParams.get("maxPrice")) || 500000000,
     bedroom: searchParams.get("bedroom") || "",
   });
 
@@ -160,7 +160,7 @@ function Filter() {
     if (query.type) filters.push({ key: 'type', label: query.type === 'buy' ? 'For Sale' : 'For Rent' });
     if (query.city) filters.push({ key: 'city', label: query.city });
     if (query.property) filters.push({ key: 'property', label: query.property.charAt(0).toUpperCase() + query.property.slice(1) });
-    if (query.minPrice > 0 || query.maxPrice < 10000000) {
+    if (query.minPrice > 0 || query.maxPrice < 500000000) {
       filters.push({ key: 'price', label: `${formatPrice(query.minPrice, currency, { compact: true })} - ${formatPrice(query.maxPrice, currency, { compact: true })}` });
     }
     if (query.bedroom) filters.push({ key: 'bedroom', label: `${query.bedroom}+ beds` });
@@ -185,7 +185,7 @@ function Filter() {
   const handleFilter = () => {
     const params = {};
     Object.keys(query).forEach(key => {
-      if (query[key] && query[key] !== "" && query[key] !== 0 && query[key] !== 10000000) {
+      if (query[key] && query[key] !== "" && query[key] !== 0 && query[key] !== 500000000) {
         params[key] = query[key];
       }
     });
@@ -196,7 +196,7 @@ function Filter() {
     let newQuery = { ...query };
     if (key === 'price') {
       newQuery.minPrice = 0;
-      newQuery.maxPrice = 10000000;
+      newQuery.maxPrice = 500000000;
     } else {
       newQuery[key] = "";
     }
@@ -209,7 +209,7 @@ function Filter() {
       city: "",
       property: "",
       minPrice: 0,
-      maxPrice: 10000000,
+      maxPrice: 500000000,
       bedroom: "",
     });
     setSearchParams({});

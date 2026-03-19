@@ -62,6 +62,13 @@ function App() {
         },
       ],
     },
+    {
+      path: "/",
+      element: <RequireAdmin />,
+      children: [
+        { path: "/admin", element: <AdminPage /> },
+      ],
+    },
   ]);
 
   return <RouterProvider router={router} />;

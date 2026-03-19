@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./searchBar.scss";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Search, MapPin, DollarSign } from "lucide-react";
+import { Search, MapPin, Coins } from "lucide-react";
 
 const types = [
   { value: "buy", label: "Buy" },
@@ -71,7 +71,7 @@ function SearchBar() {
         {/* Min Price */}
         <div className="search-field price">
           <label className="field-label">Min</label>
-          <DollarSign size={18} className="field-icon" />
+          <Coins size={18} className="field-icon" />
           <input
             type="number"
             name="minPrice"
@@ -88,7 +88,7 @@ function SearchBar() {
         {/* Max Price */}
         <div className="search-field price">
           <label className="field-label">Max</label>
-          <DollarSign size={18} className="field-icon" />
+          <Coins size={18} className="field-icon" />
           <input
             type="number"
             name="maxPrice"

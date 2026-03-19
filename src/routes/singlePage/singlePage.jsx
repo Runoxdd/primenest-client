@@ -75,7 +75,7 @@ function SinglePage() {
     }
   };
 
-  const formatPrice = (price, currency = "USD") => {
+  const formatPrice = (price, currency = "NGN") => {
     const symbol = getCurrencySymbol(currency);
     return `${symbol}${price?.toLocaleString()}`;
   };
@@ -111,8 +111,14 @@ function SinglePage() {
             </div>
 
             <div className="property-title-section">
-              <div className="type-badge">{post.type}</div>
+              <span className="type-badge">{post.type === 'buy' ? 'For Sale' : 'For Rent'}</span>
               <h1>{post.title}</h1>
+              {post.status === "delisted" && (
+                <div className="delisted-alert">
+                  <ShieldAlert size={18} />
+                  <span>This property has been delisted by an administrator.</span>
+                </div>
+              )}
               <div className="location">
                 <MapPin size={18} />
                 <span>{post.address}</span>
