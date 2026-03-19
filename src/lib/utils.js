@@ -57,45 +57,7 @@ export const detectUserCurrency = () => {
     return savedCurrency;
   }
 
-  // Try to detect from browser locale
-  const locale = navigator.language || navigator.userLanguage;
-  const localeRegion = locale?.split('-')[1]?.toUpperCase();
-  
-  if (localeRegion && COUNTRY_CURRENCY_MAP[localeRegion]) {
-    return COUNTRY_CURRENCY_MAP[localeRegion];
-  }
-
-  // Try to detect from timezone
-  try {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const timezoneToCurrency = {
-      'America/New_York': 'USD',
-      'America/Los_Angeles': 'USD',
-      'America/Chicago': 'USD',
-      'America/Denver': 'USD',
-      'Europe/London': 'GBP',
-      'Europe/Berlin': 'EUR',
-      'Europe/Paris': 'EUR',
-      'Asia/Tokyo': 'JPY',
-      'Africa/Lagos': 'NGN',
-      'Asia/Shanghai': 'CNY',
-      'Asia/Kolkata': 'INR',
-      'Australia/Sydney': 'AUD',
-      'America/Toronto': 'CAD',
-      'Europe/Zurich': 'CHF',
-      'Asia/Dubai': 'AED',
-      'Africa/Johannesburg': 'ZAR',
-      'Africa/Nairobi': 'KES',
-    };
-    
-    if (timezoneToCurrency[timezone]) {
-      return timezoneToCurrency[timezone];
-    }
-  } catch (e) {
-    // Timezone detection failed
-  }
-
-  // Default to NGN
+  // Force default to NGN for all users regardless of browser locale
   return 'NGN';
 };
 
@@ -118,7 +80,7 @@ export const setUserCurrency = (currencyCode) => {
  */
 export const formatPrice = (price, currencyCode = null, options = {}) => {
   const currency = currencyCode || detectUserCurrency();
-  const currencyData = CURRENCIES[currency] || CURRENCIES.USD;
+  const currencyData = CURRENCIES[currency] || CURRENCIES.NGN;
   
   const {
     showDecimals = price >= 10000 ? false : true,
