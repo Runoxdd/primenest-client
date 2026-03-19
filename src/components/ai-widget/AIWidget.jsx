@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import "./aiWidget.scss";
 import apiRequest from "../../lib/apiRequest";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -49,6 +49,7 @@ function AIWidget() {
   const messageEndRef = useRef(null);
   const inputRef = useRef(null);
   const messagesContainerRef = useRef(null);
+  const navigate = useNavigate();
 
   // Save chat to localStorage
   useEffect(() => {
@@ -150,6 +151,10 @@ function AIWidget() {
   };
 
   const toggleWidget = () => {
+    if (!currentUser) {
+      navigate("/login");
+      return;
+    }
     if (isMinimized) {
       setIsMinimized(false);
     } else {
