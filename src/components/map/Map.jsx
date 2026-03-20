@@ -29,16 +29,16 @@ function ChangeView({ center, zoom }) {
 function Map({ items }) {
   const center = items.length === 1
     ? [items[0].latitude, items[0].longitude]
-    : [52.4797, -1.90269];
+    : [9.0820, 8.6753]; // Nigeria Coordinates
 
   return (
     <MapContainer
       center={center}
-      zoom={items.length === 1 ? 12 : 7}
+      zoom={items.length === 1 ? 12 : 6}
       scrollWheelZoom={false}
       className="map"
     >
-      <ChangeView center={center} zoom={items.length === 1 ? 12 : 7} />
+      <ChangeView center={center} zoom={items.length === 1 ? 12 : 6} />
       <TileLayer
         attribution='&copy; OpenStreetMap &copy; CARTO'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
