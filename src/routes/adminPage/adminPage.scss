@@ -204,12 +204,50 @@
         th {
           background-color: #252525;
           border-bottom-color: #333;
+          color: #a3a3a3;
         }
+        
         td {
           border-bottom-color: #333;
+          color: #e5e5e5;
         }
+
+        .user-info .admin-badge {
+          background-color: rgba(67, 56, 202, 0.25);
+          color: #818cf8;
+        }
+
+        .status-tag {
+          &.active {
+            background-color: rgba(22, 101, 52, 0.25);
+            color: #4ade80;
+          }
+
+          &.banned, &.delisted {
+            background-color: rgba(153, 27, 27, 0.25);
+            color: #f87171;
+          }
+        }
+
+        .admin-btn {
+          &.view {
+            background-color: rgba(29, 78, 216, 0.25);
+            color: #60a5fa;
+            &:hover { background-color: rgba(29, 78, 216, 0.4); }
+          }
+
+          &.ban, &.delist {
+            background-color: rgba(185, 28, 28, 0.25);
+            color: #f87171;
+            &:hover { background-color: rgba(185, 28, 28, 0.4); }
+          }
+        }
+
         .banned-row, .delisted-row {
-          background-color: #450a0a;
+          background-color: #2e0909;
+          td {
+            color: #fca5a5;
+          }
         }
       }
     }
