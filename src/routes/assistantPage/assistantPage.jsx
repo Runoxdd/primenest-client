@@ -4,9 +4,9 @@ import "./assistantPage.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Bot, 
-  Send, 
+import {
+  Bot,
+  Send,
   RotateCcw,
   User,
   Sparkles,
@@ -27,9 +27,9 @@ function AssistantPage() {
   const [messages, setMessages] = useState(() => {
     const savedChat = localStorage.getItem(chatKey);
     return savedChat ? JSON.parse(savedChat) : [
-      { 
-        text: "Hi there! I'm Runo, your PrimeNest AI advisor. I can help you find properties, analyze markets, and answer questions about real estate. How can I assist you today?", 
-        isAi: true 
+      {
+        text: "Hi there! I'm Runo, your PrimeNest AI advisor. I can help you find properties, analyze markets, and answer questions about real estate. How can I assist you today?",
+        isAi: true
       }
     ];
   });
@@ -45,9 +45,9 @@ function AssistantPage() {
   }, [messages, chatKey]);
 
   const handleNewChat = () => {
-    const initialMsg = [{ 
-      text: "New conversation started. How can I help you find your perfect property?", 
-      isAi: true 
+    const initialMsg = [{
+      text: "New conversation started. How can I help you find your perfect property?",
+      isAi: true
     }];
     setMessages(initialMsg);
     localStorage.removeItem(chatKey);
@@ -58,23 +58,23 @@ function AssistantPage() {
     if (!input.trim() || loading) return;
 
     const userQuery = input;
-    setInput(""); 
+    setInput("");
     const userMsg = { text: userQuery, isAi: false };
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
 
     try {
       const res = await apiRequest.post("/assistant/chat", { message: userQuery });
-      const aiMsg = { 
-        text: res.data.reply, 
-        isAi: true, 
+      const aiMsg = {
+        text: res.data.reply,
+        isAi: true,
         link: res.data.searchUrl,
-        explanation: res.data.explanation 
+        explanation: res.data.explanation
       };
       setMessages((prev) => [...prev, aiMsg]);
     } catch (err) {
       setMessages((prev) => [
-        ...prev, 
+        ...prev,
         { text: "I'm having trouble connecting right now. Please try again in a moment.", isAi: true }
       ]);
     } finally {
@@ -109,8 +109,8 @@ function AssistantPage() {
             <Sparkles size={20} />
             <span>PrimeNest AI</span>
           </div>
-          <motion.button 
-            className="new-chat-sidebar-btn" 
+          <motion.button
+            className="new-chat-sidebar-btn"
             onClick={handleNewChat}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -182,10 +182,10 @@ function AssistantPage() {
                       <div className="author-name">{message.isAi ? "Runo" : "You"}</div>
                       <div className="text">{message.text}</div>
                       {message.explanation && (
-                         <div className="explanation-box">
-                            <Info size={14} />
-                            <p>{message.explanation}</p>
-                         </div>
+                        <div className="explanation-box">
+                          <Info size={14} />
+                          <p>{message.explanation}</p>
+                        </div>
                       )}
                       {message.link && (
                         <Link to={message.link} className="result-link">
