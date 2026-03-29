@@ -229,8 +229,11 @@
   border-radius: $radius-2xl;
   border: 1px solid var(--border-light);
   overflow: hidden;
-  min-height: 500px;
-  max-height: 600px;
+  min-height: 400px;
+  max-height: 80vh; // More responsive than 600px
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
 
   @include md {
     min-height: 400px;
@@ -304,19 +307,32 @@
 // Messages Container
 .messages-container {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: auto !important;
+  overflow-x: hidden;
   padding: $space-5;
   display: flex;
   flex-direction: column;
   gap: $space-4;
+  min-height: 0; // CRITICAL: Enables flexbox children to scroll properly
+  pointer-events: auto;
 
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 8px; // Increased from 4px
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--surface-secondary);
+    border-radius: $radius-full;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--border-medium);
+    background: var(--border-strong); // More visible
     border-radius: $radius-full;
+    border: 2px solid var(--surface-secondary);
+
+    &:hover {
+      background: var(--accent-primary);
+    }
   }
 }
 
