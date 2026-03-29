@@ -15,7 +15,9 @@ import {
   Shield,
   ExternalLink,
   Loader2,
-  MessageSquare
+  MessageSquare,
+  Plus,
+  Info
 } from "lucide-react";
 
 function AssistantPage() {
@@ -99,94 +101,99 @@ function AssistantPage() {
   ];
 
   return (
-    <div className="assistant-page">
-      {/* Hero Section */}
-      <motion.section 
-        className="hero-section"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="hero-content">
-          <div className="hero-badge">
-            <Sparkles size={14} />
-            <span>AI-Powered</span>
+    <div className="assistant-page-revamped">
+      {/* Sidebar - History & Tools */}
+      <aside className="chat-sidebar">
+        <div className="sidebar-header">
+          <div className="sidebar-logo">
+            <Sparkles size={20} />
+            <span>PrimeNest AI</span>
           </div>
-          <h1>
-            Meet <span>Runo</span>, Your AI Real Estate Advisor
-          </h1>
-          <p>
-            Powered by advanced AI, Runo helps you navigate the global property market 
-            with intelligent recommendations and instant insights.
-          </p>
+          <motion.button 
+            className="new-chat-sidebar-btn" 
+            onClick={handleNewChat}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Plus size={18} />
+            <span>New Chat</span>
+          </motion.button>
         </div>
-        <div className="hero-visual">
-          <div className="visual-glow" />
-          <Bot size={120} strokeWidth={1} />
-        </div>
-      </motion.section>
 
-      {/* Features */}
-      <section className="features-section">
-        <div className="features-grid">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <motion.div 
-                key={index}
-                className="feature-card"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <div className="feature-icon">
-                  <Icon size={24} />
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Chat Section */}
-      <section className="chat-section">
-        <div className="chat-container">
-          {/* Chat Header */}
-          <div className="chat-header">
-            <div className="chat-status">
-              <div className={`status-dot ${loading ? "processing" : "online"}`} />
-              <span>{loading ? "Thinking..." : "Runo Online"}</span>
+        <div className="sidebar-content">
+          <div className="history-group">
+            <span className="group-label">Recent Conversations</span>
+            <div className="history-item active">
+              <MessageSquare size={16} />
+              <span className="history-title">Current Conversation</span>
             </div>
-            <button className="new-chat-btn" onClick={handleNewChat}>
-              <RotateCcw size={16} />
-              <span>New Chat</span>
+            {/* Future history items will be mapped here */}
+          </div>
+        </div>
+
+        <div className="sidebar-footer">
+          <div className="user-info">
+            <div className="avatar">
+              <img src={currentUser?.avatar || "/noavatar.jpg"} alt="" />
+            </div>
+            <div className="details">
+              <span className="name">{currentUser?.username || "Guest"}</span>
+              <span className="plan">Pro Member</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Chat Area */}
+      <main className="main-chat-container">
+        {/* Chat Header */}
+        <header className="chat-area-header">
+          <div className="model-info">
+            <span className="model-name">Runo AI</span>
+            <span className="model-version">v2.1 (Nigeria Edition)</span>
+          </div>
+          <div className="chat-actions">
+            <button className="action-icon-btn" title="Share">
+              <ExternalLink size={18} />
+            </button>
+            <button className="action-icon-btn mobile-only" onClick={handleNewChat} title="New Chat">
+              <RotateCcw size={18} />
             </button>
           </div>
+        </header>
 
-          {/* Messages */}
-          <div className="messages-container">
-            <AnimatePresence>
+        {/* Messages */}
+        <div className="messages-scroller" ref={messageEndRef}>
+          <div className="messages-list">
+            <AnimatePresence initial={false}>
               {messages.map((message, index) => (
                 <motion.div
                   key={index}
-                  className={`message ${message.isAi ? "ai" : "user"}`}
-                  initial={{ opacity: 0, y: 10 }}
+                  className={`message-wrapper ${message.isAi ? "ai" : "user"}`}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                 >
-                  <div className="message-avatar">
-                    {message.isAi ? <Bot size={20} /> : <User size={20} />}
-                  </div>
-                  <div className="message-content">
-                    <p>{message.text}</p>
-                    {message.link && (
-                      <Link to={message.link} className="message-link">
-                        <ExternalLink size={14} />
-                        <span>View Matching Listings</span>
-                      </Link>
-                    )}
+                  <div className="message-bubble-container">
+                    <div className="message-icon">
+                      {message.isAi ? <Bot size={20} /> : <User size={20} />}
+                    </div>
+                    <div className="message-text-content">
+                      <div className="author-name">{message.isAi ? "Runo" : "You"}</div>
+                      <div className="text">{message.text}</div>
+                      {message.explanation && (
+                         <div className="explanation-box">
+                            <Info size={14} />
+                            <p>{message.explanation}</p>
+                         </div>
+                      )}
+                      {message.link && (
+                        <Link to={message.link} className="result-link">
+                          <ExternalLink size={14} />
+                          <span>View Property Listings</span>
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -194,56 +201,60 @@ function AssistantPage() {
 
             {loading && (
               <motion.div
-                className="message ai"
+                className="message-wrapper ai"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <div className="message-avatar">
-                  <Bot size={20} />
-                </div>
-                <div className="message-content loading">
-                  <div className="typing-indicator">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <div className="message-bubble-container">
+                  <div className="message-icon">
+                    <Bot size={20} />
+                  </div>
+                  <div className="message-text-content">
+                    <div className="typing-indicator">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
             )}
             <div ref={messageEndRef} />
           </div>
+        </div>
 
-          {/* Input Area */}
-          <div className="input-area">
-            <div className="input-container">
+        {/* Input Area */}
+        <footer className="chat-input-wrapper">
+          <div className="input-box-container">
+            <div className="input-pill">
               <input
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                placeholder="Ask about properties, markets, or neighborhoods..."
+                placeholder="Message Runo AI..."
                 disabled={loading}
               />
               <motion.button
-                className="send-btn"
+                className="send-action-btn"
                 onClick={handleSend}
                 disabled={loading || !input.trim()}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 {loading ? (
-                  <Loader2 size={20} className="animate-spin" />
+                  <Loader2 size={18} className="animate-spin" />
                 ) : (
-                  <Send size={20} />
+                  <Send size={18} />
                 )}
               </motion.button>
             </div>
-            <p className="input-hint">
-              Try: "Find apartments in Lagos under ₦50M" or "What's the market trend in Abuja?"
+            <p className="disclaimer">
+              Runo AI can provide real estate insights but always verify key details with agents.
             </p>
           </div>
-        </div>
-      </section>
+        </footer>
+      </main>
     </div>
   );
 }
