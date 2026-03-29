@@ -4,11 +4,11 @@ import apiRequest from "../../lib/apiRequest";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Sparkles, 
-  X, 
-  Minus, 
-  Send, 
+import {
+  Sparkles,
+  X,
+  Minus,
+  Send,
   Plus,
   MessageCircle,
   ArrowRight,
@@ -27,16 +27,16 @@ function AIWidget() {
   const { currentUser } = useContext(AuthContext);
   const chatKey = currentUser ? `primenest_widget_chat_${currentUser.id}` : "primenest_widget_chat";
   const sessionKey = currentUser ? `primenest_widget_session_${currentUser.id}` : "primenest_widget_session";
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState(() => {
     const savedChat = localStorage.getItem(chatKey);
     return savedChat ? JSON.parse(savedChat) : [
-      { 
-        text: "Hi! I'm Runo, your PrimeNest AI assistant. I can help you find your perfect property, answer questions about real estate, or provide market insights. What are you looking for today?", 
+      {
+        text: "Hi! I'm Runo, your PrimeNest AI assistant. I can help you find your perfect property, answer questions about real estate, or provide market insights. What are you looking for today?",
         isAi: true,
-        suggestions: [ "Find houses under ₦5M", "Real estate investment tips"]
+        suggestions: ["Find houses under ₦5M", "Real estate investment tips"]
       }
     ];
   });
@@ -45,7 +45,7 @@ function AIWidget() {
   const [sessionId, setSessionId] = useState(() => {
     return localStorage.getItem(sessionKey) || null;
   });
-  
+
   const messageEndRef = useRef(null);
   const inputRef = useRef(null);
   const messagesContainerRef = useRef(null);
@@ -84,10 +84,10 @@ function AIWidget() {
   }, [isOpen, isMinimized]);
 
   const handleNewChat = () => {
-    const initialMsg = [{ 
-      text: "New conversation started! I'm ready to help you find your perfect property. What are you looking for?", 
+    const initialMsg = [{
+      text: "New conversation started! I'm ready to help you find your perfect property. What are you looking for?",
       isAi: true,
-      suggestions: ["Apartments in Japan", "Houses for rent", "Properties under ₦10M"]
+      suggestions: ["Houses for rent", "Properties under ₦10M"]
     }];
     setMessages(initialMsg);
     setSessionId(null);
@@ -111,19 +111,19 @@ function AIWidget() {
     setLoading(true);
 
     try {
-      const res = await apiRequest.post("/assistant/chat", { 
+      const res = await apiRequest.post("/assistant/chat", {
         message: userQuery,
-        sessionId: sessionId 
+        sessionId: sessionId
       });
-      
+
       // Store session ID for conversation continuity
       if (res.data.sessionId) {
         setSessionId(res.data.sessionId);
       }
-      
-      const aiMsg = { 
-        text: res.data.reply, 
-        isAi: true, 
+
+      const aiMsg = {
+        text: res.data.reply,
+        isAi: true,
         link: res.data.searchUrl,
         suggestions: res.data.suggestions || null
       };
@@ -131,9 +131,9 @@ function AIWidget() {
     } catch (err) {
       console.error("Chat error:", err);
       setMessages((prev) => [
-        ...prev, 
-        { 
-          text: "I'm having trouble connecting right now. Please try again in a moment.", 
+        ...prev,
+        {
+          text: "I'm having trouble connecting right now. Please try again in a moment.",
           isAi: true,
           suggestions: ["Try again", "Browse properties instead"]
         }
@@ -236,17 +236,17 @@ function AIWidget() {
                   </span>
                 </div>
               </div>
-             <div className="header-actions">
-  <motion.button onClick={handleNewChat} title="New Chat" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-    <Plus size={20} /> {/* Increased from 16 */}
-  </motion.button>
-  <motion.button onClick={minimizeWidget} title="Minimize" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-    <Minus size={20} /> {/* Increased from 16 */}
-  </motion.button>
-  <motion.button onClick={closeWidget} title="Close" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}> 
-    <X size={20} /> {/* Increased from 16 */}
-  </motion.button>
-</div>
+              <div className="header-actions">
+                <motion.button onClick={handleNewChat} title="New Chat" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <Plus size={20} /> {/* Increased from 16 */}
+                </motion.button>
+                <motion.button onClick={minimizeWidget} title="Minimize" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <Minus size={20} /> {/* Increased from 16 */}
+                </motion.button>
+                <motion.button onClick={closeWidget} title="Close" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <X size={20} /> {/* Increased from 16 */}
+                </motion.button>
+              </div>
             </div>
 
             {/* Messages Container - Independently Scrollable */}
@@ -288,7 +288,7 @@ function AIWidget() {
                   </div>
                 </motion.div>
               ))}
-              
+
               {/* Typing Indicator */}
               {loading && (
                 <motion.div
@@ -306,7 +306,7 @@ function AIWidget() {
                   </div>
                 </motion.div>
               )}
-              
+
               <div ref={messageEndRef} />
             </div>
 
